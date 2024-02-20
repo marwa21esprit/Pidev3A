@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddPartner">
+   <stylesheets>
+   <URL value="@styles.css" />
+</stylesheets>
+   <children>
+      <Label layoutX="67.0" layoutY="41.0" text="name" />
+      <Label layoutX="68.0" layoutY="78.0" text="type" />
+      <Label layoutX="68.0" layoutY="120.0" text="description" />
+      <Label layoutX="68.0" layoutY="175.0" text="email" />
+      <Label layoutX="68.0" layoutY="211.0" text="tel" />
+      <TextField fx:id="namePartnerTF" layoutX="131.0" layoutY="37.0" />
+      <TextField fx:id="emailTF" layoutX="133.0" layoutY="170.0" />
+      <TextField fx:id="telTF" layoutX="133.0" layoutY="208.0" />
+      <ChoiceBox fx:id="typePartnerCB" layoutX="131.0" layoutY="74.0" prefWidth="150.0" />
+      <Button fx:id="add" layoutX="426.0" layoutY="283.0" mnemonicParsing="false" onAction="#addPartner" text="add" />
+      <TextArea fx:id="descTF" layoutX="133.0" layoutY="113.0" prefHeight="46.0" prefWidth="191.0" />
+      <Button fx:id="backP" layoutX="313.0" layoutY="283.0" mnemonicParsing="false" onAction="#retourPartner" text="Back" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1001.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GetEvent1">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="216.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Overview">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/loupe_751463.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Orders">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/gear_13930106.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Customers">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/home_2549900.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Menu">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/gear_13930106.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Packages">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/loupe_751463.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Settings">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/gear_13930106.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" style="-fx-background-color: #EBE8F9;" text="Sign Out">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/loupe_751463.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="275.0" layoutY="24.0" text="Restaurant Orders">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="275.0" layoutY="74.0" prefHeight="106.0" prefWidth="714.0" spacing="70.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="22000" textFill="#2a73ff">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Orders" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="1500" textFill="#26bfbc">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Delivery" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="1000" textFill="#fa5f7e">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Peding Orders" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="780" textFill="#de0000">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label text="Orders On Hold" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="275.0" layoutY="188.0" prefHeight="39.0" prefWidth="714.0" style="-fx-background-color: #F3F3F3;">
+         <children>
+            <Label text="ID Event">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="ID Establishment">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Event Name">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Event Date">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Description">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Max Participants">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Delete">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Edit">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+      <VBox fx:id="pnItems" layoutX="275.0" layoutY="242.0" prefHeight="302.0" prefWidth="714.0" />
+   </children>
+</AnchorPane>
