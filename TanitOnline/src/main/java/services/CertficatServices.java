@@ -1,8 +1,8 @@
-package tn.esprit.pidev.services;
+package services;
 
-import tn.esprit.pidev.Utils.MyDB;
-import tn.esprit.pidev.entities.Etablissement;
-import  tn.esprit.pidev.entities.Certificat;
+import utils.MyDB;
+import models.Etablissement;
+import  models.Certificat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CertficatServices implements ICertifServices<Certificat>{
-    private Connection cnx ;
+    private final Connection cnx ;
     public  CertficatServices(){ cnx = MyDB.getInstance().getCnx();}
 
     @Override
@@ -96,7 +96,7 @@ public class CertficatServices implements ICertifServices<Certificat>{
             Date dateObtentionCertificat = resultSet.getDate("Date_Obtention_Certificat");
             int idEtablissement = resultSet.getInt("ID_Etablissement");
 
-            return new Certificat(idCertificat, nomCertificat, domaineCertificat, niveau, dateObtentionCertificat, idEtablissement);
+            return new Certificat( nomCertificat, domaineCertificat, niveau, dateObtentionCertificat, idEtablissement);
         } else {
             // Gérer le cas où aucun enregistrement correspondant n'est trouvé
             return null;
@@ -104,7 +104,6 @@ public class CertficatServices implements ICertifServices<Certificat>{
     }
 
 
-
-
-
+    public void initData(Certificat certificat) {
+    }
 }

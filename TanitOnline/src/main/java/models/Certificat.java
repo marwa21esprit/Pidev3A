@@ -1,4 +1,4 @@
-package tn.esprit.pidev.entities;
+package models;
 
 import java.util.Date;
 
@@ -14,14 +14,16 @@ public class Certificat {
     public Certificat() {
     }
 
-    public Certificat(int ID_Certificat, String nom_Certificat, String domaine_Certificat, String niveau, Date date_Obtention_Certificat, int ID_Etablissement) {
-        this.ID_Certificat = ID_Certificat;
+    public Certificat( String nom_Certificat, String domaine_Certificat, String niveau, Date date_Obtention_Certificat, int ID_Etablissement) {
+
         this.Nom_Certificat = nom_Certificat;
         this.Domaine_Certificat = domaine_Certificat;
         this.Niveau = niveau;
         this.Date_Obtention_Certificat = date_Obtention_Certificat;
         this.ID_Etablissement = ID_Etablissement;
     }
+
+
 
     public int getID_Certificat() {
         return ID_Certificat;

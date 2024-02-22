@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GetCertif">
+   <children>
+      <TableView fx:id="table" layoutX="26.0" layoutY="52.0" prefHeight="239.0" prefWidth="993.0">
+         <columns>
+            <TableColumn fx:id="ID_Certificatafficher" prefWidth="104.80000114440918" text="ID Certificat" />
+            <TableColumn fx:id="Nom_Certificatafficher" prefWidth="120.79999542236328" text="Nom Certificat" />
+            <TableColumn fx:id="Domaineafficher" text="Domaine" />
+            <TableColumn fx:id="Niveauafiicher" prefWidth="82.4000244140625" text="Niveau" />
+            <TableColumn fx:id="Date_Obtentionafficher" prefWidth="104.0" text="Date Obtention" />
+            <TableColumn fx:id="ID_Etablissementafficher" prefWidth="124.7999267578125" text="ID Etablissement" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

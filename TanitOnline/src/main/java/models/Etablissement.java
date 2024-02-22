@@ -1,4 +1,4 @@
-package tn.esprit.pidev.entities;
+package models;
 
 import java.util.Date;
 
@@ -13,8 +13,7 @@ public class Etablissement {
     Date Date_Fondation;
     int ID_Certificat;
 
-    public Etablissement(int ID_Etablissement, String nom_Etablissement, String adresse_Etablissement, String type_Etablissement, int tel_Etablissement, String directeur_Etablissement, Date date_Fondation, int ID_Certificat) {
-        this.ID_Etablissement = ID_Etablissement;
+    public Etablissement( String nom_Etablissement, String adresse_Etablissement, String type_Etablissement, int tel_Etablissement, String directeur_Etablissement, Date date_Fondation, int ID_Certificat) {
         this.Nom_Etablissement = nom_Etablissement;
         this.Adresse_Etablissement = adresse_Etablissement;
         this.Type_Etablissement = type_Etablissement;
@@ -77,7 +76,6 @@ public class Etablissement {
 
 
     public java.sql.Date getDate_Fondation() {
-        // Conversion de java.util.Date en java.sql.Date
         if (Date_Fondation != null) {
             return new java.sql.Date(Date_Fondation.getTime());
         } else {
@@ -93,8 +91,8 @@ public class Etablissement {
         return ID_Certificat;
     }
 
-    public void setID_Certificat(int ID_Certificat) {
-        ID_Certificat = ID_Certificat;
+    public void setID_Certificat(int idCertificat) {
+        ID_Certificat = idCertificat;
     }
 
 

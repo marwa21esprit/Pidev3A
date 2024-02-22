@@ -1,8 +1,8 @@
-package tn.esprit.pidev;
-import tn.esprit.pidev.entities.Etablissement;
-import tn.esprit.pidev.services.EtablissementServices;
-import tn.esprit.pidev.entities.Certificat;
-import tn.esprit.pidev.services.CertficatServices;
+package test;
+import models.Etablissement;
+import services.EtablissementServices;
+import models.Certificat;
+import services.CertficatServices;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -24,15 +24,15 @@ public class Main {
         Date dateObtentionCertificat = Date.valueOf("2023-11-10");
 
 // Créez une instance de Certificat
-        Certificat c1 = new Certificat(1, "Nom du certificat", "Domaine du certificat", "Niveau du certificat", dateObtentionCertificat, 1);
+     /*   Certificat c1 = new Certificat(1, "Nom du certificat", "Domaine du certificat", "Niveau du certificat", dateObtentionCertificat, 1);
         Certificat c2 = new Certificat(1, "Nom du certificat2", "Domaine du certificat", "Niveau du certificat", dateObtentionCertificat, 2);
         Certificat c3 = new Certificat(1, "Nom du certificat3", "Domaine du certificat", "Niveau du certificat", dateObtentionCertificat, 1);
-        Certificat c4 = new Certificat(15, "CCNA", "Réseau", "A+", dateObtentionCertificat, 3);
+        Certificat c4 = new Certificat(15, "CCNA", "Réseau", "A+", dateObtentionCertificat, 3);*/
 
 //Création de l'objet Etablissement avec la date correcte
      /*   Etablissement e1 = new Etablissement(1, "esprit", "Tunis", "universite", 5596845, "belakhdher", dateSql, "test");
         Etablissement e2 = new Etablissement(2, "esprit", "Tunis", "universite", 5596845, "belakhdher", dateSql, "test");*/
-        Etablissement e3 = new Etablissement(15, "sesame", "ariana", "universite", 5596845, "idk", dateSql, 2);
+      //  Etablissement e3 = new Etablissement(15, "sesame", "ariana", "universite", 5596845, "idk", dateSql, 2);
 
 
 
@@ -94,17 +94,17 @@ public class Main {
             e.printStackTrace();
         }*/
 
-       /* try {
+        /*try {
             System.out.println(es.getAll());
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }*/
 
-       /* try {
+       try {
             System.out.println(cs.getAll());
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }*/
+        }
 
         /*try {
             System.out.println(cs.getById(c4.getID_Certificat()));
