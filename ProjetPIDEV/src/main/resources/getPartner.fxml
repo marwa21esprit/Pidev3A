@@ -13,7 +13,6 @@
     <children>
       <TableView fx:id="tablePA" layoutX="31.0" layoutY="29.0" prefHeight="459.0" prefWidth="691.0">
         <columns>
-          <TableColumn fx:id="idPartnerA" prefWidth="75.0" text="idPartner" />
           <TableColumn fx:id="namePartnerA" prefWidth="75.0" text="namePartner" />
             <TableColumn fx:id="typePartnerA" prefWidth="75.0" text="typePartner" />
             <TableColumn fx:id="descA" prefWidth="75.0" text="desc" />

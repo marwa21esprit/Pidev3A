@@ -5,47 +5,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Items">
    <children>
-      <Label text="10">
-         <HBox.margin>
-            <Insets left="40.0" />
-         </HBox.margin>
-      </Label>
-      <Label text="8888">
-         <HBox.margin>
-            <Insets left="60.0" />
-         </HBox.margin>
-      </Label>
-      <Label text="event1">
+      <Label fx:id="idEventAff" prefHeight="18.0" prefWidth="25.0" text="10">
          <HBox.margin>
             <Insets left="50.0" />
          </HBox.margin>
       </Label>
-      <Label text="2024/12/30">
+      <Label fx:id="idEtabAff" prefHeight="18.0" prefWidth="38.0" text="8888">
          <HBox.margin>
             <Insets left="50.0" />
          </HBox.margin>
       </Label>
-      <Label text="descr">
+      <Label fx:id="nameEventAff" prefHeight="18.0" prefWidth="51.0" text="event1">
          <HBox.margin>
             <Insets left="50.0" />
          </HBox.margin>
       </Label>
-      <Label text="50">
+      <Label fx:id="dateEventAff" prefHeight="18.0" prefWidth="73.0" text="2024/12/30">
          <HBox.margin>
             <Insets left="50.0" />
          </HBox.margin>
       </Label>
-      <Button mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-background-color: #fff; -fx-border-color: #2a73ff; -fx-border-radius: 20;" text="Delete">
+      <Label fx:id="descAff" prefHeight="18.0" prefWidth="42.0" text="descr">
          <HBox.margin>
             <Insets left="50.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="nbrMaxAff" prefHeight="18.0" prefWidth="26.0" text="50">
+         <HBox.margin>
+            <Insets left="50.0" />
+         </HBox.margin>
+      </Label>
+      <Button fx:id="deleteB" mnemonicParsing="false" prefHeight="27.0" prefWidth="64.0" stylesheets="@style1.css" text="Delete">
+         <HBox.margin>
+            <Insets left="20.0" />
          </HBox.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-background-color: #ffffff; -fx-border-color: #2a73ff; -fx-border-radius: 20;" text="Edit">
+      <Button fx:id="editB" mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" stylesheets="@style1.css" text="Edit">
          <HBox.margin>
-            <Insets left="30.0" />
+            <Insets left="20.0" />
          </HBox.margin>
       </Button>
    </children>

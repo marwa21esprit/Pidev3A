@@ -56,18 +56,20 @@ public class GetEvent {
     @FXML
     private TableColumn<Event, Void> modifier;
 
+    @FXML
+    private TableColumn<Event, String> imageA;
+
     public void initialize() {
 
-        idEventA.setCellValueFactory(new PropertyValueFactory<>("idEvent"));
+        //idEventA.setCellValueFactory(new PropertyValueFactory<>("idEvent"));
         idEstabA.setCellValueFactory(new PropertyValueFactory<>("idEstab"));
         nameEventA.setCellValueFactory(new PropertyValueFactory<>("nameEvent"));
         dateEventA.setCellValueFactory(new PropertyValueFactory<>("dateEvent"));
         nbrMax.setCellValueFactory(new PropertyValueFactory<>("nbrMax"));
         descA.setCellValueFactory(new PropertyValueFactory<>("description"));
+        imageA.setCellValueFactory(new PropertyValueFactory<>("image"));
         supprimer.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Supprimer");
-            private final Button editButton = new Button("Modifier");
-
 
             {
                 deleteButton.setOnAction(event -> {

@@ -15,9 +15,9 @@ public class MainFX extends Application {
     private double x,y;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/getPartner.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         //scene.getStylesheets().add("style.css");
@@ -25,7 +25,7 @@ public class MainFX extends Application {
         primaryStage.setScene(scene);
 
         //set stage borderless
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.DECORATED);
 
         //drag it here
         root.setOnMousePressed(event->{

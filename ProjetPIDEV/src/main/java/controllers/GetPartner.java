@@ -53,7 +53,7 @@ public class GetPartner {
 
     public void initialize() {
 
-        idPartnerA.setCellValueFactory(new PropertyValueFactory<>("idPartner"));
+        //idPartnerA.setCellValueFactory(new PropertyValueFactory<>("idPartner"));
         namePartnerA.setCellValueFactory(new PropertyValueFactory<>("namePartner"));
         typePartnerA.setCellValueFactory(new PropertyValueFactory<>("typePartner"));
         descA.setCellValueFactory(new PropertyValueFactory<>("description"));

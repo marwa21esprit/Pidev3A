@@ -12,24 +12,28 @@ public class Event {
     private int nbrMax;
     private String description;
 
+    private String image;
+
     public Event() {
     }
 
-    public Event(int idEvent, int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description) {
+    public Event(int idEvent, int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description , String image) {
         this.idEvent = idEvent;
         this.idEstab = idEstab;
         this.nameEvent = nameEvent;
         this.dateEvent = dateEvent;
         this.nbrMax = nbrMax;
         this.description = description;
+        this.image = image;
     }
 
-    public Event(int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description) {
+    public Event(int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description , String image) {
         this.idEstab = idEstab;
         this.nameEvent = nameEvent;
         this.dateEvent = dateEvent;
         this.nbrMax = nbrMax;
         this.description = description;
+        this.image = image;
     }
 
     public int getIdEvent() {
@@ -79,6 +83,13 @@ public class Event {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
@@ -89,6 +100,7 @@ public class Event {
                 ", dateEvent=" + dateEvent +
                 ", nbrMax=" + nbrMax +
                 ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

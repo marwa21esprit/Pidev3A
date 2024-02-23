@@ -14,7 +14,7 @@ public class Main {
 
         LocalDate datePersonnalisee = LocalDate.of(2002, 12, 30);
         Date date = Date.valueOf(datePersonnalisee);
-        Event e1 = new Event(1254,"event11",date,30,"hello");
+        Event e1 = new Event(1254,"event11",date,30,"hello","C:\\Users\\user\\Downloads\\logo.png");
 
         try {
             es.add(e1);
@@ -23,7 +23,7 @@ public class Main {
         }
 
         try {
-            es.update(new Event(5,1254,"event11",date,30,"sarra"), e1.getIdEvent());
+            es.update(new Event(5,1254,"event11",date,30,"sarra","C:\\Users\\user\\Downloads\\logo.png"), e1.getIdEvent());
         } catch (SQLException e) {
             e.printStackTrace();
         }
