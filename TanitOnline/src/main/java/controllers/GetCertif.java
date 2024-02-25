@@ -1,7 +1,10 @@
 package controllers;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Certificat;
 import services.CertficatServices;
+import services.EtablissementServices;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -21,6 +25,7 @@ import java.util.List;
 public class GetCertif {
 
     private final CertficatServices cs = new CertficatServices();
+    private final EtablissementServices es = new EtablissementServices();
 
     @FXML
     private TableColumn<Certificat, LocalDate> Date_Obtentionafficher;
@@ -32,7 +37,7 @@ public class GetCertif {
     private TableColumn<Certificat, Integer> ID_Certificatafficher;
 
     @FXML
-    private TableColumn<Certificat, Integer> ID_Etablissementafficher;
+    private TableColumn<Certificat, String> ID_Etablissementafficher;
 
     @FXML
     private TableColumn<Certificat, String> Niveauafiicher;
@@ -51,7 +56,33 @@ public class GetCertif {
         // Charger les données dans la table
         loadData();
     }
+    @FXML
+    void affi(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    void afficher(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddCertif.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void configureTableColumns() {
         // Créer une colonne d'action avec des boutons
         TableColumn<Certificat, Void> actionCol = new TableColumn<>("Action");
@@ -104,7 +135,19 @@ public class GetCertif {
         Domaineafficher.setCellValueFactory(new PropertyValueFactory<>("Domaine_Certificat"));
         Niveauafiicher.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
         Date_Obtentionafficher.setCellValueFactory(new PropertyValueFactory<>("Date_Obtention_Certificat"));
-        ID_Etablissementafficher.setCellValueFactory(new PropertyValueFactory<>("ID_Etablissement"));
+        ID_Etablissementafficher.setCellValueFactory(cellData -> {
+            // Obtenir l'ID de l'établissement à partir de la ligne de données
+            int etablissementId = cellData.getValue().getID_Etablissement();
+            try {
+                // Récupérer le nom de l'établissement correspondant à l'ID
+                String nomEtablissement = cs.getEtablissementName(etablissementId);
+                // Retourner le nom de l'établissement pour l'affichage dans la colonne
+                return new SimpleStringProperty(nomEtablissement);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        });
     }
 
     private void loadData() {
@@ -139,6 +182,8 @@ public class GetCertif {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

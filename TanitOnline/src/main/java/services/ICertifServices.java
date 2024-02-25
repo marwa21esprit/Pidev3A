@@ -5,7 +5,7 @@ import java.util.List;
 public interface ICertifServices <T>{
     void addCertificate(T t) throws SQLException;
 
-    void updateCertificate(T t) throws SQLException;
+    void updateCertificate(T t,int id) throws SQLException;
 
     void deleteCertificate(int id) throws SQLException;
 

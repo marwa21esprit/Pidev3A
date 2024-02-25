@@ -22,6 +22,10 @@ public class Certificat {
         this.Date_Obtention_Certificat = date_Obtention_Certificat;
         this.ID_Etablissement = ID_Etablissement;
     }
+    public Certificat( String nom_Certificat, String domaine_Certificat, String niveau, Date date_Obtention_Certificat, int ID_Etablissement, int ID_Certificat) {
+        this(nom_Certificat, domaine_Certificat, niveau, date_Obtention_Certificat, ID_Etablissement);
+        this.ID_Certificat = ID_Certificat;
+    }
 
 
 

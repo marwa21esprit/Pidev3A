@@ -5,17 +5,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Etablissement;
 import services.EtablissementServices;
+import javafx.scene.control.Label;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AddEtabliss {
 
@@ -31,34 +41,91 @@ public class AddEtabliss {
     private TextField Directeur_Etablissement;
 
     @FXML
-    private TextField ID_Certificat;
+    private Label addressLabelError;
 
     @FXML
-    private TextField ID_Etablissement;
+    private Label datefondLabelError;
+
+    @FXML
+    private Label directorLabelError;
+
+    @FXML
+    private Label nomLabelError;
+
+    @FXML
+    private Label telLabelError;
+    @FXML
+    private ChoiceBox<String> typeEtablissement1;
 
     @FXML
     private TextField Nom_Etablissement;
 
     @FXML
     private TextField Tel_Etablissement;
+    @FXML
+    private Button importBT;
 
     @FXML
-    private TextField Type_Etablissement1;
+    private ImageView importIV;
+
+    @FXML
+    private AnchorPane mainForm;
+    private Image image;
+
+    @FXML
+    private void initialize() {
+        // Écouteur pour le champ Nom_Etablissement
+        Nom_Etablissement.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidString(newValue)) {
+                afficherErreur(nomLabelError, "Veuillez entrer un nom valide pour l'établissement (sans chiffres).");
+            } else {
+                clearError(nomLabelError);
+            }
+        });
+
+        // Écouteur pour le DatePicker Date_Fondation
+        Date_Fondation.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.isAfter(LocalDate.now())) {
+                afficherErreur(datefondLabelError, "La date de fondation ne peut pas être postérieure à aujourd'hui.");
+            } else {
+                clearError(datefondLabelError);
+            }
+        });
+        // Écouteur pour le champ Directeur_Etablissement
+        Directeur_Etablissement.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidString(newValue)) {
+                afficherErreur(directorLabelError, "Veuillez entrer un nom de directeur valide pour l'établissement (sans chiffres).");
+            } else {
+                clearError(directorLabelError);
+            }
+        });
+
+        // Écouteur pour le champ Tel_Etablissement
+        Tel_Etablissement.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidPhoneNumber(newValue)) {
+                afficherErreur(telLabelError, "Veuillez saisir un numéro de téléphone valide composé de 8 chiffres.");
+            } else {
+                clearError(telLabelError);
+            }
+        });
+
+        // Écouteur pour le champ Adresse_Etablissement
+        Adresse_Etablissement.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidString(newValue)) {
+                afficherErreur(addressLabelError, "Veuillez entrer une adresse valide pour l'établissement (sans chiffres).");
+            } else {
+                clearError(addressLabelError);
+            }
+        });
+    }
 
     @FXML
     void affi(ActionEvent event) {
         try {
-            // Charger le fichier FXML de la vue GetEtabliss.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss.fxml"));
             Parent root = loader.load();
-
-            // Créer une nouvelle scène avec le contenu chargé à partir du fichier FXML
             Scene scene = new Scene(root);
-
-            // Obtenir la scène actuelle à partir de l'événement
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Afficher la nouvelle scène
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -69,10 +136,16 @@ public class AddEtabliss {
     @FXML
     void ajouter(ActionEvent event) {
         try {
-            // Convertir les valeurs nécessaires en types appropriés
             java.sql.Date dateFondation = java.sql.Date.valueOf(Date_Fondation.getValue());
 
+            String typeEtablissement = typeEtablissement1.getValue();
 
+            // Vérification des champs obligatoires
+            if (Nom_Etablissement.getText().isEmpty() || Adresse_Etablissement.getText().isEmpty() || typeEtablissement == null ||
+                    Tel_Etablissement.getText().isEmpty() || Directeur_Etablissement.getText().isEmpty() || Date_Fondation.getValue() == null) {
+                afficherAlerteErreur("Champs manquants", "Veuillez remplir tous les champs obligatoires.");
+                return;
+            }
 
             if (!isValidString(Nom_Etablissement.getText())) {
                 afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un nom valide pour l'établissement (sans chiffres).");
@@ -84,13 +157,13 @@ public class AddEtabliss {
                 return;
             }
 
-            if (!isValidString(Type_Etablissement1.getText())) {
+            if (!isValidString(typeEtablissement)) {
                 afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un type valide pour l'établissement (sans chiffres).");
                 return;
             }
 
             if (!isValidPhoneNumber(Tel_Etablissement.getText())) {
-                return ;
+                return;
             }
 
             if (!isValidString(Directeur_Etablissement.getText())) {
@@ -98,64 +171,54 @@ public class AddEtabliss {
                 return;
             }
 
-            if (!isValidID(ID_Certificat.getText())) {
-                afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un ID valide pour le certificat.");
-                return;
-            }
-
-            // Vérifier si la date de fondation est ultérieure à aujourd'hui
             if (!isValidDate(dateFondation)) {
                 afficherAlerteErreur("Erreur de saisie", "La date de fondation ne peut pas être ultérieure à aujourd'hui.");
                 return;
             }
 
-            // Ajouter l'établissement
+            if (!es.isUniqueEtablissement(Nom_Etablissement.getText(), Adresse_Etablissement.getText(), typeEtablissement, Integer.parseInt(Tel_Etablissement.getText()), Directeur_Etablissement.getText(), dateFondation)) {
+                afficherAlerteErreur("Erreur d'ajout", "Un établissement avec les mêmes données existe déjà.");
+                return;
+            }
+
+// Ajouter l'établissement
             es.addSchool(new Etablissement(
+                    // Remplacez les arguments suivants par les valeurs correspondantes à partir de vos champs
+                    data.path,
                     Nom_Etablissement.getText(),
                     Adresse_Etablissement.getText(),
-                    Type_Etablissement1.getText(),
+                    typeEtablissement,
                     Integer.parseInt(Tel_Etablissement.getText()),
                     Directeur_Etablissement.getText(),
-                    dateFondation,
-                    Integer.parseInt(ID_Certificat.getText())
+                    dateFondation
             ));
-
             afficherAlerteInformation("Ajout réussi", "L'établissement a été ajouté avec succès.");
+
         } catch (NumberFormatException e) {
-            // Gérer les erreurs de format du numéro d'ID
             afficherAlerteErreur("Erreur de format", "Veuillez entrer des valeurs valides pour l'établissement.");
             e.printStackTrace();
         } catch (SQLException e) {
-            // Gérer les erreurs SQL
             afficherAlerteErreur("Erreur lors de l'ajout", "Une erreur est survenue lors de l'ajout de l'établissement. Veuillez réessayer.");
             e.printStackTrace();
         }
     }
 
-    // Méthode pour vérifier si une chaîne ne contient que des lettres et des espaces
+
     private boolean isValidString(String str) {
-        return str.matches("[a-zA-Z\\s]+");
+        return str.matches("[\\p{L}.\\s]+");
     }
 
-    // Méthode pour vérifier si une chaîne est un numéro de téléphone valide
+
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // Vérifier si la chaîne ne contient que des chiffres et a une longueur de 8 caractères
         if (!phoneNumber.matches("\\d{8}")) {
-            afficherAlerteErreur("Erreur de saisie", "Veuillez saisir un numéro de téléphone valide composé de 8 chiffres.");
             return false;
         }
         return true;
     }
 
-    // Méthode pour vérifier si une chaîne est un ID valide
-    private boolean isValidID(String id) {
-        return id.matches("\\d+");
-    }
 
-    // Méthode pour vérifier si la date est ultérieure à aujourd'hui
     private boolean isValidDate(Date date) {
-        return date.toLocalDate().
-                isBefore(java.time.LocalDate.now());
+        return date.toLocalDate().isBefore(java.time.LocalDate.now());
     }
 
     private void afficherAlerteErreur(String titre, String message) {
@@ -172,5 +235,42 @@ public class AddEtabliss {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    //BOUTTON IMPORT
+    public void importer(ActionEvent event) {
+        Etablissement e = new Etablissement();
+        FileChooser openFile = new FileChooser();
+        openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File","*png","*jpg"));
+        File file = openFile.showOpenDialog(mainForm.getScene().getWindow());
+        if(file != null)
+        {
+            data.path = file.getAbsolutePath();
+            image = new Image(file.toURI().toString(), 125,130,false , true);
+            importIV.setImage(image);
+        }
+    }
+    //BOUTTON CLEAR
+    public void clear(ActionEvent event) {
+        data.path = "";
+        importIV.setImage(null);
+        Nom_Etablissement.setText("");
+        Adresse_Etablissement.setText("");
+        typeEtablissement1.setValue("choisir un type");
+        Tel_Etablissement.setText("");
+        Directeur_Etablissement.setText("");
+        Date_Fondation.setValue(null);
+
+    }
+
+    // Méthode pour afficher une erreur dans un label
+    private void afficherErreur(Label label, String message) {
+        label.setText(message);
+        label.setVisible(true);
+    }
+
+    // Méthode pour effacer un message d'erreur dans un label
+    private void clearError(Label label) {
+        label.setVisible(false);
     }
 }

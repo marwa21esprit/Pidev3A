@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,124 +9,148 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import models.Certificat;
 import services.CertficatServices;
+import services.EtablissementServices;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 
 public class AddCertif {
 
     private final CertficatServices cs = new CertficatServices();
+    private final EtablissementServices es = new EtablissementServices();
 
     @FXML
     private DatePicker Date_Obtention_Certificat;
 
     @FXML
-    private TextField Domaine_Certificat;
+    private ChoiceBox<String> ID_Etablissement;
 
     @FXML
-    private TextField ID_Etablissement;
-
-    @FXML
-    private TextField Niveau;
+    private ChoiceBox<String> Domaine_Certificat;
 
     @FXML
     private TextField Nom_Certificat;
 
     @FXML
-    void affi(ActionEvent event) {
+    private ChoiceBox<String> Niveau;
+
+    @FXML
+    private Label nomCertificatErrorLabel;
+
+    @FXML
+    private Label dateObtentionErrorLabel;
+
+    @FXML
+    void initialize() {
+        // Charger les noms des établissements dans le ChoiceBox ID_Etablissement
         try {
-            // Charger le fichier FXML de la vue GetEtabliss.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif.fxml"));
-            Parent root = loader.load();
-
-            // Créer une nouvelle scène avec le contenu chargé à partir du fichier FXML
-            Scene scene = new Scene(root);
-
-            // Obtenir la scène actuelle à partir de l'événement
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Afficher la nouvelle scène
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+            List<String> nomsEtablissements = es.getNoms();
+            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsEtablissements);
+            ID_Etablissement.setItems(observableNoms);
+        } catch (SQLException e) {
+            afficherAlerteErreur("Erreur SQL", "Une erreur est survenue lors du chargement des établissements.");
             e.printStackTrace();
         }
 
+        // Écouteur pour le champ Nom_Certificat
+        Nom_Certificat.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidString(newValue)) {
+                afficherErreurNomCertificat("Veuillez entrer un nom valide pour le certificat (sans chiffres).");
+            } else {
+                nomCertificatErrorLabel.setVisible(false);
+            }
+        });
+
+        // Écouteur pour le DatePicker Date_Obtention_Certificat
+        Date_Obtention_Certificat.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.isAfter(LocalDate.now())) {
+                afficherErreurDateObtention("La date d'obtention ne peut pas être postérieure à aujourd'hui.");
+            } else {
+                dateObtentionErrorLabel.setVisible(false);
+            }
+        });
     }
+
+    @FXML
+    void affi(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            afficherAlerteErreur("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
+    }
+
     @FXML
     void ajouter(ActionEvent event) {
         try {
-            // Convertir les valeurs nécessaires en types appropriés
-            java.sql.Date dateObtention = java.sql.Date.valueOf(Date_Obtention_Certificat.getValue());
+            LocalDate dateObtention = Date_Obtention_Certificat.getValue();
 
-            // Vérifier si les champs contiennent des valeurs valides
             if (!isValidString(Nom_Certificat.getText())) {
-                afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un nom valide pour le certificat (sans chiffres).");
+                afficherErreurNomCertificat("Veuillez entrer un nom valide pour le certificat (sans chiffres).");
                 return;
             }
 
-            if (!isValidString(Domaine_Certificat.getText())) {
-                afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un domaine valide pour le certificat (sans chiffres).");
+            if (Domaine_Certificat.getValue() == null || Domaine_Certificat.getValue().isEmpty()) {
+                afficherAlerteErreur("Erreur de saisie", "Veuillez sélectionner un domaine pour le certificat.");
                 return;
             }
 
-            if (!isValidString(Niveau.getText())) {
-                afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un niveau valide pour le certificat (sans chiffres).");
+            if (Niveau.getValue() == null || Niveau.getValue().isEmpty()) {
+                afficherAlerteErreur("Erreur de saisie", "Veuillez sélectionner un niveau pour le certificat.");
                 return;
             }
 
-            if (!isValidID(ID_Etablissement.getText())) {
-                afficherAlerteErreur("Erreur de saisie", "Veuillez entrer un ID valide pour l'établissement.");
+            if (dateObtention == null) {
+                afficherAlerteErreur("Erreur de saisie", "Veuillez sélectionner une date d'obtention pour le certificat.");
                 return;
             }
 
-            if (!isValidDate(dateObtention)) {
-                afficherAlerteErreur("Erreur de saisie", "La date d'obtention du certificat ne peut pas être ultérieure à la date actuelle.");
+            if (dateObtention.isAfter(LocalDate.now())) {
+                afficherErreurDateObtention("La date d'obtention ne peut pas être postérieure à aujourd'hui.");
                 return;
             }
 
-            // Ajouter le certificat
-            cs.addCertificate(new Certificat(
-                    Nom_Certificat.getText(),
-                    Domaine_Certificat.getText(),
-                    Niveau.getText(),
-                    dateObtention,
-                    Integer.parseInt(ID_Etablissement.getText())
-            ));
-            afficherAlerteInformation("Ajout réussi", "Le certificat a été ajouté avec succès.");
-        } catch (NumberFormatException e) {
-            // Gérer les erreurs de format du numéro d'ID
-            afficherAlerteErreur("Erreur de format", "Veuillez entrer des valeurs valides pour le certificat.");
-            e.printStackTrace();
+            // Récupérer le nom de l'établissement sélectionné dans le ChoiceBox
+            String nomEtablissement = ID_Etablissement.getValue();
+
+            // Vérifier l'unicité du certificat
+            if (cs.isUniqueCertificate(Nom_Certificat.getText(), Domaine_Certificat.getValue(), Niveau.getValue(), Date.valueOf(dateObtention), es.getIDByNom(nomEtablissement))) {
+                // Ajouter le certificat
+                cs.addCertificate(new Certificat(
+                        Nom_Certificat.getText(),
+                        Domaine_Certificat.getValue(),
+                        Niveau.getValue(),
+                        Date.valueOf(dateObtention),
+                        es.getIDByNom(nomEtablissement) // Utiliser la méthode de EtablissementServices pour obtenir l'ID par le nom
+                ));
+                afficherAlerteInformation("Ajout réussi", "Le certificat a été ajouté avec succès.");
+            } else {
+                afficherAlerteErreur("Erreur d'ajout", "Un certificat avec les mêmes données existe déjà.");
+            }
         } catch (SQLException e) {
-            // Gérer les erreurs SQL
             afficherAlerteErreur("Erreur lors de l'ajout", "Une erreur est survenue lors de l'ajout du certificat. Veuillez réessayer.");
             e.printStackTrace();
         }
     }
 
-
-    // Méthode pour valider les identifiants (entiers)
-    private boolean isValidID(String input) {
-        return input.matches("\\d+");
-    }
-
-    // Méthode pour valider les chaînes de caractères (ne contient pas de chiffres)
     private boolean isValidString(String input) {
         return !input.matches(".*\\d.*");
     }
-
-    // Méthode pour valider la date (antérieure ou égale à la date actuelle)
-    private boolean isValidDate(Date date) {
-        return !date.toLocalDate().isAfter(java.time.LocalDate.now());
-    }
-
 
     private void afficherAlerteErreur(String titre, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -140,5 +166,17 @@ public class AddCertif {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void afficherErreurNomCertificat(String message) {
+        nomCertificatErrorLabel.setText(message);
+        nomCertificatErrorLabel.setVisible(true);
+    }
+
+    @FXML
+    private void afficherErreurDateObtention(String message) {
+        dateObtentionErrorLabel.setText(message);
+        dateObtentionErrorLabel.setVisible(true);
     }
 }
