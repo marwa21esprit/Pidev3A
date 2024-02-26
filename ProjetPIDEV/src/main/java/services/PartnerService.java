@@ -44,12 +44,21 @@ public class PartnerService implements IService<Partner>{
 
     @Override
     public void delete(int id) throws SQLException {
-        String sql = "delete from partner where idPartner = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
+        // Supprimer d'abord les événements associés au partenaire
+        String deleteEventsQuery = "DELETE FROM event WHERE idPartner = ?";
+        try (PreparedStatement eventStatement = connection.prepareStatement(deleteEventsQuery)) {
+            eventStatement.setInt(1, id);
+            eventStatement.executeUpdate();
+        }
 
+        // Ensuite, supprimer le partenaire lui-même
+        String deletePartnerQuery = "DELETE FROM partner WHERE idPartner = ?";
+        try (PreparedStatement partnerStatement = connection.prepareStatement(deletePartnerQuery)) {
+            partnerStatement.setInt(1, id);
+            partnerStatement.executeUpdate();
+        }
     }
+
 
     @Override
     public List<Partner> getAll() throws SQLException {
@@ -75,7 +84,7 @@ public class PartnerService implements IService<Partner>{
     @Override
     public Partner getById(int id) throws SQLException {
         String sql = "SELECT  `namePartner`, `typePartner`, `description`,`email`,`tel` " +
-                "FROM `event` WHERE `idPartner` = ?";
+                "FROM `partner` WHERE `idPartner` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -93,4 +102,22 @@ public class PartnerService implements IService<Partner>{
             return null;
         }
     }
+
+    @Override
+    public  List<String> getName() throws SQLException {
+        List<String> nomsPartners = new ArrayList<>();
+        String sql = "SELECT  `namePartner`" +
+                "FROM `partner`";
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                String nomPartners = rs.getString("namePartner");
+                nomsPartners.add(nomPartners);
+            }
+        }
+
+        return nomsPartners;
+    }
+
+
 }

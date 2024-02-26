@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventService implements IService<Event>{
+public class EventService implements IService<Event> {
 
     private Connection connection;
 
@@ -18,40 +18,42 @@ public class EventService implements IService<Event>{
 
     @Override
     public void add(Event event) throws SQLException {
-        String sql = "INSERT INTO `event`(`idEstab`,`nameEvent`,`dateEvent`,`nbrMax`,`description`,`image`) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO `event`(`idPartner`,`idEstab`,`nameEvent`,`dateEvent`,`nbrMax`,`description`,`image`) VALUES(?,?,?,?,?,?,?)";
         System.out.println(sql);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, event.getIdEstab());
-        preparedStatement.setString(2, event.getNameEvent());
-        preparedStatement.setDate(3, event.getDateEvent());
-        preparedStatement.setInt(4, event.getNbrMax());
-        preparedStatement.setString(5, event.getDescription());
+        preparedStatement.setInt(1, event.getIdPartner());
+        preparedStatement.setInt(2, event.getIdEstab());
+        preparedStatement.setString(3, event.getNameEvent());
+        preparedStatement.setDate(4, event.getDateEvent());
+        preparedStatement.setInt(5, event.getNbrMax());
+        preparedStatement.setString(6, event.getDescription());
         String path = data.path;
-        path = path.replace("\\","\\\\");
-        preparedStatement.setString(6, path);
-        preparedStatement.executeUpdate();
+        path = path.replace("\\", "\\\\");
+        preparedStatement.setString(7, path);
+            preparedStatement.executeUpdate();
     }
 
     @Override
-    public void update(Event event,int id) throws SQLException {
-        String sql = "update event set idEstab = ?,  nameEvent = ?, dateEvent = ?, nbrMax = ?," +
+    public void update(Event event, int id) throws SQLException {
+        String sql = "update event set idPartner = ?,idEstab = ?,  nameEvent = ?, dateEvent = ?, nbrMax = ?," +
                 "description = ?,image = ? where idEvent = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, event.getIdEstab());
-        preparedStatement.setString(2, event.getNameEvent());
-        preparedStatement.setDate(3, event.getDateEvent());
-        preparedStatement.setInt(4, event.getNbrMax());
-        preparedStatement.setString(5, event.getDescription());
+        preparedStatement.setInt(1, event.getIdPartner());
+        preparedStatement.setInt(2, event.getIdEstab());
+        preparedStatement.setString(3, event.getNameEvent());
+        preparedStatement.setDate(4, event.getDateEvent());
+        preparedStatement.setInt(5, event.getNbrMax());
+        preparedStatement.setString(6, event.getDescription());
         String path = data.path;
         if (path == null) {
             System.out.println("path is null");
             path = "C:\\Users\\user\\Downloads\\logo.png"; // Replace with your default path
 
         } else {
-            path = path.replace("\\","\\\\");
+            path = path.replace("\\", "\\\\");
         }
-        preparedStatement.setString(6, path);
-        preparedStatement.setInt(7, id);
+        preparedStatement.setString(7, path);
+        preparedStatement.setInt(8, id);
         preparedStatement.executeUpdate();
     }
 
@@ -73,6 +75,7 @@ public class EventService implements IService<Event>{
         while (rs.next()) {
             Event e = new Event();
             e.setIdEvent(rs.getInt("idEvent"));
+            e.setIdPartner(rs.getInt("idPartner"));
             e.setIdEstab(rs.getInt("idEstab"));
             e.setNameEvent(rs.getString("nameEvent"));
             e.setDateEvent(rs.getDate("dateEvent"));
@@ -87,13 +90,14 @@ public class EventService implements IService<Event>{
 
     @Override
     public Event getById(int id) throws SQLException {
-        String sql = "SELECT `idEstab`, `nameEvent`, `dateEvent`, `nbrMax`, `description`,`image` " +
+        String sql = "SELECT `idPartner`,`idEstab`, `nameEvent`, `dateEvent`, `nbrMax`, `description`,`image` " +
                 "FROM `event` WHERE `idEvent` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
+            int idPartner = resultSet.getInt("idPartner");
             int idEstab = resultSet.getInt("idEstab");
             String nameEvent = resultSet.getString("nameEvent");
             Date dateEvent = resultSet.getDate("dateEvent");
@@ -101,10 +105,19 @@ public class EventService implements IService<Event>{
             String description = resultSet.getString("description");
             String image = resultSet.getString("image");
 
-            return new Event(id, idEstab, nameEvent, dateEvent,nbrMax,description,image);
+            return new Event(id,idPartner, idEstab, nameEvent, dateEvent, nbrMax, description, image);
         } else {
             // Handle the case when no matching record is found
             return null;
         }
     }
+
+    @Override
+    public List<String> getName() throws SQLException {
+        return null;
+    }
+
+
 }
+
+

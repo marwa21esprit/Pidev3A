@@ -10,3 +10,20 @@
 {
     -fx-background-color: #EBE8F9;
 }
+
+.shadow{
+    -fx-effect: dropshadow(three-pass-box ,rgba(0,0,0,0.5), 5,0,0,0);
+}
+.white-bg{
+    -fx-background-color: #FFFFFF;
+}
+
+.radius{
+    -fx-background-radius: 5px;
+}
+.btn{
+    -fx-background-color: #EBE8F9;
+    -fx-cursor: hand;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}

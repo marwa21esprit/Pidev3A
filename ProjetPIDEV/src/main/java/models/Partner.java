@@ -29,6 +29,10 @@ public class Partner {
         this.email = email;
         this.tel = tel;
     }
+    public Partner(int idPartner, String namePartner) {
+        this.idPartner = idPartner;
+        this.namePartner = namePartner;
+    }
 
     public int getIdPartner() {
         return idPartner;

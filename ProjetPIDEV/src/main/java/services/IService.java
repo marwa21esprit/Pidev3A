@@ -1,5 +1,7 @@
 package services;
 
+import models.Partner;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,4 +16,8 @@ public interface IService<T> {
     List<T> getAll() throws SQLException;
 
     T getById(int id) throws  SQLException;
+
+    List<String> getName() throws SQLException;
+
+
 }
