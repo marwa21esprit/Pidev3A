@@ -14,7 +14,6 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws IOException {
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Items.fxml"));
-       // FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowTuteur.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addTuteur1.fxml"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/addFormation.fxml"));
