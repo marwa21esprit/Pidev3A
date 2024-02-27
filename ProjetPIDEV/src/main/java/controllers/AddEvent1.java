@@ -45,6 +45,8 @@ public class AddEvent1 {
     @FXML
     private Spinner<Integer> nbrMaxS;
     @FXML
+    private TextField prixTF;
+    @FXML
     private TextArea descTF;
     @FXML
     private Button importerBT;
@@ -63,8 +65,8 @@ public class AddEvent1 {
 
         // Charger les noms des partenaires dans le ComboBox partnerCB
         try {
-            List<String> nomsEtablissements = ps.getName();
-            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsEtablissements);
+            List<String> nomsPartners = ps.getName();
+            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsPartners);
             partnerCB.setItems(observableNoms);
         } catch (SQLException e) {
             showAlert("Erreur SQL", "Une erreur est survenue lors du chargement des établissements.");
@@ -100,16 +102,24 @@ public class AddEvent1 {
                 return;
             }
 
+
+
             String selectedPartner = partnerCB.getValue();
+             // Utiliser la méthode de EtablissementServices pour obtenir l'ID par le nom
 
             if (data.path == null || data.path.isEmpty()) {
                 showAlert("Erreur", "Veuillez sélectionner une image.");
                 return;
             }
+            double prix = Double.parseDouble(prixTF.getText());
+            System.out.println(ps.getIDByNom(selectedPartner));
 
             // Ajouter l'événement si toutes les validations sont réussies
             Date dateEventC = Date.valueOf(dateEventDP.getValue());
-            es.add(new Event(Integer.parseInt(idEstabTF.getText()), eventName, dateEventC, maxParticipants, eventDescription,data.path));
+
+            Event e =new Event(ps.getIDByNom(selectedPartner),Integer.parseInt(idEstabTF.getText()), eventName, dateEventC, maxParticipants,prix, eventDescription,data.path);
+            System.out.println(e);
+            es.add(e);
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -173,4 +183,23 @@ public class AddEvent1 {
     }
 
 
+    public void showEvents(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showPartners(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getPartner1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }

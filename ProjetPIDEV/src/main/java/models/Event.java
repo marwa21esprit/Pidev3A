@@ -12,6 +12,7 @@ public class Event {
 
     private Date dateEvent;
     private int nbrMax;
+    private double prix;
     private String description;
 
     private String image;
@@ -19,33 +20,36 @@ public class Event {
     public Event() {
     }
 
-    public Event(int idEvent,int idPartner, int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description , String image) {
+    public Event(int idEvent,int idPartner, int idEstab, String nameEvent, Date dateEvent, int nbrMax,double prix, String description , String image) {
         this.idEvent = idEvent;
         this.idPartner = idPartner;
         this.idEstab = idEstab;
         this.nameEvent = nameEvent;
         this.dateEvent = dateEvent;
         this.nbrMax = nbrMax;
+        this.prix = prix;
         this.description = description;
         this.image = image;
     }
 
-    public Event(int idPartner, int idEstab,String nameEvent, Date dateEvent, int nbrMax, String description , String image) {
+    public Event(int idPartner, int idEstab, String nameEvent, Date dateEvent, int nbrMax,double prix, String description , String image) {
         this.idPartner = idPartner;
         this.idEstab = idEstab;
         this.nameEvent = nameEvent;
         this.dateEvent = dateEvent;
         this.nbrMax = nbrMax;
+        this.prix = prix;
         this.description = description;
         this.image = image;
     }
 
 
-    public Event(int idEstab, String nameEvent, Date dateEvent, int nbrMax, String description, String image) {
+    public Event(int idEstab, String nameEvent, Date dateEvent, int nbrMax,double prix, String description, String image) {
         this.idEstab = idEstab;
         this.nameEvent = nameEvent;
         this.dateEvent = dateEvent;
         this.nbrMax = nbrMax;
+        this.prix = prix;
         this.description = description;
         this.image = image;
 
@@ -99,6 +103,14 @@ public class Event {
         this.nbrMax = nbrMax;
     }
 
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
     public String getDescription() {
         return description;
     }
@@ -123,6 +135,7 @@ public class Event {
                 ", nameEvent='" + nameEvent + '\'' +
                 ", dateEvent=" + dateEvent +
                 ", nbrMax=" + nbrMax +
+                ", prix=" + prix +
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +
                 '}';
@@ -131,20 +144,12 @@ public class Event {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return idEvent == event.idEvent &&
-                idPartner == event.idPartner &&
-                idEstab == event.idEstab &&
-                nbrMax == event.nbrMax &&
-                Objects.equals(nameEvent, event.nameEvent) &&
-                Objects.equals(dateEvent, event.dateEvent) &&
-                Objects.equals(description, event.description) &&
-                Objects.equals(image, event.image);
+        if (!(o instanceof Event event)) return false;
+        return getIdEvent() == event.getIdEvent() && getIdPartner() == event.getIdPartner() && getIdEstab() == event.getIdEstab() && getNbrMax() == event.getNbrMax() && Double.compare(prix, event.prix) == 0 && Objects.equals(getNameEvent(), event.getNameEvent()) && Objects.equals(getDateEvent(), event.getDateEvent()) && Objects.equals(getDescription(), event.getDescription()) && Objects.equals(getImage(), event.getImage());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEvent, idPartner, idEstab, nameEvent, dateEvent, nbrMax, description, image);
+        return Objects.hash(getIdEvent(), getIdPartner(), getIdEstab(), getNameEvent(), getDateEvent(), getNbrMax(), prix, getDescription(), getImage());
     }
 }

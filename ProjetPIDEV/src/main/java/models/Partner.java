@@ -9,25 +9,28 @@ public class Partner {
     private String description;
     private String email;
     private int tel;
+    private String image;
 
     public Partner() {
     }
 
-    public Partner(int idPartner, String namePartner, String typePartner, String description, String email, int tel) {
+    public Partner(int idPartner, String namePartner, String typePartner, String description, String email, int tel,String image) {
         this.idPartner = idPartner;
         this.namePartner = namePartner;
         this.typePartner = typePartner;
         this.description = description;
         this.email = email;
         this.tel = tel;
+        this.image = image;
     }
 
-    public Partner( String namePartner, String typePartner, String description, String email, int tel) {
+    public Partner( String namePartner, String typePartner, String description, String email, int tel,String image) {
         this.namePartner = namePartner;
         this.typePartner = typePartner;
         this.description = description;
         this.email = email;
         this.tel = tel;
+        this.image = image;
     }
     public Partner(int idPartner, String namePartner) {
         this.idPartner = idPartner;
@@ -84,6 +87,14 @@ public class Partner {
         this.tel = tel;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Partner{" +
@@ -93,6 +104,7 @@ public class Partner {
                 ", description='" + description + '\'' +
                 ", email='" + email + '\'' +
                 ", tel=" + tel +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

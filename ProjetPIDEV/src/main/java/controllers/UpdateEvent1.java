@@ -52,6 +52,10 @@ public class UpdateEvent1 {
 
     @FXML
     private Spinner<Integer> nbrMaxS;
+
+    @FXML
+    private TextField prixTF;
+
     @FXML
     private ComboBox<String> partnerCB;
     @FXML
@@ -101,6 +105,7 @@ public class UpdateEvent1 {
         } else {
             nbrMaxS.getValueFactory().setValue(event.getNbrMax());
         }
+        prixTF.setText(String.valueOf(event.getPrix()));
         descTF.setText(event.getDescription());
 
         /*String path = event.getImage();
@@ -166,6 +171,8 @@ public class UpdateEvent1 {
                 return;
             }
 
+            double prix = Double.parseDouble(prixTF.getText());
+
             int id = Integer.parseInt(idEventTF.getText());
             Event updatedEvent = new Event(
                     selectedPartnerId,
@@ -173,6 +180,7 @@ public class UpdateEvent1 {
                     eventName,
                     dateEventC,
                     maxParticipants,
+                    prix,
                     eventDescription,
                     data.path
             );
@@ -222,9 +230,29 @@ public class UpdateEvent1 {
         nameEventTF.setText("");
         dateEventDP.setValue(null);
         nbrMaxS.getValueFactory().setValue(0);
+        prixTF.setText("");
         descTF.setText("");
         data.path = "";
         importIV.setImage(null);
     }
 
+    public void showEvents(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showPartners(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getPartner1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }

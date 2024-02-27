@@ -19,5 +19,9 @@ public interface IService<T> {
 
     List<String> getName() throws SQLException;
 
+    int getIDByNom(String name) throws SQLException;
+    String getNameByID(int id) throws SQLException;
 
-}
+
+
+    }

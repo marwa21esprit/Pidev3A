@@ -18,7 +18,7 @@ public class EventService implements IService<Event> {
 
     @Override
     public void add(Event event) throws SQLException {
-        String sql = "INSERT INTO `event`(`idPartner`,`idEstab`,`nameEvent`,`dateEvent`,`nbrMax`,`description`,`image`) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `event`(`idPartnerCE`,`idEstab`,`nameEvent`,`dateEvent`,`nbrMax`,`prix`,`description`,`image`) VALUES(?,?,?,?,?,?,?,?)";
         System.out.println(sql);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, event.getIdPartner());
@@ -26,24 +26,26 @@ public class EventService implements IService<Event> {
         preparedStatement.setString(3, event.getNameEvent());
         preparedStatement.setDate(4, event.getDateEvent());
         preparedStatement.setInt(5, event.getNbrMax());
-        preparedStatement.setString(6, event.getDescription());
+        preparedStatement.setDouble(6, event.getPrix());
+        preparedStatement.setString(7, event.getDescription());
         String path = data.path;
         path = path.replace("\\", "\\\\");
-        preparedStatement.setString(7, path);
+        preparedStatement.setString(8, path);
             preparedStatement.executeUpdate();
     }
 
     @Override
     public void update(Event event, int id) throws SQLException {
-        String sql = "update event set idPartner = ?,idEstab = ?,  nameEvent = ?, dateEvent = ?, nbrMax = ?," +
-                "description = ?,image = ? where idEvent = ?";
+        String sql = "update event set idPartnerCE = ?,idEstab = ?,  nameEvent = ?, dateEvent = ?, nbrMax = ?," +
+                "prix = ?,description = ?,image = ? where idEvent = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, event.getIdPartner());
         preparedStatement.setInt(2, event.getIdEstab());
         preparedStatement.setString(3, event.getNameEvent());
         preparedStatement.setDate(4, event.getDateEvent());
         preparedStatement.setInt(5, event.getNbrMax());
-        preparedStatement.setString(6, event.getDescription());
+        preparedStatement.setDouble(6, event.getPrix());
+        preparedStatement.setString(7, event.getDescription());
         String path = data.path;
         if (path == null) {
             System.out.println("path is null");
@@ -52,8 +54,8 @@ public class EventService implements IService<Event> {
         } else {
             path = path.replace("\\", "\\\\");
         }
-        preparedStatement.setString(7, path);
-        preparedStatement.setInt(8, id);
+        preparedStatement.setString(8, path);
+        preparedStatement.setInt(9, id);
         preparedStatement.executeUpdate();
     }
 
@@ -75,11 +77,12 @@ public class EventService implements IService<Event> {
         while (rs.next()) {
             Event e = new Event();
             e.setIdEvent(rs.getInt("idEvent"));
-            e.setIdPartner(rs.getInt("idPartner"));
+            e.setIdPartner(rs.getInt("idPartnerCE"));
             e.setIdEstab(rs.getInt("idEstab"));
             e.setNameEvent(rs.getString("nameEvent"));
             e.setDateEvent(rs.getDate("dateEvent"));
             e.setNbrMax(rs.getInt("nbrMax"));
+            e.setPrix(rs.getDouble("prix"));
             e.setDescription(rs.getString("description"));
             e.setImage(rs.getString("image"));
 
@@ -90,7 +93,7 @@ public class EventService implements IService<Event> {
 
     @Override
     public Event getById(int id) throws SQLException {
-        String sql = "SELECT `idPartner`,`idEstab`, `nameEvent`, `dateEvent`, `nbrMax`, `description`,`image` " +
+        String sql = "SELECT `idPartnerCE`,`idEstab`, `nameEvent`, `dateEvent`, `nbrMax`, `prix`, `description`,`image` " +
                 "FROM `event` WHERE `idEvent` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
@@ -102,10 +105,11 @@ public class EventService implements IService<Event> {
             String nameEvent = resultSet.getString("nameEvent");
             Date dateEvent = resultSet.getDate("dateEvent");
             int nbrMax = resultSet.getInt("nbrMax");
+            double prix = resultSet.getDouble("prix");
             String description = resultSet.getString("description");
             String image = resultSet.getString("image");
 
-            return new Event(id,idPartner, idEstab, nameEvent, dateEvent, nbrMax, description, image);
+            return new Event(id,idPartner, idEstab, nameEvent, dateEvent, nbrMax, prix,description, image);
         } else {
             // Handle the case when no matching record is found
             return null;
@@ -115,6 +119,15 @@ public class EventService implements IService<Event> {
     @Override
     public List<String> getName() throws SQLException {
         return null;
+    }
+
+    @Override
+    public int getIDByNom(String nomEtablissement) throws SQLException {
+        return 0;
+    }
+    @Override
+    public String getNameByID(int id) throws SQLException {
+        return "";
     }
 
 

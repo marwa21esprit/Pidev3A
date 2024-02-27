@@ -1,5 +1,6 @@
 package services;
 
+import controllers.data;
 import models.Event;
 import models.Partner;
 import utils.MyDatabase;
@@ -17,7 +18,7 @@ public class PartnerService implements IService<Partner>{
     }
     @Override
     public void add(Partner partner) throws SQLException {
-        String sql = "INSERT INTO `partner`(`namePartner`,`typePartner`,`description`,`email`,`tel`) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO `partner`(`namePartner`,`typePartner`,`description`,`email`,`tel`,`image`) VALUES(?,?,?,?,?,?)";
         System.out.println(sql);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, partner.getNamePartner());
@@ -25,27 +26,38 @@ public class PartnerService implements IService<Partner>{
         preparedStatement.setString(3, partner.getDescription());
         preparedStatement.setString(4, partner.getEmail());
         preparedStatement.setInt(5, partner.getTel());
+        preparedStatement.setString(6, partner.getImage());
         preparedStatement.executeUpdate();
     }
 
     @Override
     public void update(Partner partner,int id) throws SQLException {
         String sql = "update partner set namePartner = ?,  typePartner = ?, description = ?, email = ?," +
-                "tel = ? where idPartner = ?";
+                "tel = ?, image=? where idPartner = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, partner.getNamePartner());
         preparedStatement.setString(2, partner.getTypePartner());
         preparedStatement.setString(3, partner.getDescription());
         preparedStatement.setString(4, partner.getEmail());
         preparedStatement.setInt(5, partner.getTel());
-        preparedStatement.setInt(6, id);
+        String path = data.path1;
+        if (path == null) {
+            System.out.println("path is null");
+            path = "C:\\Users\\user\\Downloads\\logo.png"; // Replace with your default path
+
+        } else {
+            path = path.replace("\\", "\\\\");
+        }
+        preparedStatement.setString(6, path);
+
+        preparedStatement.setInt(7, id);
         preparedStatement.executeUpdate();
     }
 
     @Override
     public void delete(int id) throws SQLException {
         // Supprimer d'abord les événements associés au partenaire
-        String deleteEventsQuery = "DELETE FROM event WHERE idPartner = ?";
+        String deleteEventsQuery = "DELETE FROM event WHERE idPartnerCE = ?";
         try (PreparedStatement eventStatement = connection.prepareStatement(deleteEventsQuery)) {
             eventStatement.setInt(1, id);
             eventStatement.executeUpdate();
@@ -74,6 +86,7 @@ public class PartnerService implements IService<Partner>{
             p.setDescription(rs.getString("description"));
             p.setEmail(rs.getString("email"));
             p.setTel(rs.getInt("tel"));
+            p.setImage(rs.getString("image"));
 
 
             partners.add(p);
@@ -83,20 +96,22 @@ public class PartnerService implements IService<Partner>{
 
     @Override
     public Partner getById(int id) throws SQLException {
-        String sql = "SELECT  `namePartner`, `typePartner`, `description`,`email`,`tel` " +
+        String sql = "SELECT  `idPartner`,`namePartner`, `typePartner`, `description`,`email`,`tel`,`image` " +
                 "FROM `partner` WHERE `idPartner` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
+            int idPartner = resultSet.getInt("idPartner");
             String namePartner = resultSet.getString("namePartner");
             String typePartner = resultSet.getString("typePartner");
             String email = resultSet.getString("email");
             int tel = resultSet.getInt("tel");
             String description = resultSet.getString("description");
+            String image = resultSet.getString("image");
 
-            return new Partner(id, namePartner, typePartner, description,email,tel);
+            return new Partner(id, namePartner, typePartner, description,email,tel,image);
         } else {
             // Handle the case when no matching record is found
             return null;
@@ -117,6 +132,35 @@ public class PartnerService implements IService<Partner>{
         }
 
         return nomsPartners;
+    }
+    public int getIDByNom(String name) throws SQLException {
+        String sql = "SELECT idPartner FROM partner WHERE namePartner = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, name);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("idPartner");
+                } else {
+                    // Gérer le cas où aucun enregistrement correspondant n'est trouvé
+                    throw new SQLException("Aucun établissement trouvé avec le nom spécifié : " + name);
+                }
+            }
+        }
+    }
+
+    public String getNameByID(int id) throws SQLException {
+        String sql = "SELECT namePartner FROM partner WHERE idPartner = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("namePartner");
+                } else {
+                    // Gérer le cas où aucun enregistrement correspondant n'est trouvé
+                    throw new SQLException("Aucun établissement trouvé avec le nom spécifié : " + id);
+                }
+            }
+        }
     }
 
 
