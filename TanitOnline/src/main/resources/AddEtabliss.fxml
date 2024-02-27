@@ -55,11 +55,11 @@
             </AnchorPane>
             <Button fx:id="importBT" layoutX="339.0" layoutY="391.0" mnemonicParsing="false" onAction="#importer" prefHeight="26.0" prefWidth="110.0" text="Import" />
             <Button layoutX="642.0" layoutY="401.0" mnemonicParsing="false" onAction="#clear" prefHeight="32.0" prefWidth="152.0" text="Vider" />
-            <Label fx:id="nomLabelError" layoutX="501.0" layoutY="109.0" prefHeight="18.0" prefWidth="279.0" />
-            <Label fx:id="telLabelError" layoutX="141.0" layoutY="227.0" prefHeight="18.0" prefWidth="243.0" />
-            <Label fx:id="addressLabelError" layoutX="53.0" layoutY="172.0" prefHeight="18.0" prefWidth="299.0" />
-            <Label fx:id="directorLabelError" layoutX="501.0" layoutY="227.0" prefHeight="18.0" prefWidth="243.0" />
-            <Label fx:id="datefondLabelError" layoutX="127.0" layoutY="298.0" prefHeight="18.0" prefWidth="229.0" />
+            <Label fx:id="nomLabelError" layoutX="501.0" layoutY="109.0" prefHeight="18.0" prefWidth="279.0" textFill="red" visible="false" />
+            <Label fx:id="telLabelError" layoutX="141.0" layoutY="227.0" prefHeight="18.0" prefWidth="243.0" textFill="red" visible="false" />
+            <Label fx:id="addressLabelError" layoutX="53.0" layoutY="172.0" prefHeight="18.0" prefWidth="299.0" textFill="red" visible="false" />
+            <Label fx:id="directorLabelError" layoutX="501.0" layoutY="227.0" prefHeight="18.0" prefWidth="243.0" textFill="red" visible="false" />
+            <Label fx:id="datefondLabelError" layoutX="127.0" layoutY="298.0" prefHeight="18.0" prefWidth="229.0" textFill="red" visible="false" />
 
 
          </children>

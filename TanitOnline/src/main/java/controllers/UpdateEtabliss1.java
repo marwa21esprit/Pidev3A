@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.Certificat;
 import models.Etablissement;
 import services.EtablissementServices;
 
@@ -20,7 +21,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class UpdateEtabliss {
+public class UpdateEtabliss1 {
 
     private final EtablissementServices es = new EtablissementServices();
 
@@ -137,7 +138,7 @@ public class UpdateEtabliss {
     @FXML
     void affi(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss1.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) Date_Fondationmodif.getScene().getWindow();
@@ -306,5 +307,6 @@ public class UpdateEtabliss {
     private void clearError(Label label) {
         label.setVisible(false);
     }
+
 
 }

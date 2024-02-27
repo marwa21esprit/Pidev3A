@@ -59,5 +59,10 @@
          </children>
       </AnchorPane>
       <Button fx:id="importBT" layoutX="320.0" layoutY="424.0" mnemonicParsing="false" onAction="#importer" prefHeight="26.0" prefWidth="110.0" text="Import" />
+      <Label fx:id="nomLabelError" layoutX="407.0" layoutY="133.0" prefHeight="18.0" prefWidth="260.0" textFill="red" visible="false" />
+      <Label fx:id="addressLabelError" layoutX="88.0" layoutY="192.0" prefHeight="18.0" prefWidth="200.0" textFill="red" visible="false" />
+      <Label fx:id="telLabelError" layoutX="92.0" layoutY="247.0" prefHeight="18.0" prefWidth="212.0" textFill="red" visible="false" />
+      <Label fx:id="directorLabelError" layoutX="406.0" layoutY="256.0" prefHeight="18.0" prefWidth="251.0" textFill="red" visible="false" />
+      <Label fx:id="datefondLabelError" layoutX="80.0" layoutY="315.0" prefHeight="18.0" prefWidth="240.0" textFill="red" visible="false" />
    </children>
 </AnchorPane>

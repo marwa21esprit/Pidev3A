@@ -14,14 +14,19 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-      // FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddEtabliss.fxml"));
+       //FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddEtabliss1.fxml"));
         // FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeleteEtabliss.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddCertif.fxml"));
-       //FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddCertif1.fxml"));
+       //FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/items.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeleteCertif.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEtabliss.fxml"));
+      //  FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEtabliss.fxml"));
       //  FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateCertif.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/items1.fxml"));
+
+
 
 
 
