@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.showTuteur1">
+<AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.showFormation1">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
          <children>
@@ -117,7 +117,7 @@
             </Button>
          </children>
       </VBox>
-      <Label layoutX="277.0" layoutY="8.0" text="Tutor List">
+      <Label layoutX="277.0" layoutY="8.0" text="Formation List">
          <font>
             <Font size="24.0" />
          </font>
@@ -188,11 +188,11 @@
             <Image url="@images/loop.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="tuteur_AP" layoutX="291.2" layoutY="180.0" prefHeight="406.0" prefWidth="714.0" stylesheets="@style.css" AnchorPane.bottomAnchor="13.600000000000023" AnchorPane.leftAnchor="267.0" AnchorPane.rightAnchor="13.399999999999977" AnchorPane.topAnchor="204.0">
+      <AnchorPane fx:id="formation_AP" layoutX="291.2" layoutY="180.0" prefHeight="406.0" prefWidth="714.0" stylesheets="@style.css" AnchorPane.bottomAnchor="13.600000000000023" AnchorPane.leftAnchor="267.0" AnchorPane.rightAnchor="13.399999999999977" AnchorPane.topAnchor="204.0">
          <children>
-            <ScrollPane fx:id="tuteur_scrollPane" layoutX="-1.0" layoutY="-1.0" prefHeight="406.0" prefWidth="738.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.684341886080802E-14">
+            <ScrollPane fx:id="formation_scrollPane" layoutX="-1.0" layoutY="-1.0" prefHeight="406.0" prefWidth="738.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.684341886080802E-14">
                <content>
-                  <GridPane fx:id="tuteur_gridPane" prefHeight="23.0" prefWidth="110.0" stylesheets="@style.css">
+                  <GridPane fx:id="formation_gridPane" prefHeight="23.0" prefWidth="110.0" stylesheets="@style.css">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -214,6 +214,6 @@
             <String fx:value="shadow" />
          </styleClass>
       </AnchorPane>
-      <Button layoutX="272.8" layoutY="159.0" mnemonicParsing="false" onAction="#ajouterTuteur" prefHeight="35.0" prefWidth="132.0" styleClass="btn" stylesheets="@style.css" text="Add Tutor" AnchorPane.leftAnchor="272.8" AnchorPane.topAnchor="159.0" />
+      <Button layoutX="272.8" layoutY="159.0" mnemonicParsing="false" onAction="#ajouterFormation" prefHeight="35.0" prefWidth="132.0" styleClass="btn" stylesheets="@style.css" text="Add Formation" AnchorPane.leftAnchor="272.8" AnchorPane.topAnchor="159.0" />
    </children>
 </AnchorPane>

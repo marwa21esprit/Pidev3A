@@ -89,11 +89,8 @@ public class addTuteur1 {
                 return;
             }
 
-            // Convertir les valeurs nécessaires en types appropriés
+
             java.sql.Date selectedDate = java.sql.Date.valueOf(date_naisc.getValue());
-
-            // Appeler la méthode de service pour ajouter un tuteur
-
 
             st.addTuteur(new Tuteur(
                     nom.getText(),

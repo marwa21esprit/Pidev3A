@@ -13,10 +13,11 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Items.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Items1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addTuteur1.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/addFormation.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addFormation1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTuteur1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateFormation.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/deleteTuteur.fxml"));

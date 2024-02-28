@@ -1,6 +1,7 @@
 package controller;
 
 import Services.ServiceTuteur;
+import entities.Formation;
 import entities.Tuteur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,9 +125,5 @@ public class Items implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-
-
-
-
 
 }

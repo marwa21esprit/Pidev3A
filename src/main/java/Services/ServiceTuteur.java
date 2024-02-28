@@ -7,53 +7,53 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceTuteur implements ITuteur <Tuteur>
-{
+public class ServiceTuteur implements ITuteur <Tuteur> {
     private Connection cnx;
 
-    public ServiceTuteur () { cnx= MyDB.getInstance().getCnx();}
+    public ServiceTuteur() {
+        cnx = MyDB.getInstance().getCnx();
+    }
 
 
-    public void addTuteur (Tuteur tuteur) throws SQLException
-    {
-        String sql ="INSERT INTO tuteur (nom,prenom,date_naisc,tlf,profession,email,image)VALUES (?,?,?,?,?,?,?)";
+    public void addTuteur(Tuteur tuteur) throws SQLException {
+        String sql = "INSERT INTO tuteur (nom,prenom,date_naisc,tlf,profession,email,image)VALUES (?,?,?,?,?,?,?)";
 
-        PreparedStatement preparedStatement =cnx.prepareStatement(sql);
+        PreparedStatement preparedStatement = cnx.prepareStatement(sql);
 
         preparedStatement.setString(1, tuteur.getNom());
-        preparedStatement.setString(2,tuteur.getPrenom());
-        preparedStatement.setDate(3,tuteur.getDate_naisc());
-        preparedStatement.setInt(4,tuteur.getTlf());
-        preparedStatement.setString(5,tuteur.getProfession());
-        preparedStatement.setString(6,tuteur.getEmail());
-        preparedStatement.setString(7,tuteur.getImage());
+        preparedStatement.setString(2, tuteur.getPrenom());
+        preparedStatement.setDate(3, tuteur.getDate_naisc());
+        preparedStatement.setInt(4, tuteur.getTlf());
+        preparedStatement.setString(5, tuteur.getProfession());
+        preparedStatement.setString(6, tuteur.getEmail());
+        preparedStatement.setString(7, tuteur.getImage());
 
         //execution de la requete
         preparedStatement.executeUpdate();
     }
 
-    public void updateTuteur (Tuteur tuteur , int id) throws SQLException {
+    public void updateTuteur(Tuteur tuteur, int id) throws SQLException {
         String sql = "UPDATE tuteur SET nom = ?, prenom = ?, date_naisc = ?, tlf = ?, profession = ?, email = ? , image = ? WHERE id_tuteur = ? ";
 
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
 
         preparedStatement.setString(1, tuteur.getNom());
-        preparedStatement.setString(2,tuteur.getPrenom());
-        preparedStatement.setDate(3,tuteur.getDate_naisc());
-        preparedStatement.setInt(4,tuteur.getTlf());
-        preparedStatement.setString(5,tuteur.getProfession());
-        preparedStatement.setString(6,tuteur.getEmail());
-        preparedStatement.setString(7,tuteur.getImage());
-        preparedStatement.setInt(8,id);
+        preparedStatement.setString(2, tuteur.getPrenom());
+        preparedStatement.setDate(3, tuteur.getDate_naisc());
+        preparedStatement.setInt(4, tuteur.getTlf());
+        preparedStatement.setString(5, tuteur.getProfession());
+        preparedStatement.setString(6, tuteur.getEmail());
+        preparedStatement.setString(7, tuteur.getImage());
+        preparedStatement.setInt(8, id);
         System.out.println("tutteur updated");
         //execution de la requete
         preparedStatement.executeUpdate();
     }
 
-    public void deleteTuteur (int id_tuteur) throws SQLException {
+    public void deleteTuteur(int id_tuteur) throws SQLException {
         String sql = "DELETE FROM tuteur WHERE id_tuteur = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
-        preparedStatement.setInt(1,id_tuteur);
+        preparedStatement.setInt(1, id_tuteur);
         preparedStatement.executeUpdate();
 
     }
@@ -62,10 +62,10 @@ public class ServiceTuteur implements ITuteur <Tuteur>
 
         String sql = "SELECT * FROM tuteur";
         Statement statement = cnx.createStatement();
-        ResultSet rs =statement.executeQuery(sql);
-        List <Tuteur> tuteurs = new ArrayList<>();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Tuteur> tuteurs = new ArrayList<>();
 
-        while (rs.next()){
+        while (rs.next()) {
             Tuteur tuteur = new Tuteur();
 
             tuteur.setId_tuteur(rs.getInt("id_tuteur"));
@@ -78,12 +78,13 @@ public class ServiceTuteur implements ITuteur <Tuteur>
             tuteur.setImage(rs.getString("image"));
 
             tuteurs.add(tuteur);
-        } return tuteurs;
+        }
+        return tuteurs;
 
 
     }
 
-    public Tuteur getById (int id_tuteur) throws SQLException {
+    public Tuteur getById(int id_tuteur) throws SQLException {
         String sql = "SELECT `nom`, `prenom`, `date_naisc`, `tlf`, `profession`, `email`, `image` FROM `tuteur` WHERE `id_tuteur` = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
         preparedStatement.setInt(1, id_tuteur);
@@ -98,7 +99,7 @@ public class ServiceTuteur implements ITuteur <Tuteur>
             String profession = resultSet.getString("profession");
             String email = resultSet.getString("email");
             String image = resultSet.getString("image");
-            return new Tuteur(id_tuteur, nom, prenom, date_naisc, tlf, profession, email,image);
+            return new Tuteur(id_tuteur, nom, prenom, date_naisc, tlf, profession, email, image);
         } else {
 
             return null;
@@ -106,4 +107,33 @@ public class ServiceTuteur implements ITuteur <Tuteur>
     }
 
 
+    public List<String> getNom() throws SQLException {
+        List<String> nomsTuteurs = new ArrayList<>();
+        String sql = "SELECT nom FROM tuteur";
+        try (Statement statement = cnx.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                String nom = rs.getString("nom");
+                nomsTuteurs.add(nom);
+            }
+        }
+
+        return nomsTuteurs;
+    }
+
+
+    public int getIDByNom(String nom) throws SQLException {
+        String sql = "SELECT id_tuteur FROM tuteur WHERE nom = ?";
+        try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+            preparedStatement.setString(1, nom);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("id_tuteur");
+                } else {
+                    // Gérer le cas où aucun enregistrement correspondant n'est trouvé
+                    throw new SQLException("Aucun tuteur trouvé avec le nom spécifié : " + nom);
+                }
+            }
+        }
+    }
 }

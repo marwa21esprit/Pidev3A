@@ -30,7 +30,7 @@ public class Formation {
     public Formation(int id_formation, int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
         this.id_tuteur = id_tuteur;
         this.id_niveau = id_niveau;
-        this.categorie = categorie; // Assurez-vous d'initialiser la propriété categorie
+        this.categorie = categorie;
         this.titre = titre;
         this.description = description;
         this.date_d = date_d;
@@ -41,6 +41,19 @@ public class Formation {
 
     public Formation(int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
     }
+
+    public Formation(int idNiveau, String categorie, String titre, String description, Date dateDebut, Date dateFin, float prix, String lien, int idTuteur) {
+        this.id_niveau= idNiveau;
+        this.categorie = categorie;
+        this.titre = titre;
+        this.description = description;
+        this.date_d = dateDebut;
+        this.date_f = dateFin;
+        this.prix = prix;
+        this.lien = lien;
+        this.id_tuteur = idTuteur;
+    }
+
 
     public int getId_formation() {
         return id_formation;
