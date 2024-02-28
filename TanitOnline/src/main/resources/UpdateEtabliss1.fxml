@@ -18,24 +18,29 @@
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../../Pictures/logoo.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets bottom="10.0" top="50.0" />
-                    </VBox.margin>
-                </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoo.png" />
+               </image>
+            </ImageView>
                 <Label text="Tanit ONLINE">
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Label>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@style.css" text="Overview">
+                <ImageView fitHeight="40.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/user.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="50.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@style.css" text="Schools Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/home.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -43,11 +48,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@style.css" text="Orders">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@style.css" text="Certificates Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/book-bookmark.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -55,11 +60,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@style.css" text="Customers">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@style.css" text="Events Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/calendar-clock.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -67,11 +72,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="247.0" stylesheets="@style.css" text="Menu">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="247.0" stylesheets="@style.css" text="Tutors Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/book-open-reader.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -79,11 +84,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@style.css" text="Packages">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@style.css" text="Students Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/people-poll.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -91,11 +96,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@style.css" text="Settings">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@style.css" text="Reservations Management">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/booking.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -107,7 +112,7 @@
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../Pictures/logoo.png" />
+                                <Image url="@images/settings.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -192,13 +197,7 @@
                             <String fx:value="Centre de formation à distance" />
                         </FXCollections>
                     </items>
-                </ChoiceBox>
-            <Label layoutX="94.0" layoutY="434.0" text="ID">
-               <font>
-                  <Font name="Franklin Gothic Demi" size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="ID_Etablissementmodif" editable="false" layoutX="285.0" layoutY="426.0" prefHeight="35.0" prefWidth="175.0" />            </children>
+                </ChoiceBox>            </children>
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -210,5 +209,6 @@
       <Label fx:id="telLabelError" layoutX="357.0" layoutY="315.0" prefHeight="18.0" prefWidth="433.0" textFill="red" visible="false" />
       <Label fx:id="directorLabelError" layoutX="356.0" layoutY="377.0" prefHeight="18.0" prefWidth="418.0" textFill="red" visible="false" />
       <Label fx:id="datefondLabelError" layoutX="361.0" layoutY="445.0" prefHeight="8.0" prefWidth="418.0" textFill="red" visible="false" />
+      <TextField fx:id="ID_Etablissementmodif" editable="false" layoutX="569.0" layoutY="-54.0" prefHeight="35.0" prefWidth="175.0" />
     </children>
 </AnchorPane>

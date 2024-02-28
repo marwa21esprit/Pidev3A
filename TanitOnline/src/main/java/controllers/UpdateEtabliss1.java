@@ -161,7 +161,6 @@ public class UpdateEtabliss1 {
 
         String imagePath = school.getImg_Etablissement();
 
-        // Charger l'image depuis le chemin et l'afficher dans l'ImageView
         try {
             File imageFile = new File(imagePath);
             Image image = new Image(imageFile.toURI().toString());
@@ -213,7 +212,6 @@ public class UpdateEtabliss1 {
                 return;
             }
 
-            // Récupérer l'ID de l'établissement
             int idEtablissement = Integer.parseInt(ID_Etablissementmodif.getText());
 
             // Créer un nouvel établissement avec les valeurs des champs de modification
@@ -227,24 +225,18 @@ public class UpdateEtabliss1 {
                     dateFondation,
                     idEtablissement
             );
-            // Mettre à jour le chemin de l'image
             updatedSchool.setImg_Etablissement(data.path);
 
-            // Appeler la méthode updateSchool pour mettre à jour l'établissement
             es.updateSchool(updatedSchool, idEtablissement);
 
-            // Afficher une alerte de succès
             afficherAlerteInformation("Mise à jour réussie", "L'établissement a été mis à jour avec succès.");
         } catch (NumberFormatException e) {
-            // Gérer les erreurs de format des nombres
             afficherAlerteErreur("Erreur de format", "Veuillez entrer des valeurs valides.");
             e.printStackTrace();
         } catch (SQLException e) {
-            // Gérer les erreurs SQL
             afficherAlerteErreur("Erreur SQL", "Une erreur SQL est survenue lors de la mise à jour de l'établissement. Veuillez réessayer.");
             e.printStackTrace();
         } catch (Exception e) {
-            // Gérer les autres erreurs
             afficherAlerteErreur("Erreur", "Une erreur est survenue lors de la mise à jour de l'établissement. Veuillez réessayer.");
             e.printStackTrace();
         }
@@ -266,20 +258,16 @@ public class UpdateEtabliss1 {
         alert.showAndWait();
     }
 
-    // Méthode pour vérifier si une chaîne ne contient que des lettres et des espaces
     private boolean isValidString(String str) {
         return str.matches("[\\p{L}.\\s]+");
     }
 
-    // Méthode pour vérifier si une chaîne est un numéro de téléphone valide
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // Vérifier si la chaîne ne contient que des chiffres et a une long        ueur de 8 caractères
         if (!phoneNumber.matches("\\d{8}")) {
             return false;
         }
         return true;
     }
-    // Méthode pour vérifier si la date est ultérieure à aujourd'hui
     private boolean isValidDate(Date date) {
         return date.toLocalDate().isBefore(java.time.LocalDate.now());
     }
@@ -297,13 +285,11 @@ public class UpdateEtabliss1 {
 
     }
 
-    // Méthode pour afficher une erreur dans un label
     private void afficherErreur(Label label, String message) {
         label.setText(message);
         label.setVisible(true);
     }
 
-    // Méthode pour effacer un message d'erreur dans un label
     private void clearError(Label label) {
         label.setVisible(false);
     }

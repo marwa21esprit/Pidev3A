@@ -21,7 +21,6 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
     public void addSchool(Etablissement etablissement) throws SQLException {
         String sql = "INSERT INTO etablissement (img_Etablissement ,Nom_Etablissement, Adresse_Etablissement, Type_Etablissement, Tel_Etablissement, Directeur_Etablissement, Date_Fondation) VALUES ( ? , ?, ?, ?, ?, ?, ?)";
 
-// Création d'une PreparedStatement
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
 
         String path = data.path;
@@ -34,13 +33,6 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
         preparedStatement.setString(6, etablissement.getDirecteur_Etablissement());
         preparedStatement.setDate(7, etablissement.getDate_Fondation());
 
-
-
-
-
-
-
-// Exécution de la requête
         preparedStatement.executeUpdate();
 
     }
@@ -71,7 +63,6 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
             preparedStatement.executeUpdate();
         }
 
-        // Ensuite, supprimer l'établissement lui-même
         String deleteEtablissementQuery = "DELETE FROM etablissement WHERE ID_Etablissement = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(deleteEtablissementQuery)) {
             preparedStatement.setInt(1, id);
@@ -82,13 +73,12 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
 
     @Override
     public List<Etablissement> getAll() throws SQLException {
-        String sql = "SELECT * FROM etablissement"; // Utilisation de la table etabliss
+        String sql = "SELECT * FROM etablissement";
         Statement statement = cnx.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Etablissement> etablissements = new ArrayList<>();
         while (rs.next()) {
             Etablissement etablissement = new Etablissement();
-            // Assurez-vous d'utiliser les bons noms de colonnes et de récupérer les données correctement
             etablissement.setID_Etablissement(rs.getInt("ID_Etablissement"));
             etablissement.setImg_Etablissement(rs.getString("img_Etablissement"));
             etablissement.setNom_Etablissement(rs.getString("Nom_Etablissement"));
@@ -104,7 +94,8 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
 
     @Override
     public Etablissement getById(int idEtablissement) throws SQLException {
-        String sql = "SELECT `img_Etablissement`, `Nom_Etablissement`, `Adresse_Etablissement`, `Type_Etablissement`, `Tel_Etablissement`, `Directeur_Etablissement`, `Date_Fondation`,  FROM `etablissement` WHERE `ID_Etablissement` = ?";
+        String sql = "SELECT `img_Etablissement`, `Nom_Etablissement`, `Adresse_Etablissement`, `Type_Etablissement`, `Tel_Etablissement`, `Directeur_Etablissement`, `Date_Fondation` FROM `etablissement` WHERE `ID_Etablissement` = ?";
+
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
         preparedStatement.setInt(1, idEtablissement);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -120,14 +111,13 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
 
             return new Etablissement(img_Etablissement, nomEtablissement, adresseEtablissement, typeEtablissement, telEtablissement, directeurEtablissement, dateFondation);
         } else {
-            // Gérer le cas où aucun enregistrement correspondant n'est trouvé
             return null;
         }
     }
 
     public List<String> getNoms() throws SQLException {
         List<String> nomsEtablissements = new ArrayList<>();
-        String sql = "SELECT Nom_Etablissement FROM etablissement"; // Requête SQL pour récupérer tous les noms d'établissements
+        String sql = "SELECT Nom_Etablissement FROM etablissement"; // récupérer tous les noms d'établissements
 
         try (Statement statement = cnx.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
@@ -149,7 +139,6 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
                 if (resultSet.next()) {
                     return resultSet.getInt("ID_Etablissement");
                 } else {
-                    // Gérer le cas où aucun enregistrement correspondant n'est trouvé
                     throw new SQLException("Aucun établissement trouvé avec le nom spécifié : " + nomEtablissement);
                 }
             }
@@ -206,6 +195,33 @@ public class EtablissementServices implements IEtabServices<Etablissement> {
         return false;
     }
 
+    public List<Etablissement> getEtablissementList() {
+        List<Etablissement> etablissements = new ArrayList<>();
+        String sql = "SELECT ID_Etablissement, Nom_Etablissement, Adresse_Etablissement, img_Etablissement, Type_Etablissement, Tel_Etablissement, Directeur_Etablissement, Date_Fondation FROM etablissement";
+
+        try (Statement statement = cnx.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Etablissement etablissement = new Etablissement();
+                etablissement.setID_Etablissement(rs.getInt("ID_Etablissement"));
+                etablissement.setImg_Etablissement(rs.getString("img_Etablissement"));
+                etablissement.setNom_Etablissement(rs.getString("Nom_Etablissement"));
+                etablissement.setAdresse_Etablissement(rs.getString("Adresse_Etablissement"));
+                etablissement.setType_Etablissement(rs.getString("Type_Etablissement"));
+                etablissement.setTel_Etablissement(rs.getInt("Tel_Etablissement"));
+                etablissement.setDirecteur_Etablissement(rs.getString("Directeur_Etablissement"));
+                etablissement.setDate_Fondation(rs.getDate("Date_Fondation"));
+
+                etablissements.add(etablissement);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return etablissements;
+    }
 
 
 }

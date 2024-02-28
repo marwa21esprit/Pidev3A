@@ -8,12 +8,12 @@ import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,8 +23,6 @@ import services.EtablissementServices;
 import models.Etablissement;
 import services.CertficatServices;
 import models.Certificat;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 public class items1 {
 
@@ -35,7 +33,7 @@ public class items1 {
     private Label Domaineafficher;
 
     @FXML
-    private Label ID_Etablissementafficher;
+    private Hyperlink ID_Etablissementafficher;
 
     @FXML
     private Label Niveauafiicher;
@@ -53,7 +51,7 @@ public class items1 {
     private Button supprimerBT;
 
     private Certificat certificat;
-    private CertficatServices cs = new CertficatServices(); // Initialisation du service
+    private CertficatServices cs = new CertficatServices();
 
     public void initialize() {
         try {
@@ -67,10 +65,15 @@ public class items1 {
                 Niveauafiicher.setText(certificat.getNiveau());
                 ID_Etablissementafficher.setText(String.valueOf(certificat.getID_Etablissement()));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+                ID_Etablissementafficher.setOnMouseClicked(event -> {
+                    afficherInfosEtablissement(certificat.getID_Etablissement());
+                });
+            } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
     }
+
 
     @FXML
     void modifier(ActionEvent event) {
@@ -126,25 +129,62 @@ public class items1 {
         }
     }
 
-    public void setData(Certificat certificat) {
+    public void setData(Certificat certificat, EventHandler<ActionEvent> deleteEventHandler) {
         this.certificat = certificat;
         Nom_Certificatafficher.setText(certificat.getNom_Certificat());
         Domaineafficher.setText(certificat.getDomaine_Certificat());
         Niveauafiicher.setText(certificat.getNiveau());
         Date_Obtentionafficher.setText(certificat.getDate_Obtention_Certificat().toString());
 
-        // récupérer l'ID etabliss depuis  certif
-        int etablissementId = certificat.getID_Etablissement();
+        int etablissementId = certificat.getID_Etablissement();        // récupérer l'ID etabliss depuis  certif
+
         try {
-            // Récupérer le nom de l'établissement correspondant à l'ID
+            // récupérer le nom de l'établissement correspondant à l'ID
             String nomEtablissement = cs.getEtablissementName(etablissementId);
             // afficher le nom etabliss dans la vue
             ID_Etablissementafficher.setText(nomEtablissement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        supprimerBT.setOnAction(deleteEventHandler);        //  gestionnaire d'événements de suppression sur le bouton de suppression
+
     }
 
+    private void afficherInfosEtablissement(int etablissementId) {
+        try {
+            // Récupérer l'objet Etablissement à partir de son ID
+            EtablissementServices etablissementServices = new EtablissementServices();
+            Etablissement etablissement = etablissementServices.getById(etablissementId);
+
+            if (etablissement != null) {
+                // Si l'établissement est trouvé, afficher ses informations dans l'alerte
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informations sur l'établissement");
+                alert.setHeaderText(null);
+                alert.setContentText("Nom: " + etablissement.getNom_Etablissement() + "\n" +
+                        "Directeur: " + etablissement.getDirecteur_Etablissement() + "\n" +
+                        "Date de fondation: " + etablissement.getDate_Fondation() + "\n" +
+                        "Type: " + etablissement.getType_Etablissement() + "\n" +
+                        "Téléphone: " + etablissement.getTel_Etablissement());
+
+                alert.showAndWait();
+            } else {
+                // Si l'établissement n'est pas trouvé, afficher un message d'erreur
+                afficherAlerteErreur("Erreur", "L'établissement correspondant à l'ID " + etablissementId + " n'a pas été trouvé.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            afficherAlerteErreur("Erreur", "Impossible de récupérer les informations sur l'établissement.");
+        }
+    }
+
+        private void afficherAlerteErreur(String titre, String message) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(titre);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        }
 
     }
 

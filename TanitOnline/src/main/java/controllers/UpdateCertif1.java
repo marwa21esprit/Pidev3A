@@ -48,7 +48,7 @@ public class UpdateCertif1 {
     private Label nomCertificatErrorLabel;
 
     public void initialize() {
-        // Charger les noms des établissements dans le ChoiceBox ID_Etablissement
+        // Charger les noms des établissements dans le ChoiceBox
         try {
             List<String> nomsEtablissements = es.getNoms();
             ID_Etablissementmodif.setItems(FXCollections.observableArrayList(nomsEtablissements));
@@ -87,7 +87,6 @@ public class UpdateCertif1 {
     @FXML
     void modifier(ActionEvent event) {
         try {
-            // Vérifier si un ou plusieurs champs sont vides
             if (Nom_Certificatmodif.getText().isEmpty() || Domaine_Certificatmodif.getValue() == null || Niveaumodif.getValue() == null || Date_Obtention_Certificatmodif.getValue() == null || ID_Etablissementmodif.getValue() == null || ID_Certificatmodif.getText().isEmpty()) {
                 afficherAlerteErreur("Champs manquants", "Veuillez remplir tous les champs pour modifier le certificat.");
                 return;
@@ -95,26 +94,23 @@ public class UpdateCertif1 {
 
             Date dateObtention = Date.valueOf(Date_Obtention_Certificatmodif.getValue());
 
-            // Vérifier la validité du nom du certificat
             if (!isValidString(Nom_Certificatmodif.getText())) {
                 afficherErreur(nomCertificatErrorLabel, "Veuillez entrer un nom valide pour le certificat (sans chiffres).");
                 return;
             } else {
-                clearError(nomCertificatErrorLabel); // Effacer l'erreur s'il y en a une
+                clearError(nomCertificatErrorLabel);
             }
 
-            // Vérifier si la date d'obtention est valide
             if (!isValidDate(dateObtention)) {
                 afficherErreur(dateObtentionErrorLabel, "La date d'obtention doit être antérieure ou égale à aujourd'hui.");
                 return;
             } else {
-                clearError(dateObtentionErrorLabel); // Effacer l'erreur s'il y en a une
+                clearError(dateObtentionErrorLabel);
             }
 
-            // Conversion de l'ID Certificat en entier
-            int idCertificat = Integer.parseInt(ID_Certificatmodif.getText());
+            int idCertificat = Integer.parseInt(ID_Certificatmodif.getText());            // covertir de id certif en int
 
-            // Création du certificat avec les valeurs des champs de modification
+            // creer un certificat avec les valeurs des champs de modification
             Certificat updatedCertif = new Certificat(
                     Nom_Certificatmodif.getText(),
                     Domaine_Certificatmodif.getValue(),
@@ -124,10 +120,7 @@ public class UpdateCertif1 {
                     idCertificat
             );
 
-            // Appel de la méthode updateCertificate pour mettre à jour le certificat
             cs.updateCertificate(updatedCertif, idCertificat);
-
-            // Affichage d'un message de succès dans les labels
             afficherSuccess(nomCertificatErrorLabel, "Le certificat a été mis à jour avec succès.");
             afficherSuccess(dateObtentionErrorLabel, "");
             afficherAlerteInformation("Mise à jour réussie", "Le Certificat a été mis à jour avec succès.");
@@ -153,13 +146,13 @@ public class UpdateCertif1 {
         alert.showAndWait();
     }
 
-    // Méthode pour vérifier si une chaîne ne contient que des lettres et des espaces
     private boolean isValidString(String str) {
+
         return str.matches("[a-zA-Z\\s]+");
     }
 
-    // Méthode pour vérifier si la date est antérieure ou égale à aujourd'hui
     private boolean isValidDate(Date date) {
+
         return !date.toLocalDate().isAfter(java.time.LocalDate.now());
     }
 

@@ -60,9 +60,20 @@ public class GetCertif1 {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/items1.fxml"));
                 AnchorPane pane = loader.load();
                 items1 itemsController = loader.getController();
-                itemsController.setData(certificat);
+                itemsController.setData(certificat, event -> {
+                    // Supprimer le nœud de l'affichage lorsque l'utilisateur supprime le certificat
+                    event_gridPane.getChildren().remove(pane);
+                    // Supprimer également le certificat de la base de données
+                    try {
+                        cs.deleteCertificate(certificat.getID_Certificat()); // Supprimer le certificat de la base de données
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showAlert("Error", "Failed to delete the certificate from the database.");
+                    }
+                });
                 event_gridPane.add(pane, 0, row++);
             }
+
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             showAlert("Error", "Failed to display certificates.");

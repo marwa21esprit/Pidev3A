@@ -19,18 +19,15 @@ public class CertficatServices implements ICertifServices<Certificat>{
     public void addCertificate(Certificat certificat) throws SQLException {
         String sql = "INSERT INTO certificat (Nom_Certificat, Domaine_Certificat, Niveau, Date_Obtention_Certificat, ID_Etablissement) VALUES (?, ?, ?, ?, ?)";
 
-        // Création d'une PreparedStatement
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
-
         // Attribution des valeurs aux paramètres de la requête
-        preparedStatement.setString(1, certificat.getNom_Certificat()); // Nom_Certificat est de type String
-        preparedStatement.setString(2, certificat.getDomaine_Certificat()); // Domaine_Certificat est de type String
-        preparedStatement.setString(3, certificat.getNiveau()); // Niveau est de type String
-        preparedStatement.setDate(4, certificat.getDate_Obtention_Certificat()); // Date_Obtention_Certificat est de type java.sql.Date
-        preparedStatement.setInt(5, certificat.getID_Etablissement()); // ID_Etablissement est de type int
+        preparedStatement.setString(1, certificat.getNom_Certificat());
+        preparedStatement.setString(2, certificat.getDomaine_Certificat());
+        preparedStatement.setString(3, certificat.getNiveau());
+        preparedStatement.setDate(4, certificat.getDate_Obtention_Certificat());
+        preparedStatement.setInt(5, certificat.getID_Etablissement());
 
 
-        // Exécution de la requête
         preparedStatement.executeUpdate();
     }
 
@@ -52,7 +49,6 @@ public class CertficatServices implements ICertifServices<Certificat>{
 
 
     public void deleteCertificate(int certificateId) throws SQLException {
-        // Supprimer le certificat spécifié
         String deleteCertificateQuery = "DELETE FROM certificat WHERE ID_Certificat = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(deleteCertificateQuery)) {
             preparedStatement.setInt(1, certificateId);
@@ -64,13 +60,12 @@ public class CertficatServices implements ICertifServices<Certificat>{
 
     @Override
     public List<Certificat> getAll() throws SQLException {
-        String sql = "SELECT * FROM certificat"; // Utilisation de la table certificat
+        String sql = "SELECT * FROM certificat";
         Statement statement = cnx.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Certificat> certificats = new ArrayList<>();
         while (rs.next()) {
             Certificat certificat = new Certificat();
-            // Assurez-vous d'utiliser les bons noms de colonnes et de récupérer les données correctement
             certificat.setID_Certificat(rs.getInt("ID_Certificat"));
             certificat.setNom_Certificat(rs.getString("Nom_Certificat"));
             certificat.setDomaine_Certificat(rs.getString("Domaine_Certificat"));
@@ -100,27 +95,10 @@ public class CertficatServices implements ICertifServices<Certificat>{
 
             return new Certificat( nomCertificat, domaineCertificat, niveau, dateObtentionCertificat, idEtablissement);
         } else {
-            // Gérer le cas où aucun enregistrement correspondant n'est trouvé
             return null;
         }
     }
 
-    // Méthode pour obtenir le nom de l'établissement à partir de son ID
-    public String getEtablissementName(int etablissementId) throws SQLException {
-        String query = "SELECT Nom_Etablissement FROM etablissement WHERE ID_Etablissement = ?";
-        String nomEtablissement = null;
-
-        try (PreparedStatement statement = cnx.prepareStatement(query)) {
-            statement.setInt(1, etablissementId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    nomEtablissement = resultSet.getString("Nom_Etablissement");
-
-                }
-            }
-        }
-        return nomEtablissement;
-    }
 
     public int getEtablissementId(int certificateId) throws SQLException {
         String query = "SELECT ID_Etablissement FROM certificat WHERE ID_Certificat = ?";
@@ -137,7 +115,6 @@ public class CertficatServices implements ICertifServices<Certificat>{
         return etablissementId;
     }
     public boolean isUniqueCertificate(String nomCertificat, String domaineCertificat, String niveau, Date dateObtention, int idEtablissement) throws SQLException {
-        // Vérifie si un certificat avec les mêmes données existe déjà dans la base de données
         String sql = "SELECT COUNT(*) FROM certificat WHERE Nom_Certificat = ? AND Domaine_Certificat = ? AND Niveau = ? AND Date_Obtention_Certificat = ? AND ID_Etablissement = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
             preparedStatement.setString(1, nomCertificat);
@@ -152,6 +129,26 @@ public class CertficatServices implements ICertifServices<Certificat>{
         }
         return false;
     }
+
+    public String getEtablissementName(int etablissementId) throws SQLException {
+        String query = "SELECT Nom_Etablissement FROM etablissement WHERE ID_Etablissement = ?";
+        String nomEtablissement = null;
+
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, etablissementId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    nomEtablissement = resultSet.getString("Nom_Etablissement");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // Re-lancer l'exception pour la gérer à un niveau supérieur si nécessaire
+        }
+
+        return nomEtablissement;
+    }
+
 
 
 }

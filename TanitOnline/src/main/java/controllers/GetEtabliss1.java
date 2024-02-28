@@ -24,7 +24,7 @@ public class GetEtabliss1 {
     private GridPane event_gridPane;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         schoolDisplay();
     }
 
@@ -71,7 +71,7 @@ public class GetEtabliss1 {
             afficherAlerteErreur("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
         }
     }
-    public void schoolDisplay() {
+    public void schoolDisplay() throws IOException {
         try {
             List<Etablissement> eventList = es.getAll();
             event_gridPane.getChildren().clear();
@@ -81,13 +81,21 @@ public class GetEtabliss1 {
             for (Etablissement etablissement : eventList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/items.fxml"));
                 AnchorPane pane = loader.load();
-                Items items = loader.getController();
-                items.setData(etablissement);
+                Items itemsController = loader.getController();
+                itemsController.setData(etablissement, event -> {
+                    event_gridPane.getChildren().remove(pane);
+                    try {
+                        es.deleteSchool(etablissement.getID_Etablissement()); // Supprimer l'établissement de la base de données
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        afficherAlerteInformation("Error", "Failed to delete the establishment from the database.");
+                    }
+                });
                 event_gridPane.add(pane, 0, row++);
             }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-            afficherAlerteInformation("Error", "Failed to display events.");
+
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

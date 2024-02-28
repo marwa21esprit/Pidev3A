@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -103,7 +104,7 @@ handleEdit();    }
         handleDelete();
     }
 
-    public void setData(Etablissement etablissement) {
+    public void setData(Etablissement etablissement, EventHandler<ActionEvent> deleteEventHandler) {
         this.etablissement = etablissement;
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -111,6 +112,7 @@ handleEdit();    }
 
         Date_Fondationafficher.setText(formattedDate);
         Directeur_Etablissementafficher.setText(etablissement.getDirecteur_Etablissement());
+        Adresse_Etablissementafficher.setText(etablissement.getAdresse_Etablissement());
         Nom_Etablissafficher.setText(etablissement.getNom_Etablissement());
         Tel_Etablissementafficher.setText(String.valueOf(etablissement.getTel_Etablissement()));
         Type_Etablissementafiicher.setText(etablissement.getType_Etablissement());
@@ -118,7 +120,7 @@ handleEdit();    }
         String path = "File:" + etablissement.getImg_Etablissement();
         image = new Image(path, 125, 130, false, true);
         SchoolIV.setImage(image);
-        // Afficher le nombre de certificats dans le label Nb_Certifafficher
+        // afficher le nb de certif dans le label
         try {
             Map<String, Integer> nombreCertificatsParEtablissement = es.getNombreCertificatsParEtablissement();
             int nombreCertificats = nombreCertificatsParEtablissement.getOrDefault(etablissement.getNom_Etablissement(), 0);
@@ -128,7 +130,10 @@ handleEdit();    }
             Nb_Certifafficher.setText("N/A");
         }
 
+        supprimerBT.setOnAction(deleteEventHandler);        // definir le gestionnaire d'événements de suppression sur le bouton de suppression
+
     }
+
 
     @FXML
     private void handleDelete() {
@@ -159,21 +164,14 @@ handleEdit();    }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEtabliss1.fxml"));
             Parent root = loader.load();
-
-            // Obtenir le contrôleur de la vue chargée
             UpdateEtabliss1 controller = loader.getController();
-
-            // Passer les données de l'établissement à éditer au contrôleur
             controller.setSchoolData(etablissement);
-
-            // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Gérer l'exception, par exemple afficher une boîte de dialogue d'erreur
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Erreur");
             errorAlert.setHeaderText(null);

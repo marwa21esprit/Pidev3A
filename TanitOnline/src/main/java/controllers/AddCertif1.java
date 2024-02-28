@@ -62,7 +62,7 @@ public class AddCertif1 {
             e.printStackTrace();
         }
 
-        // Écouteur pour le champ Nom_Certificat
+        // Écouteur
         Nom_Certificat.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!isValidString(newValue)) {
                 afficherErreurNomCertificat("Veuillez entrer un nom valide pour le certificat (sans chiffres).");
@@ -71,7 +71,7 @@ public class AddCertif1 {
             }
         });
 
-        // Écouteur pour le DatePicker Date_Obtention_Certificat
+        // Écouteur
         Date_Obtention_Certificat.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && newValue.isAfter(LocalDate.now())) {
                 afficherErreurDateObtention("La date d'obtention ne peut pas être postérieure à aujourd'hui.");
@@ -125,12 +125,12 @@ public class AddCertif1 {
                 return;
             }
 
-            // Récupérer le nom de l'établissement sélectionné dans le ChoiceBox
+            // recuperer le nom de l'établissement sélectionné
             String nomEtablissement = ID_Etablissement.getValue();
 
             // Vérifier l'unicité du certificat
             if (cs.isUniqueCertificate(Nom_Certificat.getText(), Domaine_Certificat.getValue(), Niveau.getValue(), Date.valueOf(dateObtention), es.getIDByNom(nomEtablissement))) {
-                // Ajouter le certificat
+                // l'ajout
                 cs.addCertificate(new Certificat(
                         Nom_Certificat.getText(),
                         Domaine_Certificat.getValue(),

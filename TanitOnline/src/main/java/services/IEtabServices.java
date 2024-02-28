@@ -1,5 +1,7 @@
 package services;
 
+import models.Etablissement;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -21,4 +23,6 @@ public interface IEtabServices<T> {
     int getIDByNom(String nom) throws SQLException;
 
     Map<String, Integer> getNombreCertificatsParEtablissement() throws SQLException;
+
+     List<Etablissement> getEtablissementList() throws SQLException;
 }
