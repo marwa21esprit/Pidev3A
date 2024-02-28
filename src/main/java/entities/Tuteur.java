@@ -86,7 +86,13 @@ public class Tuteur {
         return prenom;
     }
 
+<<<<<<< HEAD
 
+=======
+    /*public Date getDate_naisc() {
+        return date_naisc;
+    }*/
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
 
     public java.sql.Date getDate_naisc() {
         // Conversion de java.util.Date en java.sql.Date

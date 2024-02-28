@@ -30,7 +30,11 @@ public class Formation {
     public Formation(int id_formation, int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
         this.id_tuteur = id_tuteur;
         this.id_niveau = id_niveau;
+<<<<<<< HEAD
         this.categorie = categorie;
+=======
+        this.categorie = categorie; // Assurez-vous d'initialiser la propriété categorie
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
         this.titre = titre;
         this.description = description;
         this.date_d = date_d;
@@ -42,6 +46,7 @@ public class Formation {
     public Formation(int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
     }
 
+<<<<<<< HEAD
     public Formation(int idNiveau, String categorie, String titre, String description, Date dateDebut, Date dateFin, float prix, String lien, int idTuteur) {
         this.id_niveau= idNiveau;
         this.categorie = categorie;
@@ -55,6 +60,8 @@ public class Formation {
     }
 
 
+=======
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
     public int getId_formation() {
         return id_formation;
     }

@@ -114,7 +114,11 @@ public class ServiceFormation {
 
     public List<String> getTitres() throws SQLException {
         List<String> titrefo = new ArrayList<>();
+<<<<<<< HEAD
         String sql = "SELECT titre FROM formation"; // Requête SQL pour récupérer tous les titres
+=======
+        String sql = "SELECT titre FROM tuteur"; // Requête SQL pour récupérer tous les titres
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
         try (Statement statement = cnx.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
