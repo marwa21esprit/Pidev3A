@@ -20,7 +20,11 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
+<<<<<<< HEAD
                   <Image url="@images/logo.png" />
+=======
+                  <Image url="@images/420061415_1580129922759933_3165525506138466855_n.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
@@ -35,7 +39,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/loop.png" />
+=======
+                        <Image url="@images/loupe_751463.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -47,7 +55,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/settings.png" />
+=======
+                        <Image url="@images/gear_13930106.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -59,7 +71,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/home.png" />
+=======
+                        <Image url="@images/home_2549900.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -71,7 +87,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/settings.png" />
+=======
+                        <Image url="@images/gear_13930106.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -83,7 +103,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/loop.png" />
+=======
+                        <Image url="@images/loupe_751463.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -95,7 +119,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/settings.png" />
+=======
+                        <Image url="@images/gear_13930106.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -107,7 +135,11 @@
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
+<<<<<<< HEAD
                         <Image url="@images/loop.png" />
+=======
+                        <Image url="@images/loupe_751463.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
                      </image>
                   </ImageView>
                </graphic>
@@ -185,7 +217,11 @@
       </HBox>
       <ImageView fitHeight="34.0" fitWidth="21.0" layoutX="935.8" layoutY="16.6" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="62.200000000000045" AnchorPane.topAnchor="16.6">
          <image>
+<<<<<<< HEAD
             <Image url="@images/loop.png" />
+=======
+            <Image url="@images/loupe_751463.png" />
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
          </image>
       </ImageView>
       <AnchorPane fx:id="tuteur_AP" layoutX="291.2" layoutY="180.0" prefHeight="406.0" prefWidth="714.0" stylesheets="@style.css" AnchorPane.bottomAnchor="13.600000000000023" AnchorPane.leftAnchor="267.0" AnchorPane.rightAnchor="13.399999999999977" AnchorPane.topAnchor="204.0">

@@ -1,7 +1,10 @@
 package controller;
 
 import Services.ServiceTuteur;
+<<<<<<< HEAD
 import entities.Formation;
+=======
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
 import entities.Tuteur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -126,4 +129,11 @@ public class Items implements Initializable {
 
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
 }

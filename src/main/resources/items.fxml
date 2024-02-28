@@ -7,19 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="tuteur_aff" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="738.0" style="-fx-background-color: #ffff;" styleClass="white-bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Items">
+=======
+<AnchorPane fx:id="tuteur_aff" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="738.0" style="-fx-background-color: #ffff;" styleClass="white-bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Items">
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
    <children>
       <Label fx:id="tuteur_label" layoutX="413.0" layoutY="14.0" prefHeight="18.0" prefWidth="101.0" text="ID Tuteur" />
       <Label fx:id="Nom_label" layoutX="413.0" layoutY="43.0" text="Nom" />
       <Label fx:id="prenom_label" layoutX="413.0" layoutY="76.0" text="Prénom" />
       <Label fx:id="date_naisc_label" layoutX="416.0" layoutY="103.0" text="Date de naissance" />
       <Label fx:id="profession_label" layoutX="420.0" layoutY="132.0" text="Matiére" />
+<<<<<<< HEAD
       <Button fx:id="supprimerBT" layoutX="546.0" layoutY="197.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="79.0" stylesheets="@style1.css" text="Delete">
+=======
+      <Button fx:id="supprimerBT" layoutX="522.0" layoutY="150.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="79.0" stylesheets="@style1.css" text="Delete">
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
          <font>
             <Font name="Franklin Gothic Demi" size="12.0" />
          </font>
       </Button>
+<<<<<<< HEAD
       <Button fx:id="modifierBT" layoutX="644.0" layoutY="197.0" mnemonicParsing="false" onAction="#modifier" prefHeight="38.0" prefWidth="79.0" stylesheets="@style1.css" text="Edit">
+=======
+      <Button fx:id="modifierBT" layoutX="618.0" layoutY="150.0" mnemonicParsing="false" onAction="#modifier" prefHeight="38.0" prefWidth="79.0" stylesheets="@style1.css" text="Edit">
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
          <font>
             <Font name="Franklin Gothic Demi" size="12.0" />
          </font>
