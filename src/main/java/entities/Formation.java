@@ -1,5 +1,6 @@
 package entities;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Formation {
 
@@ -52,6 +53,9 @@ public class Formation {
         this.prix = prix;
         this.lien = lien;
         this.id_tuteur = idTuteur;
+    }
+
+    public Formation(int i, String selectedCategorie1, String text, String text1, LocalDate selectedStartDate, LocalDate selectedEndDate, float v, String text2) {
     }
 
 

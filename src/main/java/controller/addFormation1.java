@@ -48,7 +48,7 @@ public class addFormation1 {
     private TextField id_niveau;
 
     @FXML
-    private ChoiceBox<String> id_tuteur;
+    private ChoiceBox<Integer> id_tuteur;
 
     @FXML
     private TextField lien;
@@ -67,9 +67,9 @@ public class addFormation1 {
     @FXML
     void initialize() {
         try {
-            List<String> nomsTuteurs = st.getNom();
-            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsTuteurs);
-            id_tuteur.setItems(observableNoms);
+            List<Integer> idsTuteurs = st.getId_tuteur();
+            ObservableList<Integer> observableIds = FXCollections.observableArrayList(idsTuteurs);
+            id_tuteur.setItems(observableIds);
         } catch (SQLException e) {
             afficherAlerteErreur("Erreur SQL", "Une erreur est survenue lors du chargement des  formations.");
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class addFormation1 {
             java.sql.Date selectedDate_d = java.sql.Date.valueOf(date_d.getValue());
             java.sql.Date selectedDate_f = java.sql.Date.valueOf(date_f.getValue());
 
-            String nom = id_tuteur.getValue();
+            Integer idTuteur = Integer.parseInt(String.valueOf(id_tuteur.getValue()));
 
 
             ft.addFormation(new Formation(
@@ -110,7 +110,7 @@ public class addFormation1 {
                     Date.valueOf(selectedDate_f.toLocalDate()),
                     Float.parseFloat(prix.getText()),
                     lien.getText(),
-                    st.getIDByNom(id_tuteur.getValue())
+                    st.getID(id_tuteur.getValue())
             ));
 
 
@@ -146,7 +146,7 @@ public class addFormation1 {
     void clear(ActionEvent event) {
 
         id_formation.setText("");
-        id_tuteur.setValue("");
+        id_tuteur.setValue(null);
         id_niveau.setText("");
         categorie.setValue("");
         titre.setText("");

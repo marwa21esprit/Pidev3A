@@ -1,6 +1,7 @@
 package Services;
 
 import entities.Formation;
+import javafx.scene.control.TextField;
 import utils.MyDB;
 
 import java.sql.*;
@@ -37,7 +38,7 @@ public class ServiceFormation {
 
 
 
-    public void updateFormation(Formation formation) throws SQLException {
+    public void updateFormation(Formation formation, TextField id_formation1) throws SQLException {
         String sql = "UPDATE formation SET id_tuteur = ?, id_niveau = ?, categorie = ?, titre = ?, description = ?, date_d = ?, date_f = ?, prix = ?, lien = ? WHERE id_formation = ?";
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {

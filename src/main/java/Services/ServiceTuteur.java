@@ -107,31 +107,33 @@ public class ServiceTuteur implements ITuteur <Tuteur> {
     }
 
 
-    public List<String> getNom() throws SQLException {
-        List<String> nomsTuteurs = new ArrayList<>();
-        String sql = "SELECT nom FROM tuteur";
+    public List<Integer> getId_tuteur() throws SQLException {
+        List<Integer> idsTuteurs = new ArrayList<>();
+        String sql = "SELECT id_tuteur FROM tuteur";
         try (Statement statement = cnx.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
-                String nom = rs.getString("nom");
-                nomsTuteurs.add(nom);
+                Integer id_tuteur = rs.getInt("id_tuteur"); // Récupérer l'entier correctement
+                idsTuteurs.add(id_tuteur);
             }
         }
 
-        return nomsTuteurs;
+        return idsTuteurs;
     }
 
 
-    public int getIDByNom(String nom) throws SQLException {
-        String sql = "SELECT id_tuteur FROM tuteur WHERE nom = ?";
+
+
+    public int getID(Integer id_tuteur) throws SQLException {
+        String sql = "SELECT id_tuteur FROM tuteur WHERE id_tuteur = ?";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
-            preparedStatement.setString(1, nom);
+            preparedStatement.setInt(1, id_tuteur);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return resultSet.getInt("id_tuteur");
                 } else {
                     // Gérer le cas où aucun enregistrement correspondant n'est trouvé
-                    throw new SQLException("Aucun tuteur trouvé avec le nom spécifié : " + nom);
+                    throw new SQLException("Aucun tuteur trouvé avec l'id spécifié : " + id_tuteur);
                 }
             }
         }

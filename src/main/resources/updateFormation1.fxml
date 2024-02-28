@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addFormation1">
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.updateFormation1">
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
             <children>
@@ -179,7 +181,22 @@
                </font>
             </Label>
             <ChoiceBox fx:id="id_tuteur1" layoutX="284.0" layoutY="99.0" prefHeight="26.0" prefWidth="175.0" />
-            <ChoiceBox fx:id="categorie1" layoutX="285.0" layoutY="196.0" prefHeight="26.0" prefWidth="175.0" />
+            <ChoiceBox fx:id="categorie1" layoutX="285.0" layoutY="196.0" prefHeight="26.0" prefWidth="175.0" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Informatique" />
+                        <String fx:value="Finance" />
+                        <String fx:value="Santé" />
+                        <String fx:value="Marketing" />
+                        <String fx:value="Éducation" />
+                        <String fx:value="Communication" />
+                        <String fx:value="Ingénierie" />
+                        <String fx:value="Droit" />
+                        <String fx:value="Sciences sociales" />
+                        <String fx:value="Arts et design" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
             <Label layoutX="592.0" layoutY="56.0" text="Titre">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
@@ -191,13 +208,13 @@
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="description1" layoutX="523.0" layoutY="175.0" prefHeight="146.0" prefWidth="175.0" />
             <DatePicker fx:id="date_f1" layoutX="285.0" layoutY="285.0" prefHeight="35.0" prefWidth="175.0" />
             <Label layoutX="99.0" layoutY="413.0" text="Lien">
                <font>
                   <Font name="Franklin Gothic Demi" size="16.0" />
                </font>
             </Label>
+            <TextArea fx:id="description1" layoutX="520.0" layoutY="185.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
         </AnchorPane>
     </children>
