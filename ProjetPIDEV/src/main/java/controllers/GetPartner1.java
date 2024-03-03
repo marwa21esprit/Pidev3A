@@ -9,17 +9,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import models.Event;
 import models.Partner;
-import services.EventService;
 import services.PartnerService;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GetPartner1 implements Initializable {
@@ -32,9 +33,59 @@ public class GetPartner1 implements Initializable {
 
     @FXML
     private GridPane partner_gridPane;
+    @FXML
+    private ChoiceBox<String> triCB;
+
+    @FXML
+    private ImageView notFound;
+
+    @FXML
+    private com.gluonhq.charm.glisten.control.TextField searchByName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        triCB.getItems().addAll("default","Croissant","Decroissant");
+
+        triCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                if ("Decroissant".equals(newValue)) {
+                    partnerDisplayDESC();
+                } else if ("Croissant".equals(newValue)) {
+                    // Ajoutez le code correspondant pour le tri croissant
+                    partnerDisplayASC();
+                } else if ("default".equals(newValue)) {
+                    // Ajoutez le code correspondant pour le tri croissant
+                    partnerDisplay();}
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Initialisez le tri par défaut (par exemple, tri croissant)
+        triCB.getSelectionModel().select("default");
+
+        notFound.setVisible(false);
+        notFound.setManaged(false);
+        searchByName.setOnKeyReleased(event -> {
+            try {
+                // Obtenez le texte saisi dans le champ de recherche
+                String partialName = searchByName.getText();
+
+                // Appelez la méthode de recherche avancée avec le texte saisi
+                List<Partner> resultatsRecherche = ps.getByPartialName(partialName);
+                System.out.println("Number of results: " + resultatsRecherche.size());
+
+
+                // Affichez les résultats dans le GridPane
+                afficherPartners(resultatsRecherche);
+                if(partialName == ""){
+                    partnerDisplay();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         try {
             partnerDisplay();
         } catch (SQLException e) {
@@ -62,7 +113,7 @@ public class GetPartner1 implements Initializable {
                 //mise a jour de l'affichage
                 pane.getProperties().put("controller", this);
 
-                if(column == 4)
+                if(column == 2)
                 {
                     column=0;
                     row+=1;
@@ -76,6 +127,121 @@ public class GetPartner1 implements Initializable {
         }
     }
 
+    public void partnerDisplayDESC() throws SQLException {
+        partnerList = FXCollections.observableList(ps.getAllDESC());
+        int row = 0;
+        int column = 0;
+        partner_gridPane.getRowConstraints().clear();
+        partner_gridPane.getColumnConstraints().clear();
+        partner_gridPane.getChildren().clear();
+        partner_gridPane.setHgap(20);
+        partner_gridPane.setVgap(20);
+        for(int i=0;i<partnerList.size();i++)
+        {
+            try{
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("/partners.fxml"));
+                AnchorPane pane = load.load();
+                Partners partners = load.getController();
+                partners.setData(partnerList.get(i));
+
+                //mise a jour de l'affichage
+                pane.getProperties().put("controller", this);
+
+                if(column == 2)
+                {
+                    column=0;
+                    row+=1;
+                }
+
+                partner_gridPane.add(pane,column++,row);
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    public void partnerDisplayASC() throws SQLException {
+        partnerList = FXCollections.observableList(ps.getAllASC());
+        int row = 0;
+        int column = 0;
+        partner_gridPane.getRowConstraints().clear();
+        partner_gridPane.getColumnConstraints().clear();
+        partner_gridPane.getChildren().clear();
+        partner_gridPane.setHgap(20);
+        partner_gridPane.setVgap(20);
+        for(int i=0;i<partnerList.size();i++)
+        {
+            try{
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("/partners.fxml"));
+                AnchorPane pane = load.load();
+                Partners partners = load.getController();
+                partners.setData(partnerList.get(i));
+
+                //mise a jour de l'affichage
+                pane.getProperties().put("controller", this);
+
+                if(column == 2)
+                {
+                    column=0;
+                    row+=1;
+                }
+
+                partner_gridPane.add(pane,column++,row);
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void afficherPartners(List<Partner> partnerList) throws SQLException {
+        partner_gridPane.getChildren().clear(); // Nettoyez le contenu existant
+
+        if (partnerList.isEmpty()) {
+            // Affichez un message indiquant que aucun résultat n'a été trouvé
+            notFound.setVisible(true);
+            notFound.setManaged(true);
+            partner_gridPane.getChildren().add(notFound);
+        } else {
+            // Cachez le message "notFound"
+            notFound.setVisible(false);
+            notFound.setManaged(false);
+
+
+            int row = 0;
+            int column = 0;
+            partner_gridPane.getRowConstraints().clear();
+            partner_gridPane.getColumnConstraints().clear();
+            partner_gridPane.getChildren().clear();
+            partner_gridPane.setHgap(20);
+            partner_gridPane.setVgap(20);
+            for (int i = 0; i < partnerList.size(); i++) {
+                try {
+                    FXMLLoader load = new FXMLLoader();
+                    load.setLocation(getClass().getResource("/partners.fxml"));
+                    AnchorPane pane = load.load();
+                    Partners partners = load.getController();
+                    partners.setData(partnerList.get(i));
+
+                    //mise a jour de l'affichage
+                    pane.getProperties().put("controller", this);
+
+                    if (column == 2) {
+                        column = 0;
+                        row += partnerList.size();
+                    }
+
+                    partner_gridPane.add(pane, column++, row);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     private Scene scene;
     private Stage primaryStage;
     private Parent root;
@@ -99,6 +265,7 @@ public class GetPartner1 implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     @FXML
     void ajouterPartner(ActionEvent event) throws IOException {

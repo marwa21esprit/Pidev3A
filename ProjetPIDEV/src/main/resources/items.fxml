@@ -71,5 +71,6 @@
          </font>
       </Label>
       <Hyperlink fx:id="partner_label" layoutX="417.0" layoutY="32.0" onAction="#afficherPartner" text="Partner" />
+      <ImageView fx:id="qrIV" fitHeight="130.0" fitWidth="143.0" layoutX="556.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

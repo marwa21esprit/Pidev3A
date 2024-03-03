@@ -11,3 +11,24 @@
     -fx-background-color: #212E53;
 }
 
+.text-field{
+    -fx-background-color: transparent;
+    -fx-border-color: #b5ade0;
+    -fx-border-width: .5px;
+}
+
+.text-field:focused{
+    -fx-border-width: 1.5px;
+}
+.choice-box{
+    -fx-background-color: transparent;
+    -fx-border-color: #b5ade0;
+    -fx-border-width: .5px;
+}
+
+.choice-box:focused{
+    -fx-border-width: 1.5px;
+}
+
+
+

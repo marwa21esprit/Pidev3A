@@ -18,7 +18,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateEvent1">
     <children>
-        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #CE6A6B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
+        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #212E53;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -33,7 +33,7 @@
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Label>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonUE.css" text="Overview" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGE.css" text="Overview" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -45,7 +45,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Orders" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Orders" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -57,7 +57,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Customers" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Customers" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -69,11 +69,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Events" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Events" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/icons8-event-500.png" />
+                                <Image url="@images/icons8-event-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -81,11 +81,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Partners" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Partners" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/icons8-giving-5000.png" />
+                                <Image url="@images/icons8-giving-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -93,7 +93,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Settings" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Settings" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -105,7 +105,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonUE.css" text="Sign Out" textFill="WHITE">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Sign Out" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -171,15 +171,15 @@
                         <ImageView fx:id="importIV" fitHeight="130.0" fitWidth="125.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.5999999999999943" AnchorPane.topAnchor="-1.0" />
                     </children>
                 </AnchorPane>
-                <Button fx:id="importerBT" layoutX="598.0" layoutY="190.0" mnemonicParsing="false" onAction="#importer" prefHeight="34.0" prefWidth="72.0" text="Import" AnchorPane.rightAnchor="67.39999999999998" AnchorPane.topAnchor="190.39999999999995">
+                <Button fx:id="importerBT" layoutX="598.0" layoutY="190.0" mnemonicParsing="false" onAction="#importer" prefHeight="34.0" prefWidth="72.0" stylesheets="@buttonGE.css" text="Import" textFill="WHITE" AnchorPane.rightAnchor="67.39999999999998" AnchorPane.topAnchor="190.39999999999995">
                     <font>
                         <Font name="Arial Bold" size="12.0" />
                     </font></Button>
-                <Button layoutX="499.19999999999993" layoutY="463.19999999999993" mnemonicParsing="false" onAction="#clear" prefHeight="39.0" prefWidth="97.0" styleClass="button1" stylesheets="@style.css" text="Clear" AnchorPane.bottomAnchor="32.80000000000001" AnchorPane.rightAnchor="140.60000000000002">
+                <Button layoutX="499.19999999999993" layoutY="463.19999999999993" mnemonicParsing="false" onAction="#clear" prefHeight="39.0" prefWidth="97.0" styleClass="button1" stylesheets="@buttonGE.css" text="Clear" textFill="WHITE" AnchorPane.bottomAnchor="32.80000000000001" AnchorPane.rightAnchor="140.60000000000002">
                <font>
                   <Font name="Arial Narrow Bold" size="16.0" />
                </font></Button>
-                <Button layoutX="635.0" layoutY="463.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="39.0" prefWidth="98.0" stylesheets="@style.css" text="Edit" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="31.0">
+                <Button layoutX="635.0" layoutY="463.0" mnemonicParsing="false" onAction="#updateEvent" prefHeight="39.0" prefWidth="98.0" stylesheets="@buttonGE.css" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="31.0">
                <font>
                   <Font name="Arial Narrow Bold" size="16.0" />
                </font></Button>

@@ -7,6 +7,7 @@ import utils.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PartnerService implements IService<Partner>{
@@ -133,6 +134,7 @@ public class PartnerService implements IService<Partner>{
 
         return nomsPartners;
     }
+    @Override
     public int getIDByNom(String name) throws SQLException {
         String sql = "SELECT idPartner FROM partner WHERE namePartner = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -142,12 +144,13 @@ public class PartnerService implements IService<Partner>{
                     return resultSet.getInt("idPartner");
                 } else {
                     // Gérer le cas où aucun enregistrement correspondant n'est trouvé
-                    throw new SQLException("Aucun établissement trouvé avec le nom spécifié : " + name);
+                    throw new SQLException("Aucun partenaire trouvé avec le nom spécifié : " + name);
                 }
             }
         }
     }
 
+    @Override
     public String getNameByID(int id) throws SQLException {
         String sql = "SELECT namePartner FROM partner WHERE idPartner = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -162,6 +165,83 @@ public class PartnerService implements IService<Partner>{
             }
         }
     }
+
+    @Override
+    public List<Partner> getByPartialName(String partialName) throws SQLException {
+        List<Partner> partners = new ArrayList<>();
+        String query = "SELECT * FROM partner WHERE namePartner  LIKE ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, partialName + "%");
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Partner p = new Partner();
+                    p.setIdPartner(rs.getInt("idPartner"));
+                    p.setNamePartner(rs.getString("namePartner"));
+                    p.setTypePartner(rs.getString("typePartner"));
+                    p.setDescription(rs.getString("description"));
+                    p.setEmail(rs.getString("email"));
+                    p.setTel(rs.getInt("tel"));
+                    p.setImage(rs.getString("image"));
+
+                    partners.add(p);
+                }
+            }
+        }
+
+        return partners;
+    }
+
+    @Override
+    public List<Partner> getAllDESC() throws SQLException {
+        String sql = "select * from partner ORDER BY namePartner DESC";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Partner> partners = new ArrayList<>();
+        while (rs.next()) {
+            Partner p = new Partner();
+            p.setIdPartner(rs.getInt("idPartner"));
+            p.setNamePartner(rs.getString("namePartner"));
+            p.setTypePartner(rs.getString("typePartner"));
+            p.setDescription(rs.getString("description"));
+            p.setEmail(rs.getString("email"));
+            p.setTel(rs.getInt("tel"));
+            p.setImage(rs.getString("image"));
+
+
+            partners.add(p);
+        }
+        return partners;
+    }
+
+
+    @Override
+    public List<Partner> getAllASC() throws SQLException {
+        String sql = "select * from partner ORDER BY namePartner ASC";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Partner> partners = new ArrayList<>();
+        while (rs.next()) {
+            Partner p = new Partner();
+            p.setIdPartner(rs.getInt("idPartner"));
+            p.setNamePartner(rs.getString("namePartner"));
+            p.setTypePartner(rs.getString("typePartner"));
+            p.setDescription(rs.getString("description"));
+            p.setEmail(rs.getString("email"));
+            p.setTel(rs.getInt("tel"));
+            p.setImage(rs.getString("image"));
+
+
+            partners.add(p);
+        }
+        return partners;
+    }
+    @Override
+   public List<String> getByDate(java.sql.Date date) throws SQLException{
+        return null;
+    }
+
 
 
 }

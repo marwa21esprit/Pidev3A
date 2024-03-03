@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +17,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GetPartner1">
     <children>
-        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
+        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #212E53;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -25,12 +27,12 @@
                         <Insets bottom="10.0" top="50.0" />
                     </VBox.margin>
                 </ImageView>
-                <Label text="Tanit ONLINE">
+                <Label text="Tanit ONLINE" textFill="WHITE">
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Label>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGP.css" text="Overview">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGE.css" text="Overview" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -42,7 +44,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Orders">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Orders" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -54,7 +56,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Customers">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Customers" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -66,11 +68,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Events">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Events" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/icons8-event-500.png" />
+                                <Image url="@images/icons8-event-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -78,11 +80,11 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Partners">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Partners" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/icons8-giving-5000.png" />
+                                <Image url="@images/icons8-giving-50.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -90,7 +92,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Settings">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Settings" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -102,7 +104,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonGP.css" text="Sign Out">
+                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Sign Out" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -144,6 +146,18 @@
             </ScrollPane>
          </children>
         </AnchorPane>
-      <Button layoutX="285.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajouterPartner" prefHeight="35.0" prefWidth="132.0" styleClass="btn" stylesheets="@style.css" text="Add Partner" />
+      <ImageView fx:id="notFound" fitHeight="341.0" fitWidth="356.0" layoutX="464.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/6134065.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="285.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajouterPartner" prefHeight="35.0" prefWidth="132.0" stylesheets="@buttonGE.css" text="Add Partner" textFill="WHITE" />
+      <ImageView fitHeight="34.0" fitWidth="21.0" layoutX="934.6" layoutY="19.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/loupe_751463.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchByName" floatText="Search" layoutX="773.0" layoutY="7.0" prefWidth="143.0" stylesheets="@buttonGE.css" />
+      <ChoiceBox fx:id="triCB" layoutX="434.0" layoutY="47.0" prefHeight="34.0" prefWidth="150.0" stylesheets="@buttonGE.css" />
     </children>
 </AnchorPane>

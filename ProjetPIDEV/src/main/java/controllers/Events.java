@@ -5,6 +5,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,8 +18,6 @@ import models.Event;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -35,7 +34,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
-public class Items implements Initializable {
+public class Events implements Initializable {
     private  EventService es = new EventService();
     private PartnerService ps = new PartnerService();
 
@@ -59,35 +58,24 @@ public class Items implements Initializable {
 
     @FXML
     private AnchorPane event_aff;
-    @FXML
-    private ImageView qrIV;
-
-    @FXML
-    private Button modifierBT;
 
     @FXML
     private Label nbrMax_label;
 
     @FXML
     private Label prix_label;
-
-    @FXML
-    private Button supprimerBT;
-
     private Event event;
     private Image image;
 
-    public Items(){}
-    public Items(EventService eventService) {
+    @FXML
+    private ImageView qrIV;
+
+    public Events(){}
+    public Events(EventService eventService) {
         this.es = eventService;
     }
-    public Items(PartnerService partnerService) {
+    public Events(PartnerService partnerService) {
         this.ps = partnerService;
-    }
-    public Items(EventService eventService, PartnerService partnerService, Event initialEvent) {
-        this.es = eventService;
-        this.ps = partnerService;
-        setData(initialEvent);
     }
 
     public void setData(Event event)
@@ -146,51 +134,6 @@ public class Items implements Initializable {
         }
     }
 
-    private Scene scene;
-    private Stage primaryStage;
-    private Parent root;
-
-
-    @FXML
-    void modifier(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateEvent1.fxml"));
-        root = loader.load();
-        UpdateEvent1 updateEventController = loader.getController();
-        updateEventController.setEventData(event);
-        scene = new Scene(root);
-        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-
-
-    @FXML
-    void supprimer(ActionEvent eventAction) throws SQLException {
-        es.delete(event.getIdEvent());
-        //mise a jour de l'affichage
-        GetEvent1 getEvent1Controller = (GetEvent1) event_aff.getProperties().get("controller");
-        getEvent1Controller.eventDisplay();
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
-    public void afficherPartner(ActionEvent actionEvent) throws IOException, SQLException {
-        Partner selectedPartner = ps.getById(event.getIdPartner());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updatetPartner1.fxml"));
-        root = loader.load();
-        UpdatePartner1 updatePartnerController = loader.getController();
-        updatePartnerController.setPartnerData(selectedPartner);
-        updatePartnerController.setData(selectedPartner);
-        scene = new Scene(root);
-        primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
 
     private Image convertToJavaFXImage(BufferedImage bufferedImage) {
         WritableImage writableImage = new WritableImage(bufferedImage.getWidth(), bufferedImage.getHeight());
@@ -203,4 +146,28 @@ public class Items implements Initializable {
 
         return writableImage;
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    private Scene scene;
+    private Stage primaryStage;
+    private Parent root;
+
+    public void afficherPartner(ActionEvent actionEvent) throws IOException, SQLException {
+        Partner selectedPartner = ps.getById(event.getIdPartner());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetPartnerFront.fxml"));
+        root = loader.load();
+        GetPartnerFront partnerGet = loader.getController();
+        partnerGet.setData(selectedPartner);
+        scene = new Scene(root);
+        primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
 }

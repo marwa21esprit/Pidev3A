@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class GetEvent1 implements Initializable {
+
+public class GetEventFront1 implements Initializable {
     private final EventService es = new EventService();
 
 
@@ -39,119 +40,120 @@ public class GetEvent1 implements Initializable {
     @FXML
     private ScrollPane event_scrollPane;
     private Event event;
+
     @FXML
     private ChoiceBox<String> triCB;
-
-    private ObservableList<Event> eventList;
     @FXML
     private ImageView notFound;
 
     @FXML
     private com.gluonhq.charm.glisten.control.TextField searchByName;
 
+    private ObservableList<Event> eventList;
+
 
 
     public void eventDisplay() throws SQLException {
         eventList = FXCollections.observableList(es.getAll());
+        int row = 0;
+        int column = 0;
+        event_gridPane.getRowConstraints().clear();
+        event_gridPane.getColumnConstraints().clear();
+        event_gridPane.getChildren().clear();
+        for(int i=0;i<eventList.size();i++)
+        {
+            try{
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("/events.fxml"));
+                AnchorPane pane = load.load();
+                Events eventsCard = load.getController();
+                eventsCard.setData(eventList.get(i));
 
-            int row = 0;
-            int column = 0;
-            event_gridPane.getRowConstraints().clear();
-            event_gridPane.getColumnConstraints().clear();
-            event_gridPane.getChildren().clear();
-            for (int i = 0; i < eventList.size(); i++) {
-                try {
-                    FXMLLoader load = new FXMLLoader();
-                    load.setLocation(getClass().getResource("/items.fxml"));
-                    AnchorPane pane = load.load();
-                    Items items = load.getController();
-                    items.setData(eventList.get(i));
+                //mise a jour de l'affichage
+                pane.getProperties().put("controller", this);
 
-                    //mise a jour de l'affichage
-                    pane.getProperties().put("controller", this);
-
-                    if (column == 1) {
-                        column = 0;
-                        row += 1;
-                    }
-
-                    event_gridPane.add(pane, column++, row);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(column == 1)
+                {
+                    column=0;
+                    row+=1;
                 }
+
+                event_gridPane.add(pane,column++,row);
+
+            }catch(Exception e){
+                e.printStackTrace();
             }
+        }
     }
 
     public void eventDisplayDesc() throws SQLException {
         eventList = FXCollections.observableList(es.getAllDESC());
-
         int row = 0;
         int column = 0;
         event_gridPane.getRowConstraints().clear();
         event_gridPane.getColumnConstraints().clear();
         event_gridPane.getChildren().clear();
-        for (int i = 0; i < eventList.size(); i++) {
-            try {
+        for(int i=0;i<eventList.size();i++)
+        {
+            try{
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/items.fxml"));
+                load.setLocation(getClass().getResource("/events.fxml"));
                 AnchorPane pane = load.load();
-                Items items = load.getController();
-                items.setData(eventList.get(i));
+                Events eventsCard = load.getController();
+                eventsCard.setData(eventList.get(i));
 
                 //mise a jour de l'affichage
                 pane.getProperties().put("controller", this);
 
-                if (column == 1) {
-                    column = 0;
-                    row += 1;
+                if(column == 1)
+                {
+                    column=0;
+                    row+=1;
                 }
 
-                event_gridPane.add(pane, column++, row);
+                event_gridPane.add(pane,column++,row);
 
-            } catch (Exception e) {
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
     }
+
 
     public void eventDisplayAsc() throws SQLException {
         eventList = FXCollections.observableList(es.getAllASC());
-
         int row = 0;
         int column = 0;
         event_gridPane.getRowConstraints().clear();
         event_gridPane.getColumnConstraints().clear();
         event_gridPane.getChildren().clear();
-        for (int i = 0; i < eventList.size(); i++) {
-            try {
+        for(int i=0;i<eventList.size();i++)
+        {
+            try{
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/items.fxml"));
+                load.setLocation(getClass().getResource("/events.fxml"));
                 AnchorPane pane = load.load();
-                Items items = load.getController();
-                items.setData(eventList.get(i));
+                Events eventsCard = load.getController();
+                eventsCard.setData(eventList.get(i));
 
                 //mise a jour de l'affichage
                 pane.getProperties().put("controller", this);
 
-                if (column == 1) {
-                    column = 0;
-                    row += 1;
+                if(column == 1)
+                {
+                    column=0;
+                    row+=1;
                 }
 
-                event_gridPane.add(pane, column++, row);
+                event_gridPane.add(pane,column++,row);
 
-            } catch (Exception e) {
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
     }
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //triCB.setValue("default");
         triCB.getItems().addAll("default","Croissant","Decroissant");
 
         triCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -207,74 +209,48 @@ public class GetEvent1 implements Initializable {
             // Cachez le message "notFound"
             notFound.setVisible(false);
             notFound.setManaged(false);
-
-            // Réinitialisez la disposition du GridPane
             int row = 0;
             int column = 0;
             event_gridPane.getRowConstraints().clear();
             event_gridPane.getColumnConstraints().clear();
+            event_gridPane.getChildren().clear();
             for (int i = 0; i < eventList.size(); i++) {
                 try {
                     FXMLLoader load = new FXMLLoader();
-                    load.setLocation(getClass().getResource("/items.fxml"));
+                    load.setLocation(getClass().getResource("/events.fxml"));
                     AnchorPane pane = load.load();
-                    Items items = load.getController();
-                    items.setData(eventList.get(i));
+                    Events eventsCard = load.getController();
+                    eventsCard.setData(eventList.get(i));
 
+                    //mise a jour de l'affichage
                     pane.getProperties().put("controller", this);
 
-                    if (column == 1) { // Vous pouvez ajuster le nombre de colonnes ici
+                    if (column == 1) {
                         column = 0;
                         row += eventList.size();
                     }
 
                     event_gridPane.add(pane, column++, row);
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
-
     private Scene scene;
     private Stage primaryStage;
     private Parent root;
-
-    @FXML
-    void ajouterEvent(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/addEvent1.fxml"));
+    public void showHome(ActionEvent actionEvent) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEventFront.fxml"));
         root = loader.load();
         scene = new Scene(root);
-        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-
-
-    public void showPartners(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getPartner1.fxml"));
-        root = loader.load();
-        scene = new Scene(root);
-        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.setTitle("TANIT ONLINE");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    public void showEvents(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
-        root = loader.load();
-        scene = new Scene(root);
-        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
 
     @FXML
     void showCalendar(ActionEvent event) throws IOException {
@@ -298,5 +274,6 @@ public class GetEvent1 implements Initializable {
         // Afficher la nouvelle fenêtre
         calendarStage.show();
     }
+
 
 }

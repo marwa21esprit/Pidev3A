@@ -70,18 +70,14 @@ public class UpdateEvent1 {
     public void setEventData(Event event) {
         idEventTF.setText(String.valueOf(event.getIdEvent()));
         try {
-            List<Partner> partners = ps.getAll(); // À remplacer par votre propre méthode pour récupérer les partenaires
-            ObservableList<String> partnerNames = FXCollections.observableArrayList();
-
-            for (Partner partner : partners) {
-                String partnerInfo = "ID: " + partner.getIdPartner() + " - " + partner.getNamePartner();
-                partnerNames.add(partnerInfo);
-            }
-
-            partnerCB.setItems(partnerNames);
+            List<String> nomsPartners = ps.getName();
+            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsPartners);
+            partnerCB.setItems(observableNoms);
+            partnerCB.setValue(ps.getNameByID(event.getIdPartner()));
         } catch (SQLException e) {
+            showAlert("Erreur SQL", "Une erreur est survenue lors du chargement des établissements.");
             e.printStackTrace();
-            showAlert("Erreur", "Erreur lors de la récupération des partenaires depuis la base de données.");
+
         }
         partnerCB.setOnAction(actionEvent -> {
             String selectedPartner = partnerCB.getSelectionModel().getSelectedItem();
@@ -96,6 +92,7 @@ public class UpdateEvent1 {
                 }
             }
         });
+
 
         idEstabTF.setText(String.valueOf(event.getIdEstab()));
         nameEventTF.setText(event.getNameEvent());
@@ -166,16 +163,19 @@ public class UpdateEvent1 {
             // Continuer avec la mise à jour si toutes les validations sont réussies
             Date dateEventC = Date.valueOf(dateEventDP.getValue());
 
+
             if (data.path == null || data.path.isEmpty()) {
                 showAlert("Erreur", "Veuillez sélectionner une image.");
                 return;
             }
 
+
+            String selectedPartner = partnerCB.getValue();
             double prix = Double.parseDouble(prixTF.getText());
 
             int id = Integer.parseInt(idEventTF.getText());
             Event updatedEvent = new Event(
-                    selectedPartnerId,
+                    ps.getIDByNom(selectedPartner),
                     Integer.parseInt(idEstabTF.getText()),
                     eventName,
                     dateEventC,
@@ -185,7 +185,7 @@ public class UpdateEvent1 {
                     data.path
             );
             System.out.println("Updated Event: " + updatedEvent);
-
+            System.out.println(data.path);
             // Appeler la méthode d'update de votre service
             es.update(updatedEvent, id);
 
@@ -255,4 +255,6 @@ public class UpdateEvent1 {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+
 }
