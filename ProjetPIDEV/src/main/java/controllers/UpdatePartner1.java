@@ -225,6 +225,25 @@
             primaryStage.show();
         }
 
+        public void affi(ActionEvent actionEvent) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEtabliss1.fxml"));
+            root = loader.load();
+            scene = new Scene(root);
+            primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            primaryStage.setTitle("TANIT ONLINE");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        public void gestioncertif(ActionEvent actionEvent) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/getCertif1.fxml"));
+            root = loader.load();
+            scene = new Scene(root);
+            primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            primaryStage.setTitle("TANIT ONLINE");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+
         @FXML
         void importer(ActionEvent event) {
             Event e = new Event();

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="school_aff" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="939.0" styleClass="white-bg" stylesheets="@customStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.itemsfront">
+   <children>
+      <Label fx:id="Nom_Etablissafficher" layoutX="284.0" layoutY="23.0" text="Establishment" />
+      <Label fx:id="Adresse_Etablissementafficher" layoutX="292.0" layoutY="75.0" text="Adress" />
+      <Label fx:id="Type_Etablissementafiicher" layoutX="290.0" layoutY="107.0" text="Type" />
+      <Label fx:id="Tel_Etablissementafficher" layoutX="292.0" layoutY="135.0" text="Phone" />
+      <Label fx:id="Directeur_Etablissementafficher" layoutX="288.0" layoutY="162.0" text="Director" />
+      <Label fx:id="Date_Fondationafficher" layoutX="290.0" layoutY="191.0" text="Found Date" />
+      <Label fx:id="Nb_Certifafficher" layoutX="291.0" layoutY="219.0" text="Nb_Certifafficher" />
+      <AnchorPane layoutX="579.0" layoutY="18.0" prefHeight="220.0" prefWidth="286.0">
+         <children>
+            <ImageView fx:id="SchoolIV" fitHeight="220.0" fitWidth="286.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1.0" layoutY="1.0" prefHeight="262.0" prefWidth="150.0">
+         <children>
+            <Label fx:id="Etablishment" layoutX="143.0" layoutY="26.0" text="Establishment:">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="Address" layoutX="143.0" layoutY="79.0" text="Address:">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="Type" layoutX="143.0" layoutY="111.0" text="Type:">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="Phone" layoutX="143.0" layoutY="137.0" prefHeight="18.0" prefWidth="108.0" text="Phone:">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="Director" layoutX="143.0" layoutY="166.0" text="Director:">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="FoundDate" layoutX="143.0" layoutY="193.0" text="Foundation Date">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="NbCertif" layoutX="144.0" layoutY="221.0" text="Nb of Certificate ">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

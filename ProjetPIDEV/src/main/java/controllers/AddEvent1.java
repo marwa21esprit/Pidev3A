@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Event;
+import services.EtablissementServices;
 import services.EventService;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,13 +32,8 @@ public class AddEvent1 {
     private final EventService es = new EventService();
     private final PartnerService ps = new PartnerService();
 
-    @FXML
-    private Button ajouter;
+    private final EtablissementServices ests = new EtablissementServices();
 
-    @FXML
-    private TextField idEventTF;
-    @FXML
-    private TextField idEstabTF;
     @FXML
     private TextField nameEventTF;
     @FXML
@@ -49,11 +45,12 @@ public class AddEvent1 {
     @FXML
     private TextArea descTF;
     @FXML
-    private Button importerBT;
-    @FXML
     private AnchorPane mainForm;
     @FXML
     private ComboBox<String> partnerCB;
+
+    @FXML
+    private ComboBox<String> estabCB;
 
     @FXML
     private ImageView importIV;
@@ -68,6 +65,10 @@ public class AddEvent1 {
             List<String> nomsPartners = ps.getName();
             ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsPartners);
             partnerCB.setItems(observableNoms);
+
+            List<String> nomsEstab = ests.getNoms();
+            ObservableList<String> observableNomsEst = FXCollections.observableArrayList(nomsEstab);
+            estabCB.setItems(observableNomsEst);
         } catch (SQLException e) {
             showAlert("Erreur SQL", "Une erreur est survenue lors du chargement des établissements.");
             e.printStackTrace();
@@ -105,6 +106,7 @@ public class AddEvent1 {
 
 
             String selectedPartner = partnerCB.getValue();
+            String selectedEstab = estabCB.getValue();
              // Utiliser la méthode de EtablissementServices pour obtenir l'ID par le nom
 
             if (data.path == null || data.path.isEmpty()) {
@@ -113,11 +115,13 @@ public class AddEvent1 {
             }
             double prix = Double.parseDouble(prixTF.getText());
             System.out.println(ps.getIDByNom(selectedPartner));
+            System.out.println(ests.getIDByNom(selectedEstab));
 
             // Ajouter l'événement si toutes les validations sont réussies
             Date dateEventC = Date.valueOf(dateEventDP.getValue());
 
-            Event e =new Event(ps.getIDByNom(selectedPartner),Integer.parseInt(idEstabTF.getText()), eventName, dateEventC, maxParticipants,prix, eventDescription,data.path);
+            Event e =new Event(ps.getIDByNom(selectedPartner),ests.getIDByNom(selectedEstab),
+                    eventName, dateEventC, maxParticipants,prix, eventDescription,data.path);
             System.out.println(e);
             es.add(e);
 
@@ -171,9 +175,11 @@ public class AddEvent1 {
         }
 
     }
+        
     //BOUTTON CLEAR
     public void clear(ActionEvent event) {
-        idEstabTF.setText("");
+        estabCB.setValue("Establishment Name");
+        partnerCB.setValue("Partner Name");
         nameEventTF.setText("");
         dateEventDP.setValue(null);
         nbrMaxS.getValueFactory().setValue(0);
@@ -201,5 +207,33 @@ public class AddEvent1 {
         primaryStage.setTitle("TANIT ONLINE");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @FXML
+    void affi(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss1.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
+    }
+
+    @FXML
+    void gestioncertif(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif1.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
     }
 }

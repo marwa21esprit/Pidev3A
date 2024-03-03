@@ -275,6 +275,26 @@ public class GetEvent1 implements Initializable {
         primaryStage.show();
     }
 
+    public void affi(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEtabliss1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void gestioncertif(ActionEvent actionEvent) throws RuntimeException,IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 
     @FXML
     void showCalendar(ActionEvent event) throws IOException {

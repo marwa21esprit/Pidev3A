@@ -96,7 +96,7 @@ public class GetPartnerFront {
     }*/
 
     public void showEvents(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEventFront1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEventFront1.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -106,7 +106,16 @@ public class GetPartnerFront {
     }
 
     public void showHome(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEventFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEventFront1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public void showSchools(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtablissFront1.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();

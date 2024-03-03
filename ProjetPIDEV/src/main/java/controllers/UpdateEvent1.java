@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Event;
 import models.Partner;
+import services.EtablissementServices;
 import services.EventService;
 import services.PartnerService;
 
@@ -29,6 +30,7 @@ public class UpdateEvent1 {
 
     private final EventService es = new EventService();
     private final PartnerService ps = new PartnerService();
+    private final EtablissementServices ests = new EtablissementServices();
     @FXML
     private Button backE;
 
@@ -41,8 +43,7 @@ public class UpdateEvent1 {
     @FXML
     private Button edit;
 
-    @FXML
-    private TextField idEstabTF;
+
 
     @FXML
     private TextField idEventTF;
@@ -59,6 +60,8 @@ public class UpdateEvent1 {
     @FXML
     private ComboBox<String> partnerCB;
     @FXML
+    private ComboBox<String> estabCB;
+    @FXML
     private AnchorPane mainForm1;
     private Image image;
 
@@ -67,6 +70,8 @@ public class UpdateEvent1 {
 
     private int selectedPartnerId;
 
+    private int selectedEstabId;
+
     public void setEventData(Event event) {
         idEventTF.setText(String.valueOf(event.getIdEvent()));
         try {
@@ -74,6 +79,11 @@ public class UpdateEvent1 {
             ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsPartners);
             partnerCB.setItems(observableNoms);
             partnerCB.setValue(ps.getNameByID(event.getIdPartner()));
+
+            List<String> nomsEstab = ests.getNoms();
+            ObservableList<String> observableNomsEst = FXCollections.observableArrayList(nomsEstab);
+            estabCB.setItems(observableNomsEst);
+            estabCB.setValue(ests.getNameByID(event.getIdEstab()));
         } catch (SQLException e) {
             showAlert("Erreur SQL", "Une erreur est survenue lors du chargement des établissements.");
             e.printStackTrace();
@@ -93,8 +103,20 @@ public class UpdateEvent1 {
             }
         });
 
+        estabCB.setOnAction(actionEvent -> {
+            String selectedEstab = estabCB.getSelectionModel().getSelectedItem();
+            if (selectedEstab != null) {
+                // Extraire l'id du partenaire à partir de la chaîne (par exemple, en utilisant une expression régulière)
+                String[] parts = selectedEstab.split(" - ");
+                if (parts.length == 2) {
+                    String idString = parts[0].replace("ID: ", "");
+                    selectedEstabId = Integer.parseInt(idString);
+                    // Faire quelque chose avec l'id du partenaire
+                    System.out.println("ID du partenaire sélectionné : " + selectedEstabId);
+                }
+            }
+        });
 
-        idEstabTF.setText(String.valueOf(event.getIdEstab()));
         nameEventTF.setText(event.getNameEvent());
         dateEventDP.setValue(event.getDateEvent().toLocalDate());
         if (nbrMaxS.getValueFactory() == null) {
@@ -171,12 +193,13 @@ public class UpdateEvent1 {
 
 
             String selectedPartner = partnerCB.getValue();
+            String selectedEstab = estabCB.getValue();
             double prix = Double.parseDouble(prixTF.getText());
 
             int id = Integer.parseInt(idEventTF.getText());
             Event updatedEvent = new Event(
                     ps.getIDByNom(selectedPartner),
-                    Integer.parseInt(idEstabTF.getText()),
+                    ests.getIDByNom(selectedEstab),
                     eventName,
                     dateEventC,
                     maxParticipants,
@@ -226,7 +249,8 @@ public class UpdateEvent1 {
     }
 
     public void clear(ActionEvent event) {
-        idEstabTF.setText("");
+        estabCB.setValue("Establishment Name");
+        partnerCB.setValue("Partner Name");
         nameEventTF.setText("");
         dateEventDP.setValue(null);
         nbrMaxS.getValueFactory().setValue(0);
@@ -248,6 +272,26 @@ public class UpdateEvent1 {
 
     public void showPartners(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/getPartner1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void affi(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEtabliss1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void gestioncertif(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getCertis1.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
