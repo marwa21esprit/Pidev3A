@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GetEvent">
+    <stylesheets>
+        <URL value="@styles1.css" />
+    </stylesheets>
+    <children>
+      <TableView fx:id="tableA" layoutX="38.0" layoutY="30.0" prefHeight="418.0" prefWidth="653.0">
+        <columns>
+          <TableColumn fx:id="idEstabA" prefWidth="75.0" text="idEstab" />
+            <TableColumn fx:id="nameEventA" prefWidth="75.0" text="nameEvent" />
+            <TableColumn fx:id="dateEventA" prefWidth="75.0" text="dateEvent" />
+            <TableColumn fx:id="nbrMax" prefWidth="75.0" text="nbrMax" />
+            <TableColumn fx:id="descA" prefWidth="75.0" text="desc" />
+            <TableColumn fx:id="imageA" prefWidth="75.0" text="image" />
+            <TableColumn fx:id="supprimer" prefWidth="75.0" text="supprimer" />
+            <TableColumn fx:id="modifier" prefWidth="75.0" text="modifier" />
+        </columns>
+      </TableView>
+      <Button fx:id="addEvent" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" onAction="#ajouterEvent" text="add Event" />
+   </children>
+</AnchorPane>

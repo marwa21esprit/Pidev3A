@@ -1,0 +1,26 @@
+.table-view {
+    -fx-background-color: #f4f4f4;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #e0e0e0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f0f0f0;
+}
