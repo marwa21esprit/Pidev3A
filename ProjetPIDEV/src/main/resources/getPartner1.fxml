@@ -19,9 +19,9 @@
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: #212E53;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="60.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/420061415_1580129922759933_3165525506138466855_n.png" />
+                        <Image url="@images/user.png" />
                     </image>
                     <VBox.margin>
                         <Insets bottom="10.0" top="50.0" />
@@ -32,90 +32,141 @@
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Label>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGE.css" text="Overview" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/loupe_751463.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Orders" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/gear_13930106.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Customers" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/home_2549900.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Events" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/icons8-event-50.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Partners" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/icons8-giving-50.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Settings" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/gear_13930106.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
-                <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Sign Out" textFill="WHITE">
-                    <graphic>
-                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@images/loupe_751463.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGE.css" text="Overview" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-home-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#affi" prefHeight="38.0" prefWidth="246.0" stylesheets="@buttonGE.css" text="Establishments" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-school-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#gestioncertif" prefHeight="33.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Certificates" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-diploma-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showEvents" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Events" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-event-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showPartners" prefHeight="39.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Partners" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-giving-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Tutors Management" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/book-open-reader.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Students Management" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/people-poll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Reservations Management" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/booking.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonGE.css" text="Sign Out" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-sign-out-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
             </children>
         </VBox>
         <Label layoutX="285.0" layoutY="5.0" text="Partner List">
@@ -146,15 +197,15 @@
             </ScrollPane>
          </children>
         </AnchorPane>
-      <ImageView fx:id="notFound" fitHeight="341.0" fitWidth="356.0" layoutX="464.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="notFound" fitHeight="403.0" fitWidth="787.0" layoutX="269.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/6134065.png" />
+            <Image url="@images/notFound.jpg" />
          </image>
       </ImageView>
       <Button layoutX="285.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajouterPartner" prefHeight="35.0" prefWidth="132.0" stylesheets="@buttonGE.css" text="Add Partner" textFill="WHITE" />
       <ImageView fitHeight="34.0" fitWidth="21.0" layoutX="934.6" layoutY="19.4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/loupe_751463.png" />
+            <Image url="@images/loup.png" />
          </image>
       </ImageView>
       <TextField fx:id="searchByName" floatText="Search" layoutX="773.0" layoutY="7.0" prefWidth="143.0" stylesheets="@buttonGE.css" />

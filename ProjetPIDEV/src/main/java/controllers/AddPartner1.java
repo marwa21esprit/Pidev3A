@@ -206,4 +206,32 @@ public class AddPartner1 {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    @FXML
+    void affi(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtabliss1.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
+    }
+
+    @FXML
+    void gestioncertif(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetCertif1.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
+    }
 }

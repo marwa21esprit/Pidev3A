@@ -28,8 +28,8 @@ public class MainFX extends Application {
     private double x,y;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEventFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/getEvent1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("TANIT ONLINE");

@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.Partner;
+import services.EtablissementServices;
 import services.EventService;
 import services.PartnerService;
 
@@ -38,6 +39,7 @@ import java.util.ResourceBundle;
 public class Items implements Initializable {
     private  EventService es = new EventService();
     private PartnerService ps = new PartnerService();
+    private EtablissementServices ests = new EtablissementServices();
 
     @FXML
     private Label desc_label;
@@ -84,9 +86,14 @@ public class Items implements Initializable {
     public Items(PartnerService partnerService) {
         this.ps = partnerService;
     }
-    public Items(EventService eventService, PartnerService partnerService, Event initialEvent) {
+    public Items(EtablissementServices etablissementServices) {
+        this.ests = etablissementServices;
+    }
+
+    public Items(EventService eventService, PartnerService partnerService, EtablissementServices etablissementServices,Event initialEvent) {
         this.es = eventService;
         this.ps = partnerService;
+        this.ests = etablissementServices;
         setData(initialEvent);
     }
 
@@ -94,10 +101,10 @@ public class Items implements Initializable {
     {
         this.event = event;
 
-        estab_label.setText(String.valueOf(event.getIdEstab()));
         eventName_label.setText(event.getNameEvent());
         try {
             partner_label.setText(ps.getNameByID(event.getIdPartner()));
+            estab_label.setText(ests.getNameByID(event.getIdEstab()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,16 +126,21 @@ public class Items implements Initializable {
             // Générer le code QR
 
             if(event != null) {
-                String qrContent = String.valueOf(event.getIdEstab());
-                String cleanedQrContent = qrContent.replaceAll("[^a-zA-Z0-9]", "_");
+                String qrContent = null;
+                try {
+                    qrContent = ests.getAdrByID(event.getIdEstab());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
-                //byte[] qrContentBytes = qrContent.getBytes(StandardCharsets.UTF_8);
+                //String cleanedQrContent = qrContent.replaceAll("[^a-zA-Z0-9]", "_");
+
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
                 BitMatrix bitMatrix = qrCodeWriter.encode(qrContent, com.google.zxing.BarcodeFormat.QR_CODE, 200, 200);
 
                 // Écrire le code QR dans un fichier
-                Path pathQR = FileSystems.getDefault().getPath("C:\\Users\\user\\IdeaProjects\\ProjetPIDEV\\src\\main\\resources\\images", cleanedQrContent + ".png");
-                MatrixToImageWriter.writeToPath(bitMatrix, "PNG", pathQR);
+                /*Path pathQR = FileSystems.getDefault().getPath("C:\\Users\\user\\IdeaProjects\\ProjetPIDEV\\src\\main\\resources\\images", cleanedQrContent + ".png");
+                MatrixToImageWriter.writeToPath(bitMatrix, "PNG", pathQR);*/
 
 
                 BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix, new MatrixToImageConfig(0xFF000000, 0xFFFFFFFF));
@@ -141,7 +153,7 @@ public class Items implements Initializable {
             else {
                 System.out.println("event est null");
             }
-        } catch (WriterException | IOException e) {
+        } catch (WriterException e) {
             e.printStackTrace();
         }
     }

@@ -204,21 +204,6 @@ public class EventService implements IService<Event> {
         return events;
     }
 
-    /*@Override
-    public String getDate(java.sql.Date date) throws SQLException{
-        String sql = "SELECT nameEvent FROM event WHERE dateEvent = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setDate(1, date);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getString("nameEvent");
-                } else {
-                    // Gérer le cas où aucun enregistrement correspondant n'est trouvé
-                    throw new SQLException("Aucun établissement trouvé avec le date spécifié : " + date);
-                }
-            }
-        }
-    }*/
 
     @Override
     public List<String> getByDate(java.sql.Date date) throws SQLException {

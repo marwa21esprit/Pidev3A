@@ -160,7 +160,7 @@ public class PartnerService implements IService<Partner>{
                     return resultSet.getString("namePartner");
                 } else {
                     // Gérer le cas où aucun enregistrement correspondant n'est trouvé
-                    throw new SQLException("Aucun établissement trouvé avec le nom spécifié : " + id);
+                    throw new SQLException("Aucun établissement trouvé avec l'id spécifié : " + id);
                 }
             }
         }

@@ -243,10 +243,20 @@ public class GetEventFront1 implements Initializable {
     private Stage primaryStage;
     private Parent root;
     public void showHome(ActionEvent actionEvent) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEventFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showSchools(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GetEtablissFront1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setTitle("TANIT ONLINE");
         primaryStage.setScene(scene);
         primaryStage.show();
