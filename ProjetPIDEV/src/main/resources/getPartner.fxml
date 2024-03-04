@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GetPartner">
+    <stylesheets>
+        <URL value="@styles1.css" />
+    </stylesheets>
+    <children>
+      <TableView fx:id="tablePA" layoutX="31.0" layoutY="29.0" prefHeight="459.0" prefWidth="691.0">
+        <columns>
+          <TableColumn fx:id="namePartnerA" prefWidth="75.0" text="namePartner" />
+            <TableColumn fx:id="typePartnerA" prefWidth="75.0" text="typePartner" />
+            <TableColumn fx:id="descA" prefWidth="75.0" text="desc" />
+            <TableColumn fx:id="emailA" prefWidth="75.0" text="email" />
+            <TableColumn fx:id="telA" prefWidth="75.0" text="tel" />
+            <TableColumn fx:id="supprimer" prefWidth="75.0" text="supprimer" />
+            <TableColumn fx:id="modifier" prefWidth="75.0" text="modifier" />
+        </columns>
+      </TableView>
+      <Button fx:id="addPartner" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" onAction="#ajouterPartner" text="add Partner" />
+   </children>
+</AnchorPane>

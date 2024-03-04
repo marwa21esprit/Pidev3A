@@ -1,0 +1,30 @@
+.button {
+    -fx-background-color: #D6D3E5; /* Couleur de fond */
+}
+
+.button:hover {
+    -fx-background-color: #A09FA8; /* Couleur de fond au survol */
+}
+
+.button:pressed {
+    -fx-background-color: #D6D3E5; /* Couleur de fond lorsqu'appuyé */
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0, 0, 0); /* Ombre portée */
+}
+
+.white-bg {
+    -fx-background-color: #EBE8F9; /* Fond blanc */
+}
+
+.radius {
+    -fx-background-radius: 5px; /* Rayon des coins */
+}
+
+.btn {
+    -fx-background-color: #D6D3E5; /* Couleur de fond */
+    -fx-cursor: hand; /* Curseur main au survol */
+    -fx-text-fill: black; /* Couleur du texte */
+    -fx-font-size: 14px; /* Taille de la police */
+}
