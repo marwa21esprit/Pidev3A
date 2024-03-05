@@ -6,42 +6,31 @@ public class Niveau {
     private String prerequis;
     private String duree;
     private int nbformation;
-    private String suivi;
-    private String certificat;
-    private String competences;
 
+    private String certificat;
+    private String description;
+    private String image;
     public Niveau(){}
 
-    public Niveau(int id, String name, String prerequis, String duree, int nbformation, String suivi, String certificat, String competences) {
+    public Niveau(int id, String name, String prerequis, String duree, int nbformation, String certificat, String description, String image) {
         this.id = id;
         this.name = name;
         this.prerequis = prerequis;
         this.duree = duree;
         this.nbformation = nbformation;
-        this.suivi = suivi;
         this.certificat = certificat;
-        this.competences = competences;
-
+        this.description = description;
+        this.image = image;
     }
-    public Niveau(String name, String prerequis, String duree, int nbformation, String suivi, String certificat, String competences) {
+    public Niveau(String name, String prerequis, String duree, int nbformation, String certificat, String description, String image) {
         this.name = name;
         this.prerequis = prerequis;
         this.duree = duree;
         this.nbformation = nbformation;
-        this.suivi = suivi;
         this.certificat = certificat;
-        this.competences = competences;
-
+        this.description = description;
+        this.image = image;
     }
-    public Niveau(int id, String prerequis,String name,String duree,String certificat) {
-        this.id = id;
-        this.name = name;
-        this.duree = duree;
-        this.prerequis = prerequis;
-        this.certificat = certificat;
-
-    }
-
 
     public int getId() {
         return id;
@@ -83,14 +72,6 @@ public class Niveau {
         this.nbformation = nbformation;
     }
 
-    public String getSuivi() {
-        return suivi;
-    }
-
-    public void setSuivi(String suivi) {
-        this.suivi = suivi;
-    }
-
     public String getCertificat() {
         return certificat;
     }
@@ -99,13 +80,33 @@ public class Niveau {
         this.certificat = certificat;
     }
 
-    public String getCompetences() {
-        return competences;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCompetences(String competences) {
-        this.competences = competences;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Niveau{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", prerequis='" + prerequis + '\'' +
+                ", duree='" + duree + '\'' +
+                ", nbformation=" + nbformation +
+                ", certificat='" + certificat + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

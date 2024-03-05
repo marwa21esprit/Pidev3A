@@ -1,38 +1,42 @@
-package Services;
+package services;
 
+import controllers.data;
 import models.Apprenant;
-import util.DbConnect;
+import utils.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
 
 
-public class ApprenantServices implements IServiceApprenant{
+public class ApprenantServices implements IServiceApprenant {
     private Connection connection;
 
 
     public ApprenantServices() {
-        connection = DbConnect.getInstance().getConnection();
+        connection = MyDatabase.getInstance().getConnection();
     }
 
     @Override
     public void add(Apprenant apprenant) throws SQLException {
 
-            String sql = "INSERT INTO apprenants (Name,Email,Password,StatutNiveau,FormationEtudies,Niveau,idNiveau) VALUES (?,?,?,?,?,?,?)";
-            System.out.println(sql);
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO apprenants (Name,Email,FormationEtudies,Niveau,image,idNiveau,StatutNiveau) VALUES (?,?,?,?,?,?,?)";
+        System.out.println(sql);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        System.out.println(apprenant.toString());
         statement.setString(1, apprenant.getName());
         statement.setString(2, apprenant.getEmail());
-        statement.setString(3, apprenant.getPassword());
-        statement.setString(4, apprenant.getStatutNiveau());
-        statement.setString(5, apprenant.getFormationEtudies());
-        statement.setString(6, apprenant.getNiveauName());
-        statement.setString(7, "1");
-            statement.executeUpdate();
+        statement.setString(3, apprenant.getStatutNiveau());
+        statement.setString(4, apprenant.getNiveauName());
+        String path = data.path;
+        path = path.replace("\\", "");
+        statement.setString(5, path); // Chemin de l'image
+        statement.setInt(6, apprenant.getIdNiveau()); // Utilisez la méthode getIntNiveau() si c'est un entier
+        statement.setString(7, apprenant.getFormationEtudies());
+        statement.executeUpdate();
 
-        }
+    }
+
     @Override
     public List<Apprenant> getAll() throws SQLException {
         String sql = "select * from apprenants";
@@ -40,15 +44,16 @@ public class ApprenantServices implements IServiceApprenant{
         ResultSet rs = statement.executeQuery(sql);
         List<Apprenant> apprenants = new ArrayList<>();
         while (rs.next()) {
+            System.out.println(rs.getString(1));
             Apprenant apprenant = new Apprenant();
             apprenant.setId(rs.getInt("id"));
             apprenant.setName(rs.getString("Name"));
             apprenant.setEmail(rs.getString("Email"));
-            apprenant.setEmail(rs.getString("Password"));
             apprenant.setStatutNiveau(rs.getString("StatutNiveau"));
             apprenant.setFormationEtudies(rs.getString("FormationEtudies"));
             apprenant.setNiveauName(rs.getString("Niveau"));
-            apprenant.setIdNiveau(rs.getInt("1"));
+            apprenant.setIdNiveau(rs.getInt("idNiveau"));
+            apprenant.setImage(rs.getString("Image"));
             apprenants.add(apprenant);
 
         }
@@ -57,61 +62,67 @@ public class ApprenantServices implements IServiceApprenant{
     }
 
 
-
-
     @Override
-    public void update(Apprenant apprenant) throws SQLException {
-        String sql = "UPDATE apprenants SET Name = ?, Password = ?, StatutNiveau = ?, FormationEtudies = ?, Niveau = ? WHERE Email = ?";
+    public void update(Apprenant apprenant, int id) throws SQLException {
+        String sql = "update apprenants set idNiveau = ?,  name = ?, email = ?, statutNiveau = ?," +
+                "formationEtudies = ?,niveau = ?,image = ? where id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, apprenant.getName());
-        preparedStatement.setString(2, apprenant.getPassword());
-        preparedStatement.setString(3, apprenant.getStatutNiveau());
-        preparedStatement.setString(4, apprenant.getFormationEtudies());
-        preparedStatement.setString(5, apprenant.getNiveauName());
-        preparedStatement.setString(6, apprenant.getEmail());
+        preparedStatement.setInt(1, apprenant.getIdNiveau());
+        preparedStatement.setString(2, apprenant.getName());
+        preparedStatement.setString(3, apprenant.getEmail());
+        preparedStatement.setString(4, apprenant.getStatutNiveau());
+        preparedStatement.setString(5, apprenant.getFormationEtudies());
+        preparedStatement.setString(6, apprenant.getNiveauName());
+        String path = data.path;
+        if (path == null) {
+            System.out.println("path is null");
+            path = "C:\\Users\\Hadhemi\\IdeaProjects\\demo\\src\\main\\resources\\images"; // Replace with your default path
 
+        } else {
+            path = path.replace("\\", "\\\\");
+        }
+        preparedStatement.setString(7, path);
+        preparedStatement.setInt(8, id);
         preparedStatement.executeUpdate();
-        System.out.println(apprenant);
     }
 
     @Override
-    public void delete(String email) throws SQLException {
-        String sql = "DELETE FROM apprenants WHERE Email = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, email);
-            preparedStatement.executeUpdate();
-        }
+    public void delete(int id) throws SQLException {
+        String sql = "delete from apprenants where id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
 
     }
 
 
-
-
-   /* @Override
+    @Override
     public Apprenant getById(int id) throws SQLException {
-        String sql = "SELECT `Name`, `Email`, `Password`, `StatutNiveau`, `FormationEtudies`, `Niveau` FROM `apprenants` WHERE `id` = ?";
+        String sql = "SELECT `idNiveau`, `Name`, `Email`, `StatutNiveau`, `FormationEtudies`, `Niveau` , `image` FROM `apprenants` WHERE `id` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
+
             String name = resultSet.getString("Name");
             String email = resultSet.getString("Email");
-            String password = resultSet.getString("Password");
             String statutNiveau = resultSet.getString("Statut");
             String formationEtudies = resultSet.getString("Formation");
             String niveau = resultSet.getString("Niveau");
-
+            String image = resultSet.getString("Image");
+            int idNiveau = resultSet.getInt("idNiveau");
             //return new Apprenant(id, name, email, password, statutNiveau, formationEtudies, niveau);
-            return new Apprenant(name, email, password, statutNiveau, formationEtudies, 1);
+            return new Apprenant(id, name, email, statutNiveau, formationEtudies, niveau, image,idNiveau);
         } else {
             // Handle the case when no matching record is found
             return null;
         }
-    }*/
-Apprenant apprenant;
+    }
 
-    @Override
+    Apprenant apprenant;
+
+    /*@Override
     public Apprenant getByEmail(String Email) throws SQLException {
 
         Apprenant apprenant = null;
@@ -137,6 +148,7 @@ Apprenant apprenant;
 
         return apprenant;
 
-
     }}
+     */
+}
 

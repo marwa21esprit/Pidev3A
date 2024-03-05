@@ -1,37 +1,42 @@
 package models;
 
 public class Apprenant {
+
     private int id;
+
     private String name;
     private String email;
-    private String password;
     private String statutNiveau;
     private String formationEtudies;
     private String niveauName;
 
+    private String image;
     private int idNiveau;
+
 
     public Apprenant(){}
 
-    public Apprenant(int id, String name, String email, String password, String statutNiveau, String formationEtudies, String niveauName, int idNiveau) {
+    public Apprenant(int id,  String name, String email, String statutNiveau, String formationEtudies, String niveauName, String image,int idNiveau) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.statutNiveau = statutNiveau;
         this.formationEtudies = formationEtudies;
         this.niveauName = niveauName;
+        this.image = image;
         this.idNiveau = idNiveau;
     }
-    public Apprenant( String name, String email, String password, String statutNiveau, String formationEtudies, String niveauName, int idNiveau) {
+    public Apprenant( String name, String email, String statutNiveau, String formationEtudies, String niveauName, String image, int idNiveau) {
+
         this.name = name;
         this.email = email;
-        this.password = password;
         this.statutNiveau = statutNiveau;
         this.formationEtudies = formationEtudies;
         this.niveauName = niveauName;
+        this.image = image;
         this.idNiveau = idNiveau;
     }
+
 
     public int getId() {
         return id;
@@ -39,6 +44,14 @@ public class Apprenant {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdNiveau() {
+        return idNiveau;
+    }
+
+    public void setIdNiveau(int idNiveau) {
+        this.idNiveau = idNiveau;
     }
 
     public String getName() {
@@ -55,14 +68,6 @@ public class Apprenant {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getStatutNiveau() {
@@ -89,25 +94,25 @@ public class Apprenant {
         this.niveauName = niveauName;
     }
 
-    public int getIdNiveau() {
-        return idNiveau;
+    public String getImage() {
+        return image;
     }
 
-    public void setIdNiveau(int idNiveau) {
-        this.idNiveau = idNiveau;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
         return "Apprenant{" +
                 "id=" + id +
+                ", idNiveau=" + idNiveau +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", statutNiveau='" + statutNiveau + '\'' +
                 ", formationEtudies='" + formationEtudies + '\'' +
                 ", niveauName='" + niveauName + '\'' +
-                ", idNiveau=" + idNiveau +
+                ", image='" + image + '\'' +
                 '}';
     }
 }
