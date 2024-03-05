@@ -61,6 +61,10 @@ public class addTuteur1 {
     private TextField tlf;
     private Image image;
 
+    private Scene scene;
+    private Stage primaryStage;
+    private Parent root;
+
     @FXML
     void ajouter(ActionEvent event) {
         try {
@@ -143,17 +147,14 @@ public class addTuteur1 {
     }
 
     @FXML
-    void retour(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            afficherAlerteErreur("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
-        }
+    void retour(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
     }
 
@@ -197,7 +198,29 @@ public class addTuteur1 {
     }
 
 
+    public void showTuteur1(ActionEvent actionEvent) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showFormation1(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+    }
 }
 
 

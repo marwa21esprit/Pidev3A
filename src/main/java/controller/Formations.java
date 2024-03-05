@@ -3,12 +3,9 @@ package controller;
 import Services.ServiceFormation;
 import Services.ServiceTuteur;
 import entities.Formation;
-import controller.addFormation1;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,16 +29,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
-public class Items1 implements Initializable {
-
-    private ServiceFormation ft = new ServiceFormation();
-    private ServiceTuteur st = new ServiceTuteur();
-
-
-    @FXML
-    private Button telechargerPDFButton;
-
-    private String cheminPDF;
+public class Formations {
 
     @FXML
     private Label categorie_label;
@@ -62,14 +50,16 @@ public class Items1 implements Initializable {
     private Label id_formation_label;
 
     @FXML
+    private Hyperlink lien;
+
+    @FXML
+    private Button modifierBT;
+
+    @FXML
     private Label nom_niveau_label;
 
     @FXML
     private Label nom_prenom_tuteur_label;
-
-
-    @FXML
-    private Button modifierBT;
 
     @FXML
     private Label prix_label;
@@ -78,61 +68,27 @@ public class Items1 implements Initializable {
     private Button supprimerBT;
 
     @FXML
-    private Label titre_label;
-    private Formation formation;
+    private Button telechargerPDFButton;
 
     @FXML
-    private Hyperlink lien;
+    private Label titre_label;
+
+
+    private ServiceFormation ft = new ServiceFormation();
+    private ServiceTuteur st = new ServiceTuteur();
 
     private Scene scene;
     private Stage primaryStage;
     private Parent root;
+    private Formation formation;
 
-    public Items1() {
+    public Formations() {
     }
 
-    public Items1(ServiceFormation serviceFormation, ServiceTuteur serviceTuteur) {
+    public Formations(ServiceFormation serviceFormation, ServiceTuteur serviceTuteur) {
 
         this.ft = serviceFormation;
         this.st = serviceTuteur;
-    }
-
-
-    public void setCheminPDF(String cheminPDF) {
-        this.cheminPDF = cheminPDF;
-    }
-
-
-    public String getCheminPDF() {
-        return cheminPDF;
-    }
-
-
-    @FXML
-    void modifier(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateFormation.fxml"));
-        root = loader.load();
-        updateFormation1 updateFormation1Controller = loader.getController();
-        updateFormation1Controller.setData(formation);
-        scene = new Scene(root);
-        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-
-    }
-
-    @FXML
-    void supprimer(ActionEvent event) throws SQLException {
-
-        ft.deleteFormation(formation.getId_formation());
-        //mise a jour de l'affichage
-        showFormation1 showFormation1Controller = (showFormation1) formation_aff.getProperties().get("controller");
-        showFormation1Controller.formationDisplay();
-
-
     }
 
     public void setData(Formation formation) {
@@ -164,8 +120,43 @@ public class Items1 implements Initializable {
         description_label.setText(String.valueOf(formation.getDescription()));
         lien.setText(formation.getLien());
 
+    }
 
 
+    @FXML
+    void modifier(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateFormationFront.fxml"));
+        root = loader.load();
+        updateFormationFront updateFormationFrontController = loader.getController();
+        updateFormationFrontController.setData(formation);
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+    }
+
+    @FXML
+    void supprimer(ActionEvent event) throws SQLException {
+
+        ft.deleteFormation(formation.getId_formation());
+        //mise a jour de l'affichage
+        showFormation1 showFormation1Controller = (showFormation1) formation_aff.getProperties().get("controller");
+        showFormation1Controller.formationDisplay();
+
+
+    }
+
+
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
+
+    public  Parent getRoot() {
+        return root;
     }
 
     @FXML
@@ -187,7 +178,6 @@ public class Items1 implements Initializable {
     }
 
 
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lien.setOnAction(event -> {
             String lienText = lien.getText(); // Renommez la variable locale pour éviter la confusion
@@ -243,12 +233,5 @@ public class Items1 implements Initializable {
             afficherAlerteErreur("Erreur", "Aucun PDF trouvé", "Aucun PDF associé à cet élément.");
         }
     }
-
-
-
-
-
-
-
 
 }

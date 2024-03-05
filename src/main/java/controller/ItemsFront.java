@@ -1,9 +1,7 @@
-package controller;
+/*package controller;
 
 import Services.ServiceTuteur;
 import entities.Tuteur;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,22 +16,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Items implements Initializable {
+public class ItemsFront implements Initializable {
 
     private ServiceTuteur st = new ServiceTuteur();
 
     @FXML
     private Label Nom_label;
-
-    @FXML
-    private Label tlf_label;
 
     @FXML
     private Label date_naisc_label;
@@ -42,7 +39,8 @@ public class Items implements Initializable {
     private AnchorPane tuteur_aff;
 
     @FXML
-    private Button modifierBT;
+    private Label tlf_label;
+
 
     @FXML
     private Label prenom_label;
@@ -54,9 +52,6 @@ public class Items implements Initializable {
     private Label email_label;
 
     @FXML
-    private Button supprimerBT;
-
-    @FXML
     private ImageView tuteurIV;
 
     @FXML
@@ -65,38 +60,22 @@ public class Items implements Initializable {
     private Tuteur tuteur;
     private Image image;
 
-    public Items() {
+
+    public ItemsFront() {
     }
 
-    public Items(ServiceTuteur serviceTuteur) {
+    public ItemsFront(ServiceTuteur serviceTuteur) {
         this.st = serviceTuteur;
     }
-
-    @FXML
-    void modifier(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTuteur.fxml"));
-        root = loader.load();
-        updateTuteur1 updateTuteur1Controller = loader.getController();
-        updateTuteur1Controller.setTuteurData(tuteur);
-        scene = new Scene(root);
-        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        primaryStage.setTitle("TANIT ONLINE");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    private ShowTuteurFront ShowTuteurFrontController;
 
 
-    }
-
-    @FXML
-    void supprimer(ActionEvent event) throws SQLException {
-
-        st.deleteTuteur(tuteur.getId_tuteur());
-        //mise a jour de l'affichage
-        showTuteur1 showTuteur1Controller = (showTuteur1) tuteur_aff.getProperties().get("controller");
-        showTuteur1Controller.tuteurDisplay();
 
 
+
+    public void setShowTuteurFrontController(ShowTuteurFront controller) {
+
+        this.ShowTuteurFrontController = controller;
     }
 
     public void setData(Tuteur tuteur) {
@@ -105,12 +84,12 @@ public class Items implements Initializable {
         tuteur_label.setText(String.valueOf(tuteur.getId_tuteur()));
         Nom_label.setText(tuteur.getNom());
         prenom_label.setText(tuteur.getPrenom());
-
+        tlf_label.setText(String.valueOf(tuteur.getTlf()));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(tuteur.getDate_naisc());
         date_naisc_label.setText(formattedDate);
-        tlf_label.setText(String.valueOf(tuteur.getTlf()));
+
         profession_label.setText(String.valueOf(tuteur.getProfession()));
         email_label.setText(String.valueOf(tuteur.getEmail()));
 
@@ -129,7 +108,35 @@ public class Items implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        try {
+            List<Tuteur> tuteurs = st.getAll();
+            if (!tuteurs.isEmpty()) {
+                Tuteur pe = tuteurs.get(0);
+                tuteur_label.setText(String.valueOf(pe.getId_tuteur()));
+                Nom_label.setText(pe.getNom());
+                prenom_label.setText(pe.getPrenom());
+                tlf_label.setText(String.valueOf(pe.getTlf()));
+                date_naisc_label.setText(pe.getDate_naisc().toString());
+                profession_label.setText(pe.getProfession());
+                email_label.setText(pe.getEmail());
+
+                File imageFile = new File(pe.getImage());
+                Image image = new Image(imageFile.toURI().toString());
+                tuteurIV.setImage(image);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
 
-}
+    public  Parent getRoot() {
+        return root;
+    }
+
+}*/

@@ -24,9 +24,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-//import static Services.ServiceTuteur.getIdTuteurByNomPrenom;
-
-public class addFormation1 {
+public class addFormationFront {
 
     private final ServiceFormation ft = new ServiceFormation();
     private final ServiceTuteur st = new ServiceTuteur();
@@ -77,28 +75,19 @@ public class addFormation1 {
     private Stage primaryStage;
     private Parent root;
 
-   @FXML
+    @FXML
     private void initialize() {
-       try {
-           /*// Remplacez "nom" et "prenom" par les valeurs réelles que vous souhaitez rechercher
-           String nom = "nom";
-           String prenom = "prenom";
+        try {
 
-           // Obtenez une liste d'objets Tuteur correspondant au nom et prénom spécifiés
-          // List<Tuteur> tuteursList = ServiceTuteur.getIdTuteurByNomPrenom(nom, prenom);
-
-           // Ajoutez les objets Tuteur au ChoiceBox
-           id_tuteur.setItems(FXCollections.observableArrayList(tuteursList));*/
-
-               List<String> nomsTuteurs = st.getNoms();
-               ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsTuteurs);
-           id_tuteur.setItems(observableNoms);
+            List<String> nomsTuteurs = st.getNoms();
+            ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsTuteurs);
+            id_tuteur.setItems(observableNoms);
 
 
-       } catch (SQLException e) {
-           e.printStackTrace();
-           // Gérer l'exception
-       }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
     }
 
 
@@ -134,12 +123,12 @@ public class addFormation1 {
             Date selectedDate_d = Date.valueOf(date_d.getValue());
             Date selectedDate_f = Date.valueOf(date_f.getValue());
 
-            String[] parts = selectedTuteur.split(" "); // Divise la chaîne à chaque espace
-            String nom = parts[0]; // Le premier élément du tableau est le nom
+            String[] parts = selectedTuteur.split(" ");
+            String nom = parts[0];
             String prenom = parts[1];
 
             ft.addFormation(new Formation(
-                    st.getIDByNom(nom,prenom), // Utilisez l'ID du tuteur sélectionné
+                    st.getIDByNom(nom,prenom),
                     selectedNomNiveau,
                     selectedCategorie,
                     titre.getText(),
@@ -159,7 +148,7 @@ public class addFormation1 {
             showAlert("Erreur", "Erreur SQL", e.getMessage());
         } catch (Exception e) {
             showAlert("Erreur", "Erreur inattendue", "Une erreur inattendue s'est produite. Veuillez réessayer.");
-            e.printStackTrace(); // Imprimez la trace complète de l'exception pour un débogage supplémentaire.
+            e.printStackTrace();
         }
 
 
@@ -200,7 +189,7 @@ public class addFormation1 {
     @FXML
     private void retour(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowFormation1Front.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -226,7 +215,7 @@ public class addFormation1 {
 
     public void showFormation1(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowFormation1Front.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();

@@ -3,7 +3,7 @@ package controller;
 import Services.ServiceFormation;
 import Services.ServiceTuteur;
 import entities.Formation;
-import entities.Tuteur;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,10 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 import java.util.List;
 
-public class updateFormation1 {
+public class updateFormationFront {
 
     private final ServiceFormation ft = new ServiceFormation();
     private final ServiceTuteur st = new ServiceTuteur();
@@ -113,10 +113,10 @@ public class updateFormation1 {
                     selectedEndDate,
                     Float.parseFloat(prix1.getText()),
                     lien1.getText()
-                                );
+            );
             System.out.println(updatedFormation);
 
-ft.updateFormation(updatedFormation,id);
+            ft.updateFormation(updatedFormation,id);
 
             afficherAlerteInformation("Mise à jour réussie", "La formation a été mis à jour avec succès.");
         } catch (NumberFormatException e) {
@@ -182,7 +182,7 @@ ft.updateFormation(updatedFormation,id);
     void retour(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowFormation1Front.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -233,7 +233,7 @@ ft.updateFormation(updatedFormation,id);
 
     public void showTuteur1(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowTuteurFront.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -245,7 +245,7 @@ ft.updateFormation(updatedFormation,id);
     public void showFormation1(ActionEvent event) throws IOException {
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowFormation1Front.fxml"));
         root = loader.load();
         scene = new Scene(root);
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();

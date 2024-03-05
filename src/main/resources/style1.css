@@ -19,3 +19,26 @@
     -fx-background-color: #BDBBC3;
     -fx-background-radius: 20px
 }
+.label {
+    -fx-background-color: linear-gradient(to top, rgba(0, 0, 0, 0.58), transparent);
+}
+
+.button
+{
+    -fx-background-color: transparent;
+    -fx-text-fill: #2A73FF;
+    -fx-border-color: #2A73FF;
+    -fx-background-radius: 20px
+}
+.btn:hover
+{
+    -fx-background-color: #7ca7f8;
+    -fx-background-radius: 20px
+}
+
+.btn:pressed
+{
+    -fx-background-color: #486191;
+    -fx-border-color: #486191;
+    -fx-background-radius: 20px
+}

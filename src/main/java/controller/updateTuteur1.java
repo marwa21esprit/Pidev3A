@@ -38,6 +38,7 @@ public class updateTuteur1 {
     @FXML
     private TextField id_tuteur1;
 
+
     @FXML
     private ImageView importIV1;
 
@@ -45,7 +46,7 @@ public class updateTuteur1 {
     private Button importerBT1;
 
     @FXML
-    private AnchorPane mainForm1;
+    private AnchorPane mainForm;
 
     @FXML
     private TextField nom1;
@@ -60,6 +61,11 @@ public class updateTuteur1 {
     private TextField tlf1;
 
     private Image image;
+
+
+    private Scene scene;
+    private Stage primaryStage;
+    private Parent root;
 
 
 
@@ -78,8 +84,6 @@ public class updateTuteur1 {
                     profession1.getText(),
                     email1.getText(),
                     data.path
-
-
             );
 
             st.updateTuteur(updatedTuteur, id_tuteur);
@@ -100,6 +104,8 @@ public class updateTuteur1 {
             e.printStackTrace();
         }
 
+
+
     }
 
     @FXML
@@ -117,11 +123,11 @@ public class updateTuteur1 {
     }
 
     @FXML
-    void importer1(ActionEvent event) {
+    void  importer1(ActionEvent event) {
         Tuteur t = new Tuteur();
         FileChooser openFile = new FileChooser();
         openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File","*png","*jpg"));
-        File file = openFile.showOpenDialog(mainForm1.getScene().getWindow());
+        File file = openFile.showOpenDialog(mainForm.getScene().getWindow());
         if(file != null)
         {
             data.path = file.getAbsolutePath();
@@ -130,22 +136,6 @@ public class updateTuteur1 {
         }
 
     }
-
-    @FXML
-    void retourTuteur(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            afficherAlerteErreur("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
-        }
-
-    }
-
 
 
     public void setTuteurData(Tuteur tuteur) {
@@ -195,7 +185,41 @@ public class updateTuteur1 {
     }
 
 
+    public void showTuteur1(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void showFormation1(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+        root = loader.load();
+        scene = new Scene(root);
+        primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle("TANIT ONLINE");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
 
+    @FXML
+    public void retour(ActionEvent event) {
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            afficherAlerteErreur("Erreur de chargement", "Une erreur est survenue lors du chargement de la vue.");
+        }
+    }
 }

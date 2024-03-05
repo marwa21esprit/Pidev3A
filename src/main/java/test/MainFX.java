@@ -13,12 +13,20 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteur1.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showTuteurFront.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowTuteur1Front.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowFormation1Front.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/tuteurs.fxml"));
+
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemsFront.fxml"));
+
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/showFormation1.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Items.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/Items1.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addTuteur1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addTuteur.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addFormation1.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTuteur1.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/addFormationFront.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTuteur.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateFormation.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/deleteTuteur.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/deleteFormation.fxml"));

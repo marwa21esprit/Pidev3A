@@ -1,6 +1,7 @@
 package Services;
 
 import entities.Formation;
+import entities.Tuteur;
 import utils.MyDB;
 
 import java.sql.*;
@@ -19,10 +20,10 @@ public class ServiceFormation {
     }
 
     public void addFormation(Formation formation) throws SQLException {
-        String sql = "INSERT INTO formation (id_tuteur, id_niveau, categorie, titre, description, date_d, date_f, prix, lien) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO formation (id_tuteur, nom_niveau, categorie, titre, description, date_d, date_f, prix, lien) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
             preparedStatement.setInt(1, formation.getId_tuteur());
-            preparedStatement.setInt(2, formation.getId_niveau());
+            preparedStatement.setString(2, formation.getNom_niveau());
             preparedStatement.setString(3, formation.getCategorie());
             preparedStatement.setString(4, formation.getTitre());
             preparedStatement.setString(5, formation.getDescription());
@@ -37,12 +38,12 @@ public class ServiceFormation {
 
 
 
-    public void updateFormation(Formation formation) throws SQLException {
-        String sql = "UPDATE formation SET id_tuteur = ?, id_niveau = ?, categorie = ?, titre = ?, description = ?, date_d = ?, date_f = ?, prix = ?, lien = ? WHERE id_formation = ?";
+    public void updateFormation(Formation formation, int id) throws SQLException {
+        String sql = "UPDATE formation SET id_tuteur = ?, nom_niveau = ?, categorie = ?, titre = ?, description = ?, date_d = ?, date_f = ?, prix = ?, lien = ? WHERE id_formation = ?";
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
             preparedStatement.setInt(1, formation.getId_tuteur());
-            preparedStatement.setInt(2, formation.getId_niveau());
+            preparedStatement.setString(2, formation.getNom_niveau());
             preparedStatement.setString(3, formation.getCategorie());
             preparedStatement.setString(4, formation.getTitre());
             preparedStatement.setString(5, formation.getDescription());
@@ -50,7 +51,7 @@ public class ServiceFormation {
             preparedStatement.setDate(7, formation.getDate_f());
             preparedStatement.setFloat(8, formation.getPrix());
             preparedStatement.setString(9, formation.getLien());
-            preparedStatement.setInt(10, formation.getId_formation());
+            preparedStatement.setInt(10, id);
 
             // Execution de la requete
             preparedStatement.executeUpdate();
@@ -75,7 +76,7 @@ public class ServiceFormation {
 
             formation.setId_formation(rs.getInt("id_formation"));
             formation.setId_tuteur(rs.getInt("id_tuteur"));
-            formation.setId_niveau(rs.getInt("id_niveau"));
+            formation.setNom_niveau(rs.getString("nom_niveau"));
             formation.setCategorie(rs.getString("categorie"));
             formation.setTitre(rs.getString("titre"));
             formation.setDescription(rs.getString("description"));
@@ -90,14 +91,14 @@ public class ServiceFormation {
     }
 
     public Formation getById(int id_formation) throws SQLException {
-        String sql = "SELECT id_tuteur, id_niveau, categorie, titre, description, date_d, date_f, prix, lien FROM formation WHERE id_formation = ?";
+        String sql = "SELECT id_tuteur, nom_niveau, categorie, titre, description, date_d, date_f, prix, lien FROM formation WHERE id_formation = ?";
         PreparedStatement preparedStatement = cnx.prepareStatement(sql);
         preparedStatement.setInt(1, id_formation);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
             int id_tuteur = resultSet.getInt("id_tuteur");
-            int id_niveau = resultSet.getInt("id_niveau");
+            String nom_niveau = resultSet.getString("nom_niveau");
             String categorie = resultSet.getString("categorie");
             String titre = resultSet.getString("titre");
             String description = resultSet.getString("description");
@@ -106,7 +107,7 @@ public class ServiceFormation {
             float prix = resultSet.getFloat("prix");
             String lien = resultSet.getString("lien");
 
-            return new Formation(id_formation, id_tuteur, id_niveau, categorie, titre, description, date_d, date_f, prix, lien);
+            return new Formation(id_tuteur, nom_niveau, categorie, titre, description, date_d, date_f, prix, lien);
         } else {
             return null;
         }
@@ -119,11 +120,87 @@ public class ServiceFormation {
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
                 String titre = rs.getString("titre");
-               titrefo.add(titre);
+                titrefo.add(titre);
             }
         }
 
         return titrefo;
     }
+
+    public List<Formation> getFormationList() {
+        List<Formation> formations = new ArrayList<>();
+        String sql = "SELECT id_tuteur, nom_niveau, categorie, titre, description, date_d, date_f, prix, lien  FROM formation";
+
+        try {
+
+            try (Statement statement = cnx.createStatement();
+                 ResultSet rs = statement.executeQuery(sql)) {
+
+                while (rs.next()) {
+                    Formation formation = new Formation();
+                    formation.setId_formation(rs.getInt("id_formation"));
+                    formation.setId_tuteur(rs.getInt("id_tuteur"));
+                    formation.setNom_niveau(rs.getString("nom_niveau"));
+                    formation.setCategorie(rs.getString("categorie"));
+                    formation.setTitre(rs.getString("titre"));
+                    formation.setDescription(rs.getString("description"));
+                    formation.setDate_d(rs.getDate("date_d"));
+                    formation.setDate_f(rs.getDate("date_f"));
+                    formation.setPrix(rs.getFloat("prix"));
+                    formation.setLien(rs.getString("lien"));
+
+                    formations.add(formation);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return formations;
+
+    }
+
+    private List<Formation> getFormationFromResultSet(String sql) throws SQLException {
+        List<Formation> formations = new ArrayList<>();
+        try (Statement statement = cnx.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                Formation formation = new Formation();
+                formation.setId_formation(rs.getInt("id_formation"));
+                formation.setId_tuteur(rs.getInt("id_tuteur"));
+                formation.setNom_niveau(rs.getString("nom_niveau"));
+                formation.setCategorie(rs.getString("categorie"));
+                formation.setTitre(rs.getString("titre"));
+                formation.setDescription(rs.getString("description"));
+                formation.setDate_d(rs.getDate("date_d"));
+                formation.setDate_f(rs.getDate("date_f"));
+                formation.setPrix(rs.getFloat("prix"));
+                formation.setLien(rs.getString("lien"));
+
+                formations.add(formation);
+            }
+        }
+        return formations;
+    }
+
+
+    public List<Formation> trierParCategorie() throws SQLException {
+        String sql = "SELECT * FROM formation ORDER BY categorie ASC";
+        return getFormationFromResultSet(sql);
+    }
+
+    public List<Formation> trierParNiveau() throws SQLException {
+        String sql = "SELECT * FROM formation ORDER BY nom_niveau ASC";
+        return getFormationFromResultSet(sql);
+    }
+
+    public List<Formation> trierParPrix() throws SQLException {
+        String sql = "SELECT * FROM formation ORDER BY prix ASC";
+        return getFormationFromResultSet(sql);
+    }
+
 
 }

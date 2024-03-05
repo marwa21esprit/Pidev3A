@@ -1,35 +1,29 @@
 package entities;
+
 import java.sql.Date;
 
 public class Formation {
 
-    private int id_formation;
+    private int id_formation; // Ne pas inclure dans les constructeurs
     private int id_tuteur;
-
-    private int id_niveau;
-
+    private String nom_niveau;
     private String categorie;
-
     private String titre;
-
     private String description;
-
     private Date date_d;
-
     private Date date_f;
-
     private float prix;
-
     private String lien;
 
-    public Formation()
-    {
-
+    // Constructeurs
+    public Formation() {
+        this.id_formation = 0; // Valeur par défaut
     }
 
-    public Formation(int id_formation, int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
+    public Formation(int id_tuteur, String nom_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
+        this.id_formation = 0; // Valeur par défaut
         this.id_tuteur = id_tuteur;
-        this.id_niveau = id_niveau;
+        this.nom_niveau = nom_niveau;
         this.categorie = categorie;
         this.titre = titre;
         this.description = description;
@@ -39,22 +33,7 @@ public class Formation {
         this.lien = lien;
     }
 
-    public Formation(int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
-    }
-
-    public Formation(int idNiveau, String categorie, String titre, String description, Date dateDebut, Date dateFin, float prix, String lien, int idTuteur) {
-        this.id_niveau= idNiveau;
-        this.categorie = categorie;
-        this.titre = titre;
-        this.description = description;
-        this.date_d = dateDebut;
-        this.date_f = dateFin;
-        this.prix = prix;
-        this.lien = lien;
-        this.id_tuteur = idTuteur;
-    }
-
-
+    // Getters et Setters pour id_formation
     public int getId_formation() {
         return id_formation;
     }
@@ -71,12 +50,12 @@ public class Formation {
         this.id_tuteur = id_tuteur;
     }
 
-    public int getId_niveau() {
-        return id_niveau;
+    public String getNom_niveau() {
+        return nom_niveau;
     }
 
-    public void setId_niveau(int id_niveau) {
-        this.id_niveau = id_niveau;
+    public void setNom_niveau(String nom_niveau) {
+        this.nom_niveau = nom_niveau;
     }
 
     public String getCategorie() {
@@ -135,12 +114,13 @@ public class Formation {
         this.lien = lien;
     }
 
+    // Méthode toString
     @Override
     public String toString() {
         return "Formation{" +
                 "id_formation=" + id_formation +
                 ", id_tuteur=" + id_tuteur +
-                ", id_niveau=" + id_niveau +
+                ", nom_niveau='" + nom_niveau + '\'' +
                 ", categorie='" + categorie + '\'' +
                 ", titre='" + titre + '\'' +
                 ", description='" + description + '\'' +
@@ -150,6 +130,4 @@ public class Formation {
                 ", lien='" + lien + '\'' +
                 '}';
     }
-
-
 }
