@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApprenantSearch">
+   <children>
+      <Label layoutX="23.0" layoutY="37.0" prefHeight="20.0" prefWidth="113.0" text="Search Learner">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="learnerTableView" layoutX="14.0" layoutY="86.0" prefHeight="500.0" prefWidth="1020.0">
+        <columns>
+          <TableColumn fx:id="idTableColumn" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="nameTableColumn" prefWidth="104.80001831054688" text="Name" />
+            <TableColumn fx:id="emailTableColumn" prefWidth="148.80003356933594" text="Email" />
+            <TableColumn fx:id="statutTableColumn" prefWidth="112.79998779296875" text="Statut" />
+            <TableColumn fx:id="formationTableColumn" prefWidth="140.00006103515625" text="FormationEtudie" />
+            <TableColumn fx:id="niveauTableColumn" minWidth="0.0" prefWidth="145.60009765625" text="NiveauName" />
+            <TableColumn fx:id="imageTableColumn" prefWidth="135.2000732421875" text="Image" />
+            <TableColumn fx:id="idNiveauTableColumn" prefWidth="82.39990234375" text="ID_Niveau" />
+        </columns>
+      </TableView>
+      <TextField fx:id="keyWordTextField" layoutX="174.0" layoutY="35.0" prefHeight="25.0" prefWidth="730.0" promptText="Keywords.." />
+   </children>
+</Pane>
