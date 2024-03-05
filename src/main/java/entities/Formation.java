@@ -1,6 +1,7 @@
 package entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Formation {
 
@@ -23,8 +24,16 @@ public class Formation {
     public Formation(int id_tuteur, String nom_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
         this.id_formation = 0; // Valeur par défaut
         this.id_tuteur = id_tuteur;
+<<<<<<< HEAD
         this.nom_niveau = nom_niveau;
+=======
+        this.id_niveau = id_niveau;
+<<<<<<< HEAD
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
         this.categorie = categorie;
+=======
+        this.categorie = categorie; // Assurez-vous d'initialiser la propriété categorie
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
         this.titre = titre;
         this.description = description;
         this.date_d = date_d;
@@ -33,7 +42,32 @@ public class Formation {
         this.lien = lien;
     }
 
+<<<<<<< HEAD
     // Getters et Setters pour id_formation
+=======
+    public Formation(int id_tuteur, int id_niveau, String categorie, String titre, String description, Date date_d, Date date_f, float prix, String lien) {
+    }
+
+<<<<<<< HEAD
+    public Formation(int idNiveau, String categorie, String titre, String description, Date dateDebut, Date dateFin, float prix, String lien, int idTuteur) {
+        this.id_niveau= idNiveau;
+        this.categorie = categorie;
+        this.titre = titre;
+        this.description = description;
+        this.date_d = dateDebut;
+        this.date_f = dateFin;
+        this.prix = prix;
+        this.lien = lien;
+        this.id_tuteur = idTuteur;
+    }
+
+    public Formation(int i, String selectedCategorie1, String text, String text1, LocalDate selectedStartDate, LocalDate selectedEndDate, float v, String text2) {
+    }
+
+
+=======
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
     public int getId_formation() {
         return id_formation;
     }

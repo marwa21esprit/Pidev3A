@@ -1,7 +1,11 @@
 package Services;
 
 import entities.Formation;
+<<<<<<< HEAD
 import entities.Tuteur;
+=======
+import javafx.scene.control.TextField;
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 import utils.MyDB;
 
 import java.sql.*;
@@ -38,8 +42,13 @@ public class ServiceFormation {
 
 
 
+<<<<<<< HEAD
     public void updateFormation(Formation formation, int id) throws SQLException {
         String sql = "UPDATE formation SET id_tuteur = ?, nom_niveau = ?, categorie = ?, titre = ?, description = ?, date_d = ?, date_f = ?, prix = ?, lien = ? WHERE id_formation = ?";
+=======
+    public void updateFormation(Formation formation, TextField id_formation1) throws SQLException {
+        String sql = "UPDATE formation SET id_tuteur = ?, id_niveau = ?, categorie = ?, titre = ?, description = ?, date_d = ?, date_f = ?, prix = ?, lien = ? WHERE id_formation = ?";
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
         try (PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
             preparedStatement.setInt(1, formation.getId_tuteur());
@@ -115,7 +124,11 @@ public class ServiceFormation {
 
     public List<String> getTitres() throws SQLException {
         List<String> titrefo = new ArrayList<>();
+<<<<<<< HEAD
         String sql = "SELECT titre FROM formation"; // Requête SQL pour récupérer tous les titres
+=======
+        String sql = "SELECT titre FROM tuteur"; // Requête SQL pour récupérer tous les titres
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
         try (Statement statement = cnx.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {

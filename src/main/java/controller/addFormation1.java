@@ -53,7 +53,14 @@ public class addFormation1 {
     private TextField id_formation;
 
     @FXML
+<<<<<<< HEAD
     private ChoiceBox<String> id_tuteur;
+=======
+    private TextField id_niveau;
+
+    @FXML
+    private ChoiceBox<Integer> id_tuteur;
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
     @FXML
     private TextField lien;
@@ -95,10 +102,25 @@ public class addFormation1 {
            id_tuteur.setItems(observableNoms);
 
 
+<<<<<<< HEAD
        } catch (SQLException e) {
            e.printStackTrace();
            // Gérer l'exception
        }
+=======
+
+    @FXML
+    void initialize() {
+        try {
+            List<Integer> idsTuteurs = st.getId_tuteur();
+            ObservableList<Integer> observableIds = FXCollections.observableArrayList(idsTuteurs);
+            id_tuteur.setItems(observableIds);
+        } catch (SQLException e) {
+            afficherAlerteErreur("Erreur SQL", "Une erreur est survenue lors du chargement des  formations.");
+            e.printStackTrace();
+        }
+
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
     }
 
 
@@ -134,9 +156,17 @@ public class addFormation1 {
             Date selectedDate_d = Date.valueOf(date_d.getValue());
             Date selectedDate_f = Date.valueOf(date_f.getValue());
 
+<<<<<<< HEAD
             String[] parts = selectedTuteur.split(" "); // Divise la chaîne à chaque espace
             String nom = parts[0]; // Le premier élément du tableau est le nom
             String prenom = parts[1];
+=======
+            java.sql.Date selectedDate_d = java.sql.Date.valueOf(date_d.getValue());
+            java.sql.Date selectedDate_f = java.sql.Date.valueOf(date_f.getValue());
+
+            Integer idTuteur = Integer.parseInt(String.valueOf(id_tuteur.getValue()));
+
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
             ft.addFormation(new Formation(
                     st.getIDByNom(nom,prenom), // Utilisez l'ID du tuteur sélectionné
@@ -147,7 +177,12 @@ public class addFormation1 {
                     selectedDate_d,
                     selectedDate_f,
                     Float.parseFloat(prix.getText()),
+<<<<<<< HEAD
                     lien.getText()
+=======
+                    lien.getText(),
+                    st.getID(id_tuteur.getValue())
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
             ));
 
 
@@ -187,7 +222,11 @@ public class addFormation1 {
     private void clear(ActionEvent event) {
         id_formation.setText("");
         id_tuteur.setValue(null);
+<<<<<<< HEAD
         nom_niveau.setText("");
+=======
+        id_niveau.setText("");
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
         categorie.setValue("");
         titre.setText("");
         description.setText("");

@@ -14,10 +14,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+<<<<<<< HEAD
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+=======
+import javafx.stage.Stage;
+
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -45,10 +50,17 @@ public class updateFormation1 {
     private TextField id_formation1;
 
     @FXML
+<<<<<<< HEAD
     private TextField nom_niveau1;
 
     @FXML
     private ChoiceBox<String> nom_prenom_tuteur1;
+=======
+    private TextField id_niveau1;
+
+    @FXML
+    private ChoiceBox<Integer> id_tuteur1;
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
     @FXML
     private TextField lien1;
@@ -65,12 +77,26 @@ public class updateFormation1 {
     @FXML
     private Button updateFormation;
 
+<<<<<<< HEAD
     private Scene scene;
     private Stage primaryStage;
     private Parent root;
 
     @FXML
     void initialize() {
+=======
+    @FXML
+    void initialize() {
+        try {
+            List<Integer> idsTuteurs = st.getId_tuteur();
+            ObservableList<Integer> observableIds = FXCollections.observableArrayList(idsTuteurs);
+            id_tuteur1.setItems(observableIds);
+        } catch (SQLException e) {
+            afficherAlerteErreur("Erreur SQL", "Une erreur est survenue lors du chargement des  formations.");
+            e.printStackTrace();
+        }
+
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
     }
 
 
@@ -78,10 +104,16 @@ public class updateFormation1 {
     void modifier(ActionEvent event) {
 
         try {
+<<<<<<< HEAD
             Date selectedStartDate = java.sql.Date.valueOf(date_d1.getValue());
             Date selectedEndDate = java.sql.Date.valueOf(date_f1.getValue());
 
 
+=======
+
+            LocalDate selectedStartDate = date_d1.getValue();
+            LocalDate selectedEndDate = date_f1.getValue();
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
             String selectedCategorie = categorie1.getValue();
             if (selectedCategorie == null) {
@@ -89,12 +121,18 @@ public class updateFormation1 {
                 return;
             }
 
+<<<<<<< HEAD
             String selectedTuteur = nom_prenom_tuteur1.getValue();
             if (selectedTuteur == null) {
+=======
+            Integer selectedId = id_tuteur1.getValue();
+            if (selectedId == null) {
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
                 showAlert("Erreur", "ID non sélectionnée", "Veuillez sélectionner l'id.");
                 return;
             }
 
+<<<<<<< HEAD
             int id = Integer.parseInt(id_formation1.getText());
             String[] parts = selectedTuteur.split(" "); // Divise la chaîne à chaque espace
             String nom = parts[0]; // Le premier élément du tableau est le nom
@@ -106,6 +144,14 @@ public class updateFormation1 {
             Formation updatedFormation = new Formation(
                     idTuteur,
                     nom_niveau1.getText(),
+=======
+            int id_formation = Integer.parseInt(id_formation1.getText());
+            int idTuteur = st.getID(id_tuteur1.getValue());
+            int id_niveau = Integer.parseInt(id_niveau1.getText());
+
+            Formation updatedFormation = new Formation(
+                    id_niveau,
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
                     selectedCategorie,
                     titre1.getText(),
                     description1.getText(),
@@ -113,12 +159,21 @@ public class updateFormation1 {
                     selectedEndDate,
                     Float.parseFloat(prix1.getText()),
                     lien1.getText()
+<<<<<<< HEAD
                                 );
             System.out.println(updatedFormation);
 
 ft.updateFormation(updatedFormation,id);
 
             afficherAlerteInformation("Mise à jour réussie", "La formation a été mis à jour avec succès.");
+=======
+            );
+
+            ft.updateFormation(updatedFormation, id_formation1);
+
+
+            afficherAlerteInformation("Mise à jour réussie", "Le tuteur a été mis à jour avec succès.");
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
         } catch (NumberFormatException e) {
 
             afficherAlerteErreur("Erreur de format", "Veuillez entrer des valeurs valides.");
@@ -165,8 +220,13 @@ ft.updateFormation(updatedFormation,id);
     void clear(ActionEvent event) {
 
         id_formation1.setText("");
+<<<<<<< HEAD
         nom_prenom_tuteur1.setValue("tuteur name");
         nom_niveau1.setText("");
+=======
+        id_tuteur1.setValue(null);
+        id_niveau1.setText("");
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
         categorie1.setValue("");
         titre1.setText("");
         description1.setText("");
@@ -197,6 +257,7 @@ ft.updateFormation(updatedFormation,id);
     public void setData(Formation formation) {
 
         id_formation1.setText(String.valueOf(formation.getId_formation()));
+<<<<<<< HEAD
         try {
             List<String> nomsTuteurs = st.getNoms();
             ObservableList<String> observableNoms = FXCollections.observableArrayList(nomsTuteurs);
@@ -206,6 +267,10 @@ ft.updateFormation(updatedFormation,id);
             throw new RuntimeException(e);
         }
         nom_niveau1.setText(formation.getNom_niveau());
+=======
+        id_tuteur1.setValue(formation.getId_tuteur());
+        id_niveau1.setText(String.valueOf(formation.getId_niveau()));
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
         categorie1.setValue(String.valueOf(formation.getCategorie()));
 
@@ -230,6 +295,7 @@ ft.updateFormation(updatedFormation,id);
         lien1.setText(formation.getLien());
 
     }
+<<<<<<< HEAD
 
     public void showTuteur1(ActionEvent event) throws IOException {
 
@@ -275,4 +341,6 @@ ft.updateFormation(updatedFormation,id);
             System.out.println("Aucun fichier sélectionné.");
         }
     }
+=======
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 }

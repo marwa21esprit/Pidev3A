@@ -1,6 +1,13 @@
 package controller;
 
 import Services.ServiceTuteur;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import entities.Formation;
+=======
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 import entities.Tuteur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,5 +138,15 @@ public class Items implements Initializable {
 
     }
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 }

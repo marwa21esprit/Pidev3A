@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="600.0" prefWidth="1019.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.updateFormation1">
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="245.0" styleClass="button" stylesheets="@buttonUP.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.842170943040401E-14" AnchorPane.topAnchor="0.0">
@@ -69,6 +70,16 @@
                         <Insets left="50.0" />
                     </padding>
                 </Button>
+=======
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+<<<<<<< HEAD
+            fx:controller="controller.updateFormation1"
+=======
+            fx:controller="controller.UpdateFormation"
+>>>>>>> fbee1fb1734da57bf6f5445215b18fdea9e2aefe
+            prefHeight="400.0" prefWidth="600.0">
+>>>>>>> 589f2aeeceeb3ef8137b0cec44d486000e851d55
 
 
             <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="18.0" layoutY="393.0" mnemonicParsing="false" onAction="#showTuteur1" prefHeight="36.0" prefWidth="247.0" stylesheets="@buttonUP.css" text="Tutors" textFill="WHITE">
