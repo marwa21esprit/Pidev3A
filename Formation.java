@@ -1,4 +1,4 @@
-package entities;
+package models;
 
 import java.sql.Date;
 
@@ -125,6 +125,7 @@ public class Formation {
                 ", description='" + description + '\'' +
                 ", date_d=" + date_d +
                 ", date_f=" + date_f +
+
                 ", lien='" + lien + '\'' +
                 '}';
     }

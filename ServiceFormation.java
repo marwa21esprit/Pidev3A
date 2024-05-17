@@ -1,8 +1,7 @@
-package Services;
+package services;
 
-import entities.Formation;
-import entities.Tuteur;
-import utils.MyDB;
+import models.Formation;
+import utils.myBD;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class ServiceFormation {
     private Connection cnx;
 
     public ServiceFormation() {
-        this.cnx = MyDB.getInstance().getCnx();
+        this.cnx = myBD.getInstance().getConnection();
         if (this.cnx == null) {
             // Handle the case where connection is not properly initialized
             throw new IllegalStateException("Database connection is not properly initialized");
@@ -29,6 +28,7 @@ public class ServiceFormation {
             preparedStatement.setString(5, formation.getDescription());
             preparedStatement.setDate(6, formation.getDate_d());
             preparedStatement.setDate(7, formation.getDate_f());
+
             preparedStatement.setString(8, formation.getLien());
             // Execution de la requete
             preparedStatement.executeUpdate();

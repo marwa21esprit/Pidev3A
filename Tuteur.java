@@ -1,4 +1,4 @@
-package entities;
+package models;
 
 import java.sql.Date;
 
@@ -88,10 +88,10 @@ public class Tuteur {
 
 
 
-    public java.sql.Date getDate_naisc() {
+    public Date getDate_naisc() {
         // Conversion de java.util.Date en java.sql.Date
         if (date_naisc != null) {
-            return new java.sql.Date(date_naisc.getTime());
+            return new Date(date_naisc.getTime());
         } else {
             return null;
         }
